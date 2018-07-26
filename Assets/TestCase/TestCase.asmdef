@@ -1,0 +1,11 @@
+{
+    "name": "TestCase",
+    "references": [
+        "TestRunner",
+        "Unity.Burst"
+    ],
+    "optionalUnityReferences": [],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false
+}
