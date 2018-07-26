@@ -3,6 +3,7 @@ using TestRunner.InputData;
 using TestRunner.Jobs;
 using TestRunner.Wrappers.Base;
 using TestRunner.Wrappers.IJob;
+using TestRunner.Wrappers.IJobParallelFor;
 
 namespace TestRunner
 {
@@ -20,6 +21,18 @@ namespace TestRunner
             where TJob : struct, IJobExtended<T1, T2>
         {
             return RunIJob(ref job, new InputData<T1, T2>(ref itemArray1, ref itemArray2));
+        }
+        
+        internal static IJobWrapperBase RunIJobParallelFor<TJob>(ref TJob job, IInputData<T1, T2> data)
+            where TJob : struct, IJobParallelForExtended<T1, T2>
+        {
+            return new JobParallelForWrapper<IDataContainer<T1, T2>, IInputData<T1, T2>, TJob, T1, T2>(ref job, ref data);
+        }
+
+        public static IJobWrapperBase RunIJobParallelFor<TJob>(TJob job, T1[] itemArray1, T2[] itemArray2)
+            where TJob : struct, IJobParallelForExtended<T1, T2>
+        {
+            return RunIJobParallelFor(ref job, new InputData<T1, T2>(ref itemArray1,ref itemArray2));
         }
     }
 }
