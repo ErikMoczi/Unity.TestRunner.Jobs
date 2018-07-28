@@ -6,7 +6,7 @@ using TestRunner.Jobs.Extensions;
 
 namespace TestRunner.Wrappers.IJobParallelFor
 {
-    internal class
+    internal sealed class
         JobParallelForWrapper<TDataContainer, TData, TJob, T1> : JobWrapperBase<TDataContainer, TData, TJob, T1>
         where T1 : struct
         where TDataContainer : class, IDataContainer<T1>

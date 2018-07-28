@@ -7,7 +7,7 @@ using TestRunner.Wrappers.IJobParallelFor;
 
 namespace TestRunner
 {
-    public class JobTests<T1>
+    public static class JobTests<T1>
         where T1 : struct
     {
         internal static IJobWrapperBase RunIJob<TJob>(ref TJob job, IInputData<T1> data)

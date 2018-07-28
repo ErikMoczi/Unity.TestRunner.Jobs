@@ -6,7 +6,8 @@ using TestRunner.Wrappers.Base;
 
 namespace TestRunner.Wrappers.IJob
 {
-    internal class JobWrapper<TDataContainer, TData, TJob, T1, T2> : JobWrapperBase<TDataContainer, TData, TJob, T1, T2>
+    internal sealed class
+        JobWrapper<TDataContainer, TData, TJob, T1, T2> : JobWrapperBase<TDataContainer, TData, TJob, T1, T2>
         where T1 : struct
         where T2 : struct
         where TDataContainer : class, IDataContainer<T1, T2>
