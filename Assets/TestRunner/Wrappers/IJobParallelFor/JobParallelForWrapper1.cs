@@ -13,7 +13,7 @@ namespace TestRunner.Wrappers.IJobParallelFor
         where TData : class, IInputData<T1>
         where TJob : struct, IJobParallelForExtended<T1>
     {
-        public JobParallelForWrapper(ref TJob job, ref TData data) : base(ref job, ref data)
+        public JobParallelForWrapper(TJob job, TData data) : base(job, data)
         {
         }
 

@@ -17,7 +17,7 @@ namespace TestRunner.Wrappers.Base
         protected readonly TDataContainer DataContainer;
         protected TJob Job;
 
-        protected JobWrapperBase(ref TJob job, ref TData data)
+        protected JobWrapperBase(TJob job, TData data)
         {
             Job = job;
             DataContainer = GetDataContainer(data);

@@ -8,8 +8,8 @@
     {
         public T4[] ItemArray4 { get; }
 
-        public InputData(ref T1[] itemArray1, ref T2[] itemArray2, ref T3[] itemArray3, ref T4[] itemArray4) : base(
-            ref itemArray1, ref itemArray2, ref itemArray3)
+        public InputData(T1[] itemArray1, T2[] itemArray2, T3[] itemArray3, T4[] itemArray4) : base(itemArray1,
+            itemArray2, itemArray3)
         {
             ItemArray4 = itemArray4;
         }

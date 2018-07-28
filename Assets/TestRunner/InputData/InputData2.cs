@@ -6,7 +6,7 @@
     {
         public T2[] ItemArray2 { get; }
 
-        public InputData(ref T1[] itemArray1, ref T2[] itemArray2) : base(ref itemArray1)
+        public InputData(T1[] itemArray1, T2[] itemArray2) : base(itemArray1)
         {
             ItemArray2 = itemArray2;
         }

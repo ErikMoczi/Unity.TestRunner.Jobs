@@ -14,22 +14,22 @@ namespace TestRunner.Utils
 
                 case InputDataTypeName.Int:
                 {
-                    SetDataToDynamicTypeArray(RandomGenerator.GetRandomInt(), name, index, ref typedData);
+                    SetDataToDynamicTypeArray(RandomGenerator.GetRandomInt(), name, index, typedData);
                     break;
                 }
                 case InputDataTypeName.Int2:
                 {
-                    SetDataToDynamicTypeArray(RandomGenerator.GetRandomInt2(), name, index, ref typedData);
+                    SetDataToDynamicTypeArray(RandomGenerator.GetRandomInt2(), name, index, typedData);
                     break;
                 }
                 case InputDataTypeName.Int3:
                 {
-                    SetDataToDynamicTypeArray(RandomGenerator.GetRandomInt3(), name, index, ref typedData);
+                    SetDataToDynamicTypeArray(RandomGenerator.GetRandomInt3(), name, index, typedData);
                     break;
                 }
                 case InputDataTypeName.Int4:
                 {
-                    SetDataToDynamicTypeArray(RandomGenerator.GetRandomInt4(), name, index, ref typedData);
+                    SetDataToDynamicTypeArray(RandomGenerator.GetRandomInt4(), name, index, typedData);
                     break;
                 }
 
@@ -39,22 +39,22 @@ namespace TestRunner.Utils
 
                 case InputDataTypeName.Float:
                 {
-                    SetDataToDynamicTypeArray(RandomGenerator.GetRandomFloat(), name, index, ref typedData);
+                    SetDataToDynamicTypeArray(RandomGenerator.GetRandomFloat(), name, index, typedData);
                     break;
                 }
                 case InputDataTypeName.Float2:
                 {
-                    SetDataToDynamicTypeArray(RandomGenerator.GetRandomFloat2(), name, index, ref typedData);
+                    SetDataToDynamicTypeArray(RandomGenerator.GetRandomFloat2(), name, index, typedData);
                     break;
                 }
                 case InputDataTypeName.Float3:
                 {
-                    SetDataToDynamicTypeArray(RandomGenerator.GetRandomFloat3(), name, index, ref typedData);
+                    SetDataToDynamicTypeArray(RandomGenerator.GetRandomFloat3(), name, index, typedData);
                     break;
                 }
                 case InputDataTypeName.Float4:
                 {
-                    SetDataToDynamicTypeArray(RandomGenerator.GetRandomFloat4(), name, index, ref typedData);
+                    SetDataToDynamicTypeArray(RandomGenerator.GetRandomFloat4(), name, index, typedData);
                     break;
                 }
 
@@ -68,7 +68,7 @@ namespace TestRunner.Utils
         }
 
         internal static void SetDataToDynamicTypeArray<T>(T newValue, string name, int index,
-            ref Dictionary<string, dynamic> typedData)
+            Dictionary<string, dynamic> typedData)
             where T : struct
         {
             // ReSharper disable once PossibleNullReferenceException

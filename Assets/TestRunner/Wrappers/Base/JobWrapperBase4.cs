@@ -15,7 +15,7 @@ namespace TestRunner.Wrappers.Base
         where TDataContainer : class, IDataContainer<T1, T2, T3, T4>
         where TJob : struct, IJobBase<T1, T2, T3, T4>
     {
-        protected JobWrapperBase(ref TJob job, ref TData data) : base(ref job, ref data)
+        protected JobWrapperBase(TJob job, TData data) : base(job, data)
         {
         }
 

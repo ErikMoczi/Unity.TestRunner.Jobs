@@ -18,7 +18,7 @@ namespace TestRunner.Wrappers.IJob
         where TData : class, IInputData<T1, T2, T3, T4, T5>
         where TJob : struct, IJobExtended<T1, T2, T3, T4, T5>
     {
-        public JobWrapper(ref TJob job, ref TData data) : base(ref job, ref data)
+        public JobWrapper(TJob job, TData data) : base(job, data)
         {
         }
 
