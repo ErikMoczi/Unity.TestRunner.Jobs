@@ -1,6 +1,8 @@
 ﻿{
     "name": "TestRunner",
-    "references": [],
+    "references": [
+        "Unity.Mathematics"
+    ],
     "optionalUnityReferences": [],
     "includePlatforms": [],
     "excludePlatforms": [],
