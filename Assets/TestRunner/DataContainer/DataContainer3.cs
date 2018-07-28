@@ -1,4 +1,6 @@
-﻿using Unity.Collections;
+﻿using System;
+using TestRunner.Utils;
+using Unity.Collections;
 
 namespace TestRunner.DataContainer
 {
@@ -19,9 +21,18 @@ namespace TestRunner.DataContainer
         protected override void CleanUpData()
         {
             base.CleanUpData();
-            if (!Item3.Equals(default(NativeArray<T3>)))
+            if (Item3.IsCreated)
             {
-                Item3.Dispose();
+                try
+                {
+                    Item3.Dispose();
+                }
+                catch (InvalidOperationException e)
+                {
+                    UnityDebugLog.DisposeStructWarningLog(nameof(Item3));
+                }
+
+                Item3 = default(NativeArray<T3>);
             }
         }
 
