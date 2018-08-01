@@ -1,30 +1,32 @@
-﻿using TestRunner.DataContainer;
+﻿using TestRunner.DataContainer.Struct;
 using TestRunner.InputData;
-using TestRunner.Jobs;
-using TestRunner.Jobs.Extensions;
-using TestRunner.Wrappers.Base;
+using TestRunner.Workers;
+using TestRunner.Workers.Extensions;
+using TestRunner.Wrappers.Base.Config;
+using TestRunner.Wrappers.Base.Job;
 
 namespace TestRunner.Wrappers.IJob
 {
     internal sealed class
-        JobWrapper<TDataContainer, TData, TJob, T1, T2, T3, T4, T5> : JobWrapperBase<TDataContainer, TData, TJob, T1, T2
-            , T3, T4, T5>
+        JobWrapper<TDataContainer, TData, TWorker, TConfig, T1, T2, T3, T4, T5> : JobWrapperBase<TDataContainer, TData,
+            TWorker, TConfig, T1, T2, T3, T4, T5>
+        where TDataContainer : class, IStructContainer<TConfig, T1, T2, T3, T4, T5>
+        where TData : class, IInputData<T1, T2, T3, T4, T5>
+        where TWorker : struct, IJobExt<T1, T2, T3, T4, T5>
+        where TConfig : class, IWorkConfigIJob
         where T1 : struct
         where T2 : struct
         where T3 : struct
         where T4 : struct
         where T5 : struct
-        where TDataContainer : class, IDataContainer<T1, T2, T3, T4, T5>
-        where TData : class, IInputData<T1, T2, T3, T4, T5>
-        where TJob : struct, IJobExtended<T1, T2, T3, T4, T5>
     {
-        public JobWrapper(TJob job, TData data) : base(job, data)
+        public JobWrapper(TWorker job, TData data, TConfig config) : base(job, data, config)
         {
         }
 
-        protected override void TestCase(bool scheduled)
+        protected override void TestCase(TConfig config)
         {
-            Job.RunTest(scheduled);
+            Worker.RunTest(config);
         }
     }
 }

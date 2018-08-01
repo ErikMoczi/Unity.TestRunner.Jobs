@@ -1,7 +1,6 @@
 ﻿using TestRunner.Generator;
 using TestRunner.Generator.Interfaces;
 using TestRunner.Wrappers.Base;
-using Unity.Collections;
 using UnityEngine;
 
 namespace TestRunner
@@ -15,22 +14,22 @@ namespace TestRunner
         protected int TotalRuns => _totalRuns;
 
         private IInputDataContainer _inputDataContainer;
-        private IJobWrapperBase[] _jobWrapperBases;
+        private IWorkWrapper[] _workWrappers;
         private int _currentRun;
 
         protected virtual void Awake()
         {
             _inputDataContainer = new InputDataContainer(InitSampleConfigs(), _dataSize);
-            _jobWrapperBases = InitJobWrapperBases();
+            _workWrappers = InitWorkWrappers();
         }
 
         protected virtual void Update()
         {
             if (_totalRuns > _currentRun)
             {
-                foreach (var jobWrapperBase in _jobWrapperBases)
+                foreach (var workWrapper in _workWrappers)
                 {
-                    jobWrapperBase.Run(Allocator.Persistent);
+                    workWrapper.Run();
                 }
 
                 _currentRun++;
@@ -44,6 +43,6 @@ namespace TestRunner
 
         protected abstract ISampleConfig[] InitSampleConfigs();
 
-        protected abstract IJobWrapperBase[] InitJobWrapperBases();
+        protected abstract IWorkWrapper[] InitWorkWrappers();
     }
 }
