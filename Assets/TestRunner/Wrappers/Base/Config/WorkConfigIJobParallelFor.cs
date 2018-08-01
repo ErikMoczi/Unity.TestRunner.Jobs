@@ -7,7 +7,7 @@ namespace TestRunner.Wrappers.Base.Config
     {
         public int BatchCount { get; }
 
-        public WorkConfigIJobParallelFor(Allocator allocator, int batchCount, bool scheduled = false) : base(allocator,
+        public WorkConfigIJobParallelFor(Allocator allocator, int batchCount = 64, bool scheduled = false) : base(allocator,
             scheduled)
         {
             BatchCount = batchCount;
