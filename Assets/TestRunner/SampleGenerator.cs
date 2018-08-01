@@ -10,6 +10,9 @@ namespace TestRunner
         [SerializeField] private int _dataSize = 10;
         [SerializeField] private int _totalRuns = 10;
 
+        [Header("Delay specific frames from start")] [SerializeField] [Range(0, 10)]
+        private int _delayFrames = 3;
+
         protected int DataSize => _dataSize;
         protected int TotalRuns => _totalRuns;
 
@@ -25,7 +28,7 @@ namespace TestRunner
 
         protected virtual void Update()
         {
-            if (_totalRuns > _currentRun)
+            if (Time.frameCount > _delayFrames + 1 && _totalRuns > _currentRun)
             {
                 foreach (var workWrapper in _workWrappers)
                 {
