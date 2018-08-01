@@ -14,7 +14,8 @@ namespace TestRunner.Wrappers.Base.Job
         where TConfig : class, IWorkConfigIJob
         where T1 : struct
     {
-        protected JobWrapperBase(TWorker worker, TData data, TConfig config) : base(worker, data, config)
+        protected JobWrapperBase(string testName, TWorker worker, TData data, TConfig config) : base(testName, worker,
+            data, config)
         {
         }
 

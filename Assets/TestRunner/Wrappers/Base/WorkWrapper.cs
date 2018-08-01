@@ -18,12 +18,14 @@ namespace TestRunner.Wrappers.Base
         protected TWorker Worker;
 
         private readonly TConfig _config;
+        private readonly string _testName;
 
-        protected WorkWrapper(TWorker worker, TData data, TConfig config = null)
+        protected WorkWrapper(string testName, TWorker worker, TData data, TConfig config = null)
         {
             Worker = worker;
             DataContainer = GetDataContainer(data);
             _config = config;
+            _testName = testName;
         }
 
         private TDataContainer GetDataContainer(TData data)
@@ -68,7 +70,7 @@ namespace TestRunner.Wrappers.Base
 
         private void BeginTracking()
         {
-            Profiler.BeginSample($"{TestNamePrefix}: {Worker.GetType().Name} {_config}");
+            Profiler.BeginSample($"|{TestNamePrefix}| {_testName}: {Worker.GetType().Name} {_config}");
         }
 
         private void EndTracking()

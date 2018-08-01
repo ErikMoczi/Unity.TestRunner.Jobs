@@ -17,7 +17,8 @@ namespace TestRunner.Wrappers.IJobParallelFor
         where T1 : struct
         where T2 : struct
     {
-        public JobParallelForWrapper(TWorker job, TData data, TConfig config) : base(job, data, config)
+        public JobParallelForWrapper(string testName, TWorker worker, TData data, TConfig config) : base(testName,
+            worker, data, config)
         {
         }
 

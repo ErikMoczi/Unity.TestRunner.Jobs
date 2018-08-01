@@ -15,51 +15,55 @@ namespace TestRunner
         where T2 : struct
         where T3 : struct
     {
-        internal static IWorkWrapper RunIJob<TJob, TConfig>(TJob job, IInputData<T1, T2, T3> data, TConfig config)
-            where TJob : struct, IJobExt<T1, T2, T3>
+        internal static IWorkWrapper RunIJob<TWorker, TConfig>(string testName, TWorker worker,
+            IInputData<T1, T2, T3> data, TConfig config)
+            where TWorker : struct, IJobExt<T1, T2, T3>
             where TConfig : class, IWorkConfigIJob
         {
-            return new JobWrapper<IStructContainer<TConfig, T1, T2, T3>, IInputData<T1, T2, T3>, TJob, TConfig, T1, T2,
-                T3>(job, data, config);
+            return new JobWrapper<IStructContainer<TConfig, T1, T2, T3>, IInputData<T1, T2, T3>, TWorker, TConfig, T1,
+                T2, T3>(testName, worker, data, config);
         }
 
-        public static IWorkWrapper RunIJob<TJob, TConfig>(TJob job, T1[] itemArray1, T2[] itemArray2, T3[] itemArray3,
-            TConfig config)
-            where TJob : struct, IJobExt<T1, T2, T3>
+        public static IWorkWrapper RunIJob<TWorker, TConfig>(string testName, TWorker worker, T1[] itemArray1,
+            T2[] itemArray2, T3[] itemArray3, TConfig config)
+            where TWorker : struct, IJobExt<T1, T2, T3>
             where TConfig : class, IWorkConfigIJob
         {
-            return RunIJob(job, new InputData<T1, T2, T3>(itemArray1, itemArray2, itemArray3), config);
+            return RunIJob(testName, worker, new InputData<T1, T2, T3>(itemArray1, itemArray2, itemArray3), config);
         }
 
-        internal static IWorkWrapper RunIJobParallelFor<TJob, TConfig>(TJob job, IInputData<T1, T2, T3> data,
-            TConfig config)
-            where TJob : struct, IJobParallelForExt<T1, T2, T3>
+        internal static IWorkWrapper RunIJobParallelFor<TWorker, TConfig>(string testName, TWorker worker,
+            IInputData<T1, T2, T3> data, TConfig config)
+            where TWorker : struct, IJobParallelForExt<T1, T2, T3>
             where TConfig : class, IWorkConfigIJobParallelFor
         {
-            return new JobParallelForWrapper<IStructContainer<TConfig, T1, T2, T3>, IInputData<T1, T2, T3>, TJob,
-                TConfig, T1, T2, T3>(job, data, config);
+            return new JobParallelForWrapper<IStructContainer<TConfig, T1, T2, T3>, IInputData<T1, T2, T3>, TWorker,
+                TConfig, T1, T2, T3>(testName, worker, data, config);
         }
 
-        public static IWorkWrapper RunIJobParallelFor<TJob, TConfig>(TJob job, T1[] itemArray1, T2[] itemArray2,
-            T3[] itemArray3, TConfig config)
-            where TJob : struct, IJobParallelForExt<T1, T2, T3>
+        public static IWorkWrapper RunIJobParallelFor<TWorker, TConfig>(string testName, TWorker worker,
+            T1[] itemArray1, T2[] itemArray2, T3[] itemArray3, TConfig config)
+            where TWorker : struct, IJobParallelForExt<T1, T2, T3>
             where TConfig : class, IWorkConfigIJobParallelFor
         {
-            return RunIJobParallelFor(job, new InputData<T1, T2, T3>(itemArray1, itemArray2, itemArray3), config);
+            return RunIJobParallelFor(testName, worker, new InputData<T1, T2, T3>(itemArray1, itemArray2, itemArray3),
+                config);
         }
 
-        internal static IWorkWrapper RunINonJob<TJob, TConfig>(TJob job, IInputData<T1, T2, T3> data, TConfig config)
-            where TJob : struct, INonJobExt<T1, T2, T3>
+        internal static IWorkWrapper RunINonJob<TWorker, TConfig>(string testName, TWorker worker,
+            IInputData<T1, T2, T3> data, TConfig config)
+            where TWorker : struct, INonJobExt<T1, T2, T3>
             where TConfig : class, IWorkConfigINonJob
         {
-            return new NonJobWrapper<IArrayContainer<TConfig, T1, T2, T3>, IInputData<T1, T2, T3>, TJob, TConfig, T1, T2
-                , T3>(job, data, config);
+            return new NonJobWrapper<IArrayContainer<TConfig, T1, T2, T3>, IInputData<T1, T2, T3>, TWorker, TConfig, T1,
+                T2, T3>(testName, worker, data, config);
         }
 
-        public static IWorkWrapper RunINonJob<TJob>(TJob job, T1[] itemArray1, T2[] itemArray2, T3[] itemArray3)
-            where TJob : struct, INonJobExt<T1, T2, T3>
+        public static IWorkWrapper RunINonJob<TWorker>(string testName, TWorker worker, T1[] itemArray1,
+            T2[] itemArray2, T3[] itemArray3)
+            where TWorker : struct, INonJobExt<T1, T2, T3>
         {
-            return RunINonJob(job, new InputData<T1, T2, T3>(itemArray1, itemArray2, itemArray3),
+            return RunINonJob(testName, worker, new InputData<T1, T2, T3>(itemArray1, itemArray2, itemArray3),
                 new WorkConfigINonJob());
         }
     }

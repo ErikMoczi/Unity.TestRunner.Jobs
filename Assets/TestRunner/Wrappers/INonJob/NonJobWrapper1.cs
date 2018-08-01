@@ -16,7 +16,8 @@ namespace TestRunner.Wrappers.INonJob
         where TConfig : class, IWorkConfigINonJob
         where T1 : struct
     {
-        public NonJobWrapper(TWorker worker, TData data, TConfig config) : base(worker, data, config)
+        public NonJobWrapper(string testName, TWorker worker, TData data, TConfig config) : base(testName, worker, data,
+            config)
         {
         }
 
