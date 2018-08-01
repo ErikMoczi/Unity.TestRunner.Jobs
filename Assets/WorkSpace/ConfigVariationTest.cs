@@ -24,7 +24,6 @@ namespace WorkSpace
 
         protected override IWorkWrapper[] InitWorkWrappers()
         {
-            Debug.Log(SystemInfo.processorCount);
             return new[]
             {
                 #region Allocator
