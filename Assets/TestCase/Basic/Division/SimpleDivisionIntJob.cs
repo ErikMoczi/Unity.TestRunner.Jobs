@@ -1,9 +1,9 @@
 ﻿using TestRunner.Workers;
 using Unity.Collections;
 
-namespace TestCase.Basic
+namespace TestCase.Basic.Division
 {
-    public struct SimpleDivisionJob : IJobExt<int, int, int>
+    public struct SimpleDivisionIntJob : IJobExt<int, int, int>
     {
         private NativeArray<int> _data1;
         private NativeArray<int> _data2;

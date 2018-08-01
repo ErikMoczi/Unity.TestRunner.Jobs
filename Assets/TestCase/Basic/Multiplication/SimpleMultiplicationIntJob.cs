@@ -1,9 +1,9 @@
 ﻿using TestRunner.Workers;
 using Unity.Collections;
 
-namespace TestCase.Basic
+namespace TestCase.Basic.Multiplication
 {
-    public struct SimpleAdditionJob : IJobExt<int, int, int>
+    public struct SimpleMultiplicationIntJob : IJobExt<int, int, int>
     {
         private NativeArray<int> _data1;
         private NativeArray<int> _data2;
@@ -33,7 +33,7 @@ namespace TestCase.Basic
         {
             for (int i = 0; i < DataSize; i++)
             {
-                _data3[i] = _data1[i] + _data2[i];
+                _data3[i] = _data1[i] * _data2[i];
             }
         }
 
