@@ -5,7 +5,31 @@ namespace TestRunner.Utils
 {
     internal enum DataTypeName
     {
-        #region Int
+        #region byte
+
+        [TypeName(typeof(byte))] Byte,
+
+        #endregion
+
+        #region double
+
+        [TypeName(typeof(double))] Double,
+
+        #endregion
+
+        #region long
+
+        [TypeName(typeof(long))] Long,
+
+        #endregion
+
+        #region short
+
+        [TypeName(typeof(short))] Short,
+
+        #endregion
+
+        #region int
 
         [TypeName(typeof(int))] Int,
         [TypeName(typeof(int2))] Int2,
@@ -14,7 +38,16 @@ namespace TestRunner.Utils
 
         #endregion
 
-        #region Float
+        #region uint
+
+        [TypeName(typeof(uint))] UInt,
+        [TypeName(typeof(uint2))] UInt2,
+        [TypeName(typeof(uint3))] UInt3,
+        [TypeName(typeof(uint4))] UInt4,
+
+        #endregion
+
+        #region float
 
         [TypeName(typeof(float))] Float,
         [TypeName(typeof(float2))] Float2,

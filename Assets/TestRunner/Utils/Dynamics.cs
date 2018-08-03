@@ -10,6 +10,46 @@ namespace TestRunner.Utils
         {
             switch (EnumHelper.GetEnumFromString<DataTypeName>(type.ToString()))
             {
+                #region byte
+
+                case DataTypeName.Byte:
+                {
+                    SetDataToDynamicTypeArray(RandomGenerator.GetRandomByte(), name, index, typedData);
+                    break;
+                }
+
+                #endregion
+
+                #region double
+
+                case DataTypeName.Double:
+                {
+                    SetDataToDynamicTypeArray(RandomGenerator.GetRandomDouble(), name, index, typedData);
+                    break;
+                }
+
+                #endregion
+
+                #region long
+
+                case DataTypeName.Long:
+                {
+                    SetDataToDynamicTypeArray(RandomGenerator.GetRandomLong(), name, index, typedData);
+                    break;
+                }
+
+                #endregion
+
+                #region short
+
+                case DataTypeName.Short:
+                {
+                    SetDataToDynamicTypeArray(RandomGenerator.GetRandomShort(), name, index, typedData);
+                    break;
+                }
+
+                #endregion
+
                 #region int
 
                 case DataTypeName.Int:
@@ -30,6 +70,31 @@ namespace TestRunner.Utils
                 case DataTypeName.Int4:
                 {
                     SetDataToDynamicTypeArray(RandomGenerator.GetRandomInt4(), name, index, typedData);
+                    break;
+                }
+
+                #endregion
+
+                #region uint
+
+                case DataTypeName.UInt:
+                {
+                    SetDataToDynamicTypeArray(RandomGenerator.GetRandomUInt(), name, index, typedData);
+                    break;
+                }
+                case DataTypeName.UInt2:
+                {
+                    SetDataToDynamicTypeArray(RandomGenerator.GetRandomUInt2(), name, index, typedData);
+                    break;
+                }
+                case DataTypeName.UInt3:
+                {
+                    SetDataToDynamicTypeArray(RandomGenerator.GetRandomUInt3(), name, index, typedData);
+                    break;
+                }
+                case DataTypeName.UInt4:
+                {
+                    SetDataToDynamicTypeArray(RandomGenerator.GetRandomUInt4(), name, index, typedData);
                     break;
                 }
 

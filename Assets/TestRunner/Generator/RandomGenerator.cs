@@ -31,6 +31,42 @@ namespace TestRunner.Generator
             return (T) Convert.ChangeType(GenerateValue(typeRange.MinRange(), typeRange.MaxRange()), typeof(T));
         }
 
+        #region byte
+
+        internal static byte GetRandomByte()
+        {
+            return GetRandom<byte>();
+        }
+
+        #endregion
+
+        #region double
+
+        internal static double GetRandomDouble()
+        {
+            return GetRandom<double>();
+        }
+
+        #endregion
+
+        #region long
+
+        internal static long GetRandomLong()
+        {
+            return GetRandom<long>();
+        }
+
+        #endregion
+
+        #region short
+
+        internal static short GetRandomShort()
+        {
+            return GetRandom<short>();
+        }
+
+        #endregion
+
         #region int
 
         internal static int GetRandomInt()
@@ -51,6 +87,30 @@ namespace TestRunner.Generator
         internal static int4 GetRandomInt4()
         {
             return new int4(GetRandom<int>(), GetRandom<int>(), GetRandom<int>(), GetRandom<int>());
+        }
+
+        #endregion
+
+        #region uint
+
+        internal static uint GetRandomUInt()
+        {
+            return GetRandom<uint>();
+        }
+
+        internal static uint2 GetRandomUInt2()
+        {
+            return new uint2(GetRandom<uint>(), GetRandom<uint>());
+        }
+
+        internal static uint3 GetRandomUInt3()
+        {
+            return new uint3(GetRandom<uint>(), GetRandom<uint>(), GetRandom<uint>());
+        }
+
+        internal static uint4 GetRandomUInt4()
+        {
+            return new uint4(GetRandom<uint>(), GetRandom<uint>(), GetRandom<uint>(), GetRandom<uint>());
         }
 
         #endregion
