@@ -11,7 +11,7 @@ namespace WorkSpace
     public class OptimalizationTest : SampleGenerator
     {
         private const string TestName = nameof(OptimalizationTest);
-        private const string DataInt1 = "dataInt1";
+        private const string DataInt1 = "DataInt1";
 
         protected override ISampleConfig[] InitSampleConfigs()
         {

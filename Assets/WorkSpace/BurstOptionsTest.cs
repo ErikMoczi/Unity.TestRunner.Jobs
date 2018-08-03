@@ -11,8 +11,8 @@ namespace WorkSpace
     public class BurstOptionsTest : SampleGenerator
     {
         private const string TestName = nameof(BurstOptionsTest);
-        private const string DataInt1 = "dataInt1";
-        private const string DataFloat1 = "dataFloat1";
+        private const string DataInt1 = "DataInt1";
+        private const string DataFloat1 = "DataFloat1";
 
         protected override ISampleConfig[] InitSampleConfigs()
         {

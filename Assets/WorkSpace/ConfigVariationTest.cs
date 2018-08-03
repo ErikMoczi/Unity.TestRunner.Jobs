@@ -12,7 +12,7 @@ namespace WorkSpace
     public class ConfigVariationTest : SampleGenerator
     {
         private const string TestName = nameof(ConfigVariationTest);
-        private const string DataInt1 = "dataInt1";
+        private const string DataInt1 = "DataInt1";
 
         protected override ISampleConfig[] InitSampleConfigs()
         {
