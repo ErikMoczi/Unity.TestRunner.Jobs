@@ -1,6 +1,7 @@
 ﻿using TestRunner.Generator;
 using TestRunner.Generator.Interfaces;
 using TestRunner.Wrappers.Base;
+using UnityEditor;
 using UnityEngine;
 
 namespace TestRunner
@@ -12,6 +13,9 @@ namespace TestRunner
 
         [Header("Delay specific frames from start")] [SerializeField] [Range(0, 10)]
         private int _delayFrames = 3;
+
+        [Header("Pause unity after finished test case")] [SerializeField] [Range(0, 10)]
+        private int _pauseAfterFinishFrames = 5;
 
         protected int DataSize => _dataSize;
         protected int TotalRuns => _totalRuns;
@@ -28,7 +32,12 @@ namespace TestRunner
 
         protected virtual void Update()
         {
-            if (Time.frameCount > _delayFrames + 1 && _totalRuns > _currentRun)
+            if (_delayFrames + 1 > Time.frameCount)
+            {
+                return;
+            }
+
+            if (_totalRuns > _currentRun)
             {
                 foreach (var workWrapper in _workWrappers)
                 {
@@ -36,6 +45,11 @@ namespace TestRunner
                 }
 
                 _currentRun++;
+            }
+
+            if (Time.frameCount > _pauseAfterFinishFrames + _delayFrames + 1 + _totalRuns)
+            {
+                EditorApplication.isPaused = true;
             }
         }
 
