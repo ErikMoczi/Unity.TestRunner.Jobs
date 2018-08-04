@@ -44,13 +44,13 @@ namespace WorkSpace
                     new WorkConfigIJobParallelFor(Allocator.Persistent)),
                 WorkerTests<int, int>.RunIJobParallelFor(TestName, new BurstCompileSynchronouslyTrueJobParallelFor(),
                     GetData<int>(DataInt1), GetData<int>(DataInt1),
-                    new WorkConfigIJobParallelFor(Allocator.Persistent, 64, true)),
+                    new WorkConfigIJobParallelFor(Allocator.Persistent, true, 64)),
                 WorkerTests<int, int>.RunIJobParallelFor(TestName, new BurstCompileSynchronouslyFalseJobParallelFor(),
                     GetData<int>(DataInt1), GetData<int>(DataInt1),
                     new WorkConfigIJobParallelFor(Allocator.Persistent)),
                 WorkerTests<int, int>.RunIJobParallelFor(TestName, new BurstCompileSynchronouslyFalseJobParallelFor(),
                     GetData<int>(DataInt1), GetData<int>(DataInt1),
-                    new WorkConfigIJobParallelFor(Allocator.Persistent, 64, true)),
+                    new WorkConfigIJobParallelFor(Allocator.Persistent, true, 64)),
 
                 #endregion
 
@@ -70,13 +70,13 @@ namespace WorkSpace
                     new WorkConfigIJobParallelFor(Allocator.Persistent)),
                 WorkerTests<float, float>.RunIJobParallelFor(TestName, new BurstSupportRelaxedJobParallelFor(),
                     GetData<float>(DataFloat1), GetData<float>(DataFloat1),
-                    new WorkConfigIJobParallelFor(Allocator.Persistent, 64, true)),
+                    new WorkConfigIJobParallelFor(Allocator.Persistent, true, 64)),
                 WorkerTests<float, float>.RunIJobParallelFor(TestName, new BurstSupportStrictJobParallelFor(),
                     GetData<float>(DataFloat1), GetData<float>(DataFloat1),
                     new WorkConfigIJobParallelFor(Allocator.Persistent)),
                 WorkerTests<float, float>.RunIJobParallelFor(TestName, new BurstSupportStrictJobParallelFor(),
                     GetData<float>(DataFloat1), GetData<float>(DataFloat1),
-                    new WorkConfigIJobParallelFor(Allocator.Persistent, 64, true)),
+                    new WorkConfigIJobParallelFor(Allocator.Persistent, true, 64)),
 
                 #endregion
 
@@ -104,25 +104,25 @@ namespace WorkSpace
                     new WorkConfigIJobParallelFor(Allocator.Persistent)),
                 WorkerTests<float, float>.RunIJobParallelFor(TestName, new BurstAccuracyStdJobParallelFor(),
                     GetData<float>(DataFloat1), GetData<float>(DataFloat1),
-                    new WorkConfigIJobParallelFor(Allocator.Persistent, 64, true)),
+                    new WorkConfigIJobParallelFor(Allocator.Persistent, true, 64)),
                 WorkerTests<float, float>.RunIJobParallelFor(TestName, new BurstAccuracyLowJobParallelFor(),
                     GetData<float>(DataFloat1), GetData<float>(DataFloat1),
                     new WorkConfigIJobParallelFor(Allocator.Persistent)),
                 WorkerTests<float, float>.RunIJobParallelFor(TestName, new BurstAccuracyLowJobParallelFor(),
                     GetData<float>(DataFloat1), GetData<float>(DataFloat1),
-                    new WorkConfigIJobParallelFor(Allocator.Persistent, 64, true)),
+                    new WorkConfigIJobParallelFor(Allocator.Persistent, true, 64)),
                 WorkerTests<float, float>.RunIJobParallelFor(TestName, new BurstAccuracyMedJobParallelFor(),
                     GetData<float>(DataFloat1), GetData<float>(DataFloat1),
                     new WorkConfigIJobParallelFor(Allocator.Persistent)),
                 WorkerTests<float, float>.RunIJobParallelFor(TestName, new BurstAccuracyMedJobParallelFor(),
                     GetData<float>(DataFloat1), GetData<float>(DataFloat1),
-                    new WorkConfigIJobParallelFor(Allocator.Persistent, 64, true)),
+                    new WorkConfigIJobParallelFor(Allocator.Persistent, true, 64)),
                 WorkerTests<float, float>.RunIJobParallelFor(TestName, new BurstAccuracyHighJobParallelFor(),
                     GetData<float>(DataFloat1), GetData<float>(DataFloat1),
                     new WorkConfigIJobParallelFor(Allocator.Persistent)),
                 WorkerTests<float, float>.RunIJobParallelFor(TestName, new BurstAccuracyHighJobParallelFor(),
                     GetData<float>(DataFloat1), GetData<float>(DataFloat1),
-                    new WorkConfigIJobParallelFor(Allocator.Persistent, 64, true)),
+                    new WorkConfigIJobParallelFor(Allocator.Persistent, true, 64)),
 
                 #endregion
             };
