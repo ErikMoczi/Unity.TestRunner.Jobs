@@ -8,11 +8,11 @@ namespace TestRunner.Utils
     {
         internal static void FillDataByType(Type type, string name, int index, Dictionary<string, dynamic> typedData)
         {
-            switch (EnumHelper.GetEnumFromString<DataTypeName>(type.ToString()))
+            switch (type.ToString())
             {
                 #region byte
 
-                case DataTypeName.Byte:
+                case InputDataTypeName.Byte:
                 {
                     SetDataToDynamicTypeArray(RandomGenerator.GetRandomByte(), name, index, typedData);
                     break;
@@ -22,7 +22,7 @@ namespace TestRunner.Utils
 
                 #region double
 
-                case DataTypeName.Double:
+                case InputDataTypeName.Double:
                 {
                     SetDataToDynamicTypeArray(RandomGenerator.GetRandomDouble(), name, index, typedData);
                     break;
@@ -32,7 +32,7 @@ namespace TestRunner.Utils
 
                 #region long
 
-                case DataTypeName.Long:
+                case InputDataTypeName.Long:
                 {
                     SetDataToDynamicTypeArray(RandomGenerator.GetRandomLong(), name, index, typedData);
                     break;
@@ -42,7 +42,7 @@ namespace TestRunner.Utils
 
                 #region short
 
-                case DataTypeName.Short:
+                case InputDataTypeName.Short:
                 {
                     SetDataToDynamicTypeArray(RandomGenerator.GetRandomShort(), name, index, typedData);
                     break;
@@ -52,22 +52,22 @@ namespace TestRunner.Utils
 
                 #region int
 
-                case DataTypeName.Int:
+                case InputDataTypeName.Int:
                 {
                     SetDataToDynamicTypeArray(RandomGenerator.GetRandomInt(), name, index, typedData);
                     break;
                 }
-                case DataTypeName.Int2:
+                case InputDataTypeName.Int2:
                 {
                     SetDataToDynamicTypeArray(RandomGenerator.GetRandomInt2(), name, index, typedData);
                     break;
                 }
-                case DataTypeName.Int3:
+                case InputDataTypeName.Int3:
                 {
                     SetDataToDynamicTypeArray(RandomGenerator.GetRandomInt3(), name, index, typedData);
                     break;
                 }
-                case DataTypeName.Int4:
+                case InputDataTypeName.Int4:
                 {
                     SetDataToDynamicTypeArray(RandomGenerator.GetRandomInt4(), name, index, typedData);
                     break;
@@ -77,22 +77,22 @@ namespace TestRunner.Utils
 
                 #region uint
 
-                case DataTypeName.UInt:
+                case InputDataTypeName.UInt:
                 {
                     SetDataToDynamicTypeArray(RandomGenerator.GetRandomUInt(), name, index, typedData);
                     break;
                 }
-                case DataTypeName.UInt2:
+                case InputDataTypeName.UInt2:
                 {
                     SetDataToDynamicTypeArray(RandomGenerator.GetRandomUInt2(), name, index, typedData);
                     break;
                 }
-                case DataTypeName.UInt3:
+                case InputDataTypeName.UInt3:
                 {
                     SetDataToDynamicTypeArray(RandomGenerator.GetRandomUInt3(), name, index, typedData);
                     break;
                 }
-                case DataTypeName.UInt4:
+                case InputDataTypeName.UInt4:
                 {
                     SetDataToDynamicTypeArray(RandomGenerator.GetRandomUInt4(), name, index, typedData);
                     break;
@@ -102,22 +102,22 @@ namespace TestRunner.Utils
 
                 #region float
 
-                case DataTypeName.Float:
+                case InputDataTypeName.Float:
                 {
                     SetDataToDynamicTypeArray(RandomGenerator.GetRandomFloat(), name, index, typedData);
                     break;
                 }
-                case DataTypeName.Float2:
+                case InputDataTypeName.Float2:
                 {
                     SetDataToDynamicTypeArray(RandomGenerator.GetRandomFloat2(), name, index, typedData);
                     break;
                 }
-                case DataTypeName.Float3:
+                case InputDataTypeName.Float3:
                 {
                     SetDataToDynamicTypeArray(RandomGenerator.GetRandomFloat3(), name, index, typedData);
                     break;
                 }
-                case DataTypeName.Float4:
+                case InputDataTypeName.Float4:
                 {
                     SetDataToDynamicTypeArray(RandomGenerator.GetRandomFloat4(), name, index, typedData);
                     break;

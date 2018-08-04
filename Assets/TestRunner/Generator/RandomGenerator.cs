@@ -1,7 +1,4 @@
-﻿using System;
-using TestRunner.Generator.Extensions;
-using TestRunner.Utils;
-using Unity.Mathematics;
+﻿using Unity.Mathematics;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -15,27 +12,51 @@ namespace TestRunner.Generator
             do
             {
                 value = Random.Range(min, max);
-            } while (Mathf.Abs(value) < 1f);
+            } while (Mathf.Abs(value) <= 1f);
 
             return value;
         }
 
-        private static T GetRandom<T>() where T : struct, IConvertible
+        private static byte RandomRangeByte()
         {
-            if (!typeof(T).IsValueType)
-            {
-                throw new ArgumentException($"The type '{typeof(T)}' is not value type.");
-            }
+            return (byte) GenerateValue(byte.MinValue, byte.MaxValue);
+        }
 
-            var typeRange = EnumHelper.GetEnumFromString<TypeRange>(typeof(T).ToString());
-            return (T) Convert.ChangeType(GenerateValue(typeRange.MinRange(), typeRange.MaxRange()), typeof(T));
+        private static double RandomRangeDouble()
+        {
+            return GenerateValue(float.MinValue, float.MaxValue);
+        }
+
+        private static long RandomRangeLong()
+        {
+            return (long) GenerateValue(long.MinValue, long.MaxValue);
+        }
+
+        private static short RandomRangeShort()
+        {
+            return (short) GenerateValue(short.MinValue, short.MaxValue);
+        }
+
+        private static int RandomRangeInt()
+        {
+            return (int) GenerateValue(int.MinValue, int.MaxValue);
+        }
+
+        private static uint RandomRangeUInt()
+        {
+            return (uint) GenerateValue(uint.MinValue, uint.MaxValue);
+        }
+
+        private static float RandomRangeFloat()
+        {
+            return GenerateValue(float.MinValue, float.MaxValue);
         }
 
         #region byte
 
         internal static byte GetRandomByte()
         {
-            return GetRandom<byte>();
+            return RandomRangeByte();
         }
 
         #endregion
@@ -44,7 +65,7 @@ namespace TestRunner.Generator
 
         internal static double GetRandomDouble()
         {
-            return GetRandom<double>();
+            return RandomRangeDouble();
         }
 
         #endregion
@@ -53,7 +74,7 @@ namespace TestRunner.Generator
 
         internal static long GetRandomLong()
         {
-            return GetRandom<long>();
+            return RandomRangeLong();
         }
 
         #endregion
@@ -62,7 +83,7 @@ namespace TestRunner.Generator
 
         internal static short GetRandomShort()
         {
-            return GetRandom<short>();
+            return RandomRangeShort();
         }
 
         #endregion
@@ -71,22 +92,22 @@ namespace TestRunner.Generator
 
         internal static int GetRandomInt()
         {
-            return GetRandom<int>();
+            return RandomRangeInt();
         }
 
         internal static int2 GetRandomInt2()
         {
-            return new int2(GetRandom<int>(), GetRandom<int>());
+            return new int2(RandomRangeInt(), RandomRangeInt());
         }
 
         internal static int3 GetRandomInt3()
         {
-            return new int3(GetRandom<int>(), GetRandom<int>(), GetRandom<int>());
+            return new int3(RandomRangeInt(), RandomRangeInt(), RandomRangeInt());
         }
 
         internal static int4 GetRandomInt4()
         {
-            return new int4(GetRandom<int>(), GetRandom<int>(), GetRandom<int>(), GetRandom<int>());
+            return new int4(RandomRangeInt(), RandomRangeInt(), RandomRangeInt(), RandomRangeInt());
         }
 
         #endregion
@@ -95,22 +116,22 @@ namespace TestRunner.Generator
 
         internal static uint GetRandomUInt()
         {
-            return GetRandom<uint>();
+            return RandomRangeUInt();
         }
 
         internal static uint2 GetRandomUInt2()
         {
-            return new uint2(GetRandom<uint>(), GetRandom<uint>());
+            return new uint2(RandomRangeUInt(), RandomRangeUInt());
         }
 
         internal static uint3 GetRandomUInt3()
         {
-            return new uint3(GetRandom<uint>(), GetRandom<uint>(), GetRandom<uint>());
+            return new uint3(RandomRangeUInt(), RandomRangeUInt(), RandomRangeUInt());
         }
 
         internal static uint4 GetRandomUInt4()
         {
-            return new uint4(GetRandom<uint>(), GetRandom<uint>(), GetRandom<uint>(), GetRandom<uint>());
+            return new uint4(RandomRangeUInt(), RandomRangeUInt(), RandomRangeUInt(), RandomRangeUInt());
         }
 
         #endregion
@@ -119,22 +140,22 @@ namespace TestRunner.Generator
 
         internal static float GetRandomFloat()
         {
-            return GetRandom<float>();
+            return RandomRangeFloat();
         }
 
         internal static float2 GetRandomFloat2()
         {
-            return new float2(GetRandom<float>(), GetRandom<float>());
+            return new float2(RandomRangeFloat(), RandomRangeFloat());
         }
 
         internal static float3 GetRandomFloat3()
         {
-            return new float3(GetRandom<float>(), GetRandom<float>(), GetRandom<float>());
+            return new float3(RandomRangeFloat(), RandomRangeFloat(), RandomRangeFloat());
         }
 
         internal static float4 GetRandomFloat4()
         {
-            return new float4(GetRandom<float>(), GetRandom<float>(), GetRandom<float>(), GetRandom<float>());
+            return new float4(RandomRangeFloat(), RandomRangeFloat(), RandomRangeFloat(), RandomRangeFloat());
         }
 
         #endregion
