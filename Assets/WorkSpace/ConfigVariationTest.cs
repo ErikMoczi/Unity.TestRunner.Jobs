@@ -1,11 +1,10 @@
-﻿using TestCase.Basic.Addition;
+﻿using TestCase.Basic.Addition.Simple;
 using TestRunner;
 using TestRunner.Generator;
 using TestRunner.Generator.Interfaces;
 using TestRunner.Wrappers.Base;
 using TestRunner.Wrappers.Base.Config;
 using Unity.Collections;
-using UnityEngine;
 
 namespace WorkSpace
 {
