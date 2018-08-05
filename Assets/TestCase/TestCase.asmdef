@@ -2,7 +2,8 @@
     "name": "TestCase",
     "references": [
         "TestRunner",
-        "Unity.Burst"
+        "Unity.Burst",
+        "Unity.Mathematics"
     ],
     "optionalUnityReferences": [],
     "includePlatforms": [],
