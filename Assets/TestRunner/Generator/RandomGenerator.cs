@@ -12,7 +12,7 @@ namespace TestRunner.Generator
             do
             {
                 value = Random.Range(min, max);
-            } while (Mathf.Abs(value) <= 1f);
+            } while (Mathf.Abs(value) < 1f);
 
             return value;
         }
@@ -44,7 +44,8 @@ namespace TestRunner.Generator
 
         private static uint RandomRangeUInt()
         {
-            return (uint) GenerateValue(uint.MinValue, uint.MaxValue);
+            // ReSharper disable once PossibleLossOfFraction
+            return (uint) GenerateValue(uint.MinValue, uint.MaxValue / 2);
         }
 
         private static float RandomRangeFloat()
