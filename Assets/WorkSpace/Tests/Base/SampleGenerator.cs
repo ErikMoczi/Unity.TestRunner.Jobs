@@ -8,10 +8,4 @@ namespace WorkSpace.Tests.Base
         public abstract ISampleConfig[] InitSampleConfigs();
         public abstract IWorkWrapper[] InitWorkWrappers(IInputDataContainer inputDataContainer, int dataSize);
     }
-
-    public interface ISampleGenerator
-    {
-        ISampleConfig[] InitSampleConfigs();
-        IWorkWrapper[] InitWorkWrappers(IInputDataContainer inputDataContainer, int dataSize);
-    }
 }
