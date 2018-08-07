@@ -59,7 +59,7 @@ namespace WorkSpace.Editor
                     var defaultColor = GUI.color;
 
                     EditorGUI.LabelField(new Rect(rect.x, rect.y, rect.width * 0.8f, rect.height),
-                        _targetProperty.displayName);
+                        _targetProperty.displayName + ": " + _reorderableList.serializedProperty.arraySize);
 
                     GUI.backgroundColor = Color.green;
                     if (GUI.Button(new Rect(rect.width - 20, rect.y, 20f, rect.height), new GUIContent("+", "Add all"),
