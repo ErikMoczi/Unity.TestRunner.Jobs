@@ -6,7 +6,7 @@ using TestRunner.Utils;
 
 namespace TestRunner.Generator
 {
-    internal sealed class InputDataContainer : IInputDataContainer
+    public sealed class InputDataContainer : IInputDataContainer
     {
         private readonly int _dataSize;
         private readonly ISampleConfig[] _sampleConfigs;
@@ -39,17 +39,11 @@ namespace TestRunner.Generator
             {
                 throw new NullReferenceException("Missing sample configuration");
             }
-
-            if (_sampleConfigs.Length != _sampleConfigs.GroupBy(item => item.Type).Count())
-            {
-                throw new Exception(
-                    "Make sure you create data type only once. Use params to create more data for same type.");
-            }
         }
 
         private void AllocateDataContainer()
         {
-            foreach (var sampleConfig in _sampleConfigs)
+            foreach (var sampleConfig in CleanUpConfiguration(_sampleConfigs))
             {
                 AddNewConfiguration(sampleConfig);
             }
@@ -57,11 +51,10 @@ namespace TestRunner.Generator
 
         private void AddNewConfiguration(ISampleConfig sampleConfig)
         {
-            var inputData = new Dictionary<string, dynamic>();
-            foreach (var name in new HashSet<string>(sampleConfig.DataNames))
-            {
-                inputData.Add(name, ObjectCreator.CreateArray(sampleConfig.Type, _dataSize));
-            }
+            var inputData = sampleConfig.DataNames.ToDictionary<string, string, dynamic>(
+                name => name,
+                name => ObjectCreator.CreateArray(sampleConfig.Type, _dataSize)
+            );
 
             _dataContainer.Add(sampleConfig.Type, inputData);
         }
@@ -84,6 +77,37 @@ namespace TestRunner.Generator
                     Dynamics.FillDataByType(type, inputDataName, index, typeSetuPair.Value);
                 }
             }
+        }
+
+        private static IEnumerable<ISampleConfig> CleanUpConfiguration(ISampleConfig[] sampleConfigs)
+        {
+            var uniqueType = sampleConfigs.GroupBy(item => item.Type).ToList();
+
+            if (sampleConfigs.Length == uniqueType.Count) return sampleConfigs;
+            {
+                var newSampleConfigs = new ISampleConfig[uniqueType.Count];
+                var correctData = uniqueType.Where(item => item.Count() == 1).Select(item => item.First()).ToArray();
+                var duplicateData = uniqueType.Where(item => item.Count() > 1).Select(item => item);
+
+                var i = 0;
+                for (; i < correctData.Length; i++)
+                {
+                    newSampleConfigs[i] = correctData[i];
+                }
+
+                foreach (var sampleConfig in duplicateData)
+                {
+                    var dataNames = sampleConfig.GroupBy(item => item.DataNames).SelectMany(item => item.Key).Distinct()
+                        .ToArray();
+
+                    newSampleConfigs[i] = new SampleConfig(sampleConfig.First().Type, dataNames);
+                    i++;
+                }
+
+                sampleConfigs = newSampleConfigs;
+            }
+
+            return sampleConfigs;
         }
     }
 }
