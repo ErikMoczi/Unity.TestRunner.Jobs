@@ -17,146 +17,146 @@ namespace TestRunner.Generator
             return value;
         }
 
-        private static byte RandomRangeByte()
+        private static byte RandomRangeByte1()
         {
             return (byte) GenerateValue(byte.MinValue, byte.MaxValue);
         }
 
-        private static double RandomRangeDouble()
+        private static double RandomRangeDouble1()
         {
             return GenerateValue(float.MinValue, float.MaxValue);
         }
 
-        private static long RandomRangeLong()
+        private static long RandomRangeLong1()
         {
             return (long) GenerateValue(long.MinValue, long.MaxValue);
         }
 
-        private static short RandomRangeShort()
+        private static short RandomRangeShort1()
         {
             return (short) GenerateValue(short.MinValue, short.MaxValue);
         }
 
-        private static int RandomRangeInt()
+        private static int RandomRangeInt1()
         {
             return (int) GenerateValue(int.MinValue, int.MaxValue);
         }
 
-        private static uint RandomRangeUInt()
+        private static uint RandomRangeUInt1()
         {
             // ReSharper disable once PossibleLossOfFraction
             return (uint) GenerateValue(uint.MinValue, uint.MaxValue / 2);
         }
 
-        private static float RandomRangeFloat()
+        private static float RandomRangeFloat1()
         {
             return GenerateValue(float.MinValue, float.MaxValue);
         }
 
         #region byte
 
-        internal static byte GetRandomByte()
+        internal static byte GetRandomByte1()
         {
-            return RandomRangeByte();
+            return RandomRangeByte1();
         }
 
         #endregion
 
         #region double
 
-        internal static double GetRandomDouble()
+        internal static double GetRandomDouble1()
         {
-            return RandomRangeDouble();
+            return RandomRangeDouble1();
         }
 
         #endregion
 
         #region long
 
-        internal static long GetRandomLong()
+        internal static long GetRandomLong1()
         {
-            return RandomRangeLong();
+            return RandomRangeLong1();
         }
 
         #endregion
 
         #region short
 
-        internal static short GetRandomShort()
+        internal static short GetRandomShort1()
         {
-            return RandomRangeShort();
+            return RandomRangeShort1();
         }
 
         #endregion
 
         #region int
 
-        internal static int GetRandomInt()
+        internal static int GetRandomInt1()
         {
-            return RandomRangeInt();
+            return RandomRangeInt1();
         }
 
         internal static int2 GetRandomInt2()
         {
-            return new int2(RandomRangeInt(), RandomRangeInt());
+            return new int2(RandomRangeInt1(), RandomRangeInt1());
         }
 
         internal static int3 GetRandomInt3()
         {
-            return new int3(RandomRangeInt(), RandomRangeInt(), RandomRangeInt());
+            return new int3(RandomRangeInt1(), RandomRangeInt1(), RandomRangeInt1());
         }
 
         internal static int4 GetRandomInt4()
         {
-            return new int4(RandomRangeInt(), RandomRangeInt(), RandomRangeInt(), RandomRangeInt());
+            return new int4(RandomRangeInt1(), RandomRangeInt1(), RandomRangeInt1(), RandomRangeInt1());
         }
 
         #endregion
 
         #region uint
 
-        internal static uint GetRandomUInt()
+        internal static uint GetRandomUInt1()
         {
-            return RandomRangeUInt();
+            return RandomRangeUInt1();
         }
 
         internal static uint2 GetRandomUInt2()
         {
-            return new uint2(RandomRangeUInt(), RandomRangeUInt());
+            return new uint2(RandomRangeUInt1(), RandomRangeUInt1());
         }
 
         internal static uint3 GetRandomUInt3()
         {
-            return new uint3(RandomRangeUInt(), RandomRangeUInt(), RandomRangeUInt());
+            return new uint3(RandomRangeUInt1(), RandomRangeUInt1(), RandomRangeUInt1());
         }
 
         internal static uint4 GetRandomUInt4()
         {
-            return new uint4(RandomRangeUInt(), RandomRangeUInt(), RandomRangeUInt(), RandomRangeUInt());
+            return new uint4(RandomRangeUInt1(), RandomRangeUInt1(), RandomRangeUInt1(), RandomRangeUInt1());
         }
 
         #endregion
 
         #region float
 
-        internal static float GetRandomFloat()
+        internal static float GetRandomFloat1()
         {
-            return RandomRangeFloat();
+            return RandomRangeFloat1();
         }
 
         internal static float2 GetRandomFloat2()
         {
-            return new float2(RandomRangeFloat(), RandomRangeFloat());
+            return new float2(RandomRangeFloat1(), RandomRangeFloat1());
         }
 
         internal static float3 GetRandomFloat3()
         {
-            return new float3(RandomRangeFloat(), RandomRangeFloat(), RandomRangeFloat());
+            return new float3(RandomRangeFloat1(), RandomRangeFloat1(), RandomRangeFloat1());
         }
 
         internal static float4 GetRandomFloat4()
         {
-            return new float4(RandomRangeFloat(), RandomRangeFloat(), RandomRangeFloat(), RandomRangeFloat());
+            return new float4(RandomRangeFloat1(), RandomRangeFloat1(), RandomRangeFloat1(), RandomRangeFloat1());
         }
 
         #endregion

@@ -12,9 +12,9 @@ namespace TestRunner.Utils
             {
                 #region byte
 
-                case InputDataTypeName.Byte:
+                case InputDataTypeName.Byte1:
                 {
-                    SetDataToDynamicTypeArray(RandomGenerator.GetRandomByte(), name, index, typedData);
+                    SetDataToDynamicTypeArray(RandomGenerator.GetRandomByte1(), name, index, typedData);
                     break;
                 }
 
@@ -22,9 +22,9 @@ namespace TestRunner.Utils
 
                 #region double
 
-                case InputDataTypeName.Double:
+                case InputDataTypeName.Double1:
                 {
-                    SetDataToDynamicTypeArray(RandomGenerator.GetRandomDouble(), name, index, typedData);
+                    SetDataToDynamicTypeArray(RandomGenerator.GetRandomDouble1(), name, index, typedData);
                     break;
                 }
 
@@ -32,9 +32,9 @@ namespace TestRunner.Utils
 
                 #region long
 
-                case InputDataTypeName.Long:
+                case InputDataTypeName.Long1:
                 {
-                    SetDataToDynamicTypeArray(RandomGenerator.GetRandomLong(), name, index, typedData);
+                    SetDataToDynamicTypeArray(RandomGenerator.GetRandomLong1(), name, index, typedData);
                     break;
                 }
 
@@ -42,9 +42,9 @@ namespace TestRunner.Utils
 
                 #region short
 
-                case InputDataTypeName.Short:
+                case InputDataTypeName.Short1:
                 {
-                    SetDataToDynamicTypeArray(RandomGenerator.GetRandomShort(), name, index, typedData);
+                    SetDataToDynamicTypeArray(RandomGenerator.GetRandomShort1(), name, index, typedData);
                     break;
                 }
 
@@ -52,9 +52,9 @@ namespace TestRunner.Utils
 
                 #region int
 
-                case InputDataTypeName.Int:
+                case InputDataTypeName.Int1:
                 {
-                    SetDataToDynamicTypeArray(RandomGenerator.GetRandomInt(), name, index, typedData);
+                    SetDataToDynamicTypeArray(RandomGenerator.GetRandomInt1(), name, index, typedData);
                     break;
                 }
                 case InputDataTypeName.Int2:
@@ -77,9 +77,9 @@ namespace TestRunner.Utils
 
                 #region uint
 
-                case InputDataTypeName.UInt:
+                case InputDataTypeName.UInt1:
                 {
-                    SetDataToDynamicTypeArray(RandomGenerator.GetRandomUInt(), name, index, typedData);
+                    SetDataToDynamicTypeArray(RandomGenerator.GetRandomUInt1(), name, index, typedData);
                     break;
                 }
                 case InputDataTypeName.UInt2:
@@ -102,9 +102,9 @@ namespace TestRunner.Utils
 
                 #region float
 
-                case InputDataTypeName.Float:
+                case InputDataTypeName.Float1:
                 {
-                    SetDataToDynamicTypeArray(RandomGenerator.GetRandomFloat(), name, index, typedData);
+                    SetDataToDynamicTypeArray(RandomGenerator.GetRandomFloat1(), name, index, typedData);
                     break;
                 }
                 case InputDataTypeName.Float2:
