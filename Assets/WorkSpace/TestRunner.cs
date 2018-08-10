@@ -21,7 +21,7 @@ namespace WorkSpace
         private int _pauseAfterFinishFrames = 5;
 
         [Header("Choose which test case to run")] [SerializeField]
-        private TestCase _testCase;
+        private TestCaseWrapper _testCaseWrapper;
 
         private ISampleGenerator[] _sampleGenerators;
         private IInputDataContainer _inputDataContainer;
@@ -60,15 +60,15 @@ namespace WorkSpace
 
         private ISampleGenerator[] InitSampleGenerator()
         {
-            var sampleGenerators = new ISampleGenerator[_testCase.TotalGenerators];
-            for (var i = 0; i < _testCase.TotalGenerators; i++)
+            var sampleGenerators = new ISampleGenerator[_testCaseWrapper.TotalGenerators];
+            for (var i = 0; i < _testCaseWrapper.TotalGenerators; i++)
             {
-                var type = Type.GetType(_testCase.Generators[i]);
+                var type = Type.GetType(_testCaseWrapper.Generators[i]);
                 if (type == null)
                 {
                     throw new ArgumentException(
-                        $"Parameter of generators has to be real class full name (using reflection), instead of {_testCase.Generators[i]}",
-                        nameof(_testCase.Generators)
+                        $"Parameter of generators has to be real class full name (using reflection), instead of {_testCaseWrapper.Generators[i]}",
+                        nameof(_testCaseWrapper.Generators)
                     );
                 }
 

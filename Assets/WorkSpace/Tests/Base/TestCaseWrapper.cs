@@ -1,9 +1,9 @@
 ﻿using System;
 
-namespace WorkSpace
+namespace WorkSpace.Tests.Base
 {
     [Serializable]
-    public sealed class TestCase
+    public sealed class TestCaseWrapper
     {
         public string[] Generators;
         public int TotalGenerators => Generators.Length;
