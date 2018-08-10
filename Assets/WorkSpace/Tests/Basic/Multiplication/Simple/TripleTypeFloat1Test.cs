@@ -36,6 +36,10 @@ namespace WorkSpace.Tests.Basic.Multiplication.Simple
                     inputDataContainer.GetData<float>(DataConfig.DataFloat1),
                     inputDataContainer.GetData<float>(DataConfig.DataFloat1),
                     new WorkConfigIJobParallelFor(Allocator.Persistent, true)),
+                WorkerTests<float, float, float>.RunINonJob(TestName, new SimpleMultiplicationFloatNonJob(),
+                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
+                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
+                    inputDataContainer.GetData<float>(DataConfig.DataFloat1)),
             };
         }
     }

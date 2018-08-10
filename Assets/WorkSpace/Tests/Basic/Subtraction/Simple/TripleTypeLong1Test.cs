@@ -36,6 +36,10 @@ namespace WorkSpace.Tests.Basic.Subtraction.Simple
                     inputDataContainer.GetData<long>(DataConfig.DataLong1),
                     inputDataContainer.GetData<long>(DataConfig.DataLong1),
                     new WorkConfigIJobParallelFor(Allocator.Persistent, true)),
+                WorkerTests<long, long, long>.RunINonJob(TestName, new SimpleSubtractionLongNonJob(),
+                    inputDataContainer.GetData<long>(DataConfig.DataLong1),
+                    inputDataContainer.GetData<long>(DataConfig.DataLong1),
+                    inputDataContainer.GetData<long>(DataConfig.DataLong1)),
             };
         }
     }

@@ -36,6 +36,10 @@ namespace WorkSpace.Tests.Basic.Addition.Simple
                     inputDataContainer.GetData<long>(DataConfig.DataLong1),
                     inputDataContainer.GetData<long>(DataConfig.DataLong1),
                     new WorkConfigIJobParallelFor(Allocator.Persistent, true)),
+                WorkerTests<long, long, long>.RunINonJob(TestName, new SimpleAdditionLongNonJob(),
+                    inputDataContainer.GetData<long>(DataConfig.DataLong1),
+                    inputDataContainer.GetData<long>(DataConfig.DataLong1),
+                    inputDataContainer.GetData<long>(DataConfig.DataLong1)),
             };
         }
     }
