@@ -12,6 +12,8 @@ namespace WorkSpace.Editor
     public sealed class SampleGeneratorSerializedWrapper
     {
         private const string KeyWordCategoryAll = "All";
+        private const string KeyWordExtraCategory = "Extra";
+        private const char MenuSeparator = '/';
 
         private readonly ReorderableList _reorderableList;
         private readonly ISampleGeneratorData _sampleGeneratorData = new SampleGeneratorData();
@@ -156,6 +158,14 @@ namespace WorkSpace.Editor
                 menu.AddItem(new GUIContent(item.Value), false, AddValueByCategory, item.Key);
             }
 
+            menu.AddSeparator(MenuSeparator.ToString());
+
+            foreach (var item in _sampleGeneratorData.GetCategoriesExtra().OrderBy(item => item.Key))
+            {
+                menu.AddItem(new GUIContent(KeyWordExtraCategory + MenuSeparator + item.Key), false,
+                    AddValueByCategoryExtra, item.Value);
+            }
+
             return menu;
         }
 
@@ -175,6 +185,19 @@ namespace WorkSpace.Editor
             }
 
             foreach (var item in _sampleGeneratorData.GetByCategory(category))
+            {
+                AddValue(item);
+            }
+        }
+
+        private void AddValueByCategoryExtra(object o)
+        {
+            if (!(o is string[] extraCategory))
+            {
+                throw new ArgumentNullException(nameof(extraCategory));
+            }
+
+            foreach (var item in extraCategory)
             {
                 AddValue(item);
             }

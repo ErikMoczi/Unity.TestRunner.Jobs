@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using TestRunner.Utils;
 using WorkSpace.Extensions;
 
 namespace WorkSpace.Tests.Base
@@ -10,6 +11,7 @@ namespace WorkSpace.Tests.Base
         public const string TargetPropertyName = "Generators";
         public const char KeySeparator = '.';
         public const char ValueSeparator = '/';
+        public const string PrefixBasicTests = "Type";
 
         private readonly string _prefixWorkspace;
 
@@ -52,6 +54,17 @@ namespace WorkSpace.Tests.Base
         public IEnumerable<KeyValuePair<string, string>> GetCategories()
         {
             return _sampleGeneratorCategories;
+        }
+
+        public IEnumerable<KeyValuePair<string, string[]>> GetCategoriesExtra()
+        {
+            var inputDataTypeName = typeof(InputDataTypeName).GetAllPublicConstantNames();
+            foreach (var value in inputDataTypeName)
+            {
+                var generators = _sampleGenerators.Keys.Where(item => item.Contains(PrefixBasicTests + value))
+                    .ToArray();
+                yield return new KeyValuePair<string, string[]>(value, generators);
+            }
         }
 
         public IEnumerable<string> GetByCategory(string category)
