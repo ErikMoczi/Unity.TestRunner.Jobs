@@ -69,6 +69,21 @@ namespace TestRunner.Generator
             return RandomRangeDouble1();
         }
 
+        internal static double2 GetRandomDouble2()
+        {
+            return new double2(RandomRangeDouble1(), RandomRangeDouble1());
+        }
+
+        internal static double3 GetRandomDouble3()
+        {
+            return new double3(RandomRangeDouble1(), RandomRangeDouble1(), RandomRangeDouble1());
+        }
+
+        internal static double4 GetRandomDouble4()
+        {
+            return new double4(RandomRangeDouble1(), RandomRangeDouble1(), RandomRangeDouble1(), RandomRangeDouble1());
+        }
+
         #endregion
 
         #region long

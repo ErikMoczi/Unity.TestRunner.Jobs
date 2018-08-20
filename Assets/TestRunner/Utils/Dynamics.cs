@@ -28,6 +28,24 @@ namespace TestRunner.Utils
                     break;
                 }
 
+                case InputDataTypeName.Double2:
+                {
+                    SetDataToDynamicTypeArray(RandomGenerator.GetRandomDouble2(), name, index, typedData);
+                    break;
+                }
+
+                case InputDataTypeName.Double3:
+                {
+                    SetDataToDynamicTypeArray(RandomGenerator.GetRandomDouble3(), name, index, typedData);
+                    break;
+                }
+
+                case InputDataTypeName.Double4:
+                {
+                    SetDataToDynamicTypeArray(RandomGenerator.GetRandomDouble4(), name, index, typedData);
+                    break;
+                }
+
                 #endregion
 
                 #region long

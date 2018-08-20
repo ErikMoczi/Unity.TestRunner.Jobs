@@ -11,6 +11,9 @@
         #region double
 
         public const string Double1 = "System.Double";
+        public const string Double2 = "Unity.Mathematics.double2";
+        public const string Double3 = "Unity.Mathematics.double3";
+        public const string Double4 = "Unity.Mathematics.double4";
 
         #endregion
 

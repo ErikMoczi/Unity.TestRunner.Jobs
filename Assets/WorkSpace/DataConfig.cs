@@ -4,6 +4,9 @@
     {
         public const string DataByte1 = "DataByte1";
         public const string DataDouble1 = "DataDouble1";
+        public const string DataDouble2 = "DataDouble2";
+        public const string DataDouble3 = "DataDouble3";
+        public const string DataDouble4 = "DataDouble4";
         public const string DataFloat1 = "DataFloat1";
         public const string DataFloat2 = "DataFloat2";
         public const string DataFloat3 = "DataFloat3";
