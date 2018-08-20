@@ -4,13 +4,13 @@
     {
         #region byte
 
-        public const string Byte1 = "System.Byte1";
+        public const string Byte1 = "System.Byte";
 
         #endregion
 
         #region double
 
-        public const string Double1 = "System.Double1";
+        public const string Double1 = "System.Double";
 
         #endregion
 
