@@ -8,6 +8,14 @@
 
         #endregion
 
+        #region bool
+
+        public const string Bool2 = "Unity.Mathematics.bool2";
+        public const string Bool3 = "Unity.Mathematics.bool3";
+        public const string Bool4 = "Unity.Mathematics.bool4";
+
+        #endregion
+
         #region double
 
         public const string Double1 = "System.Double";

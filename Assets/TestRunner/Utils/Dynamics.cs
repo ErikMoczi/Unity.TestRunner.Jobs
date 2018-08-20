@@ -20,6 +20,28 @@ namespace TestRunner.Utils
 
                 #endregion
 
+                #region bool
+
+                case InputDataTypeName.Bool2:
+                {
+                    SetDataToDynamicTypeArray(RandomGenerator.GetRandomBool2(), name, index, typedData);
+                    break;
+                }
+
+                case InputDataTypeName.Bool3:
+                {
+                    SetDataToDynamicTypeArray(RandomGenerator.GetRandomBool3(), name, index, typedData);
+                    break;
+                }
+
+                case InputDataTypeName.Bool4:
+                {
+                    SetDataToDynamicTypeArray(RandomGenerator.GetRandomBool4(), name, index, typedData);
+                    break;
+                }
+
+                #endregion
+
                 #region double
 
                 case InputDataTypeName.Double1:

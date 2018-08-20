@@ -22,6 +22,11 @@ namespace TestRunner.Generator
             return (byte) GenerateValue(byte.MinValue, byte.MaxValue);
         }
 
+        private static bool RandomRangeBool1()
+        {
+            return Random.value > 0.5f;
+        }
+
         private static double RandomRangeDouble1()
         {
             return GenerateValue(float.MinValue, float.MaxValue);
@@ -58,6 +63,25 @@ namespace TestRunner.Generator
         internal static byte GetRandomByte1()
         {
             return RandomRangeByte1();
+        }
+
+        #endregion
+
+        #region bool
+
+        internal static bool2 GetRandomBool2()
+        {
+            return new bool2(RandomRangeBool1(), RandomRangeBool1());
+        }
+
+        internal static bool3 GetRandomBool3()
+        {
+            return new bool3(RandomRangeBool1(), RandomRangeBool1(), RandomRangeBool1());
+        }
+
+        internal static bool4 GetRandomBool4()
+        {
+            return new bool4(RandomRangeBool1(), RandomRangeBool1(), RandomRangeBool1(), RandomRangeBool1());
         }
 
         #endregion

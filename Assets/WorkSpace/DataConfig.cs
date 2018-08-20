@@ -3,6 +3,9 @@
     public static class DataConfig
     {
         public const string DataByte1 = "DataByte1";
+        public const string DataBool2 = "DataBool2";
+        public const string DataBool3 = "DataBool3";
+        public const string DataBool4 = "DataBool4";
         public const string DataDouble1 = "DataDouble1";
         public const string DataDouble2 = "DataDouble2";
         public const string DataDouble3 = "DataDouble3";
