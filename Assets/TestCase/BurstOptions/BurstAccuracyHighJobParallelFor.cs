@@ -5,7 +5,7 @@ using Unity.Collections;
 namespace TestCase.BurstOptions
 {
     [BurstCompile(Accuracy = Accuracy.High)]
-    public struct BurstAccuracyHighJobParallelFor : IJobParallelForExt<float, float>
+    public struct BurstAccuracyHighJobParallelFor : IJobParallelForExt<NativeArray<float>, NativeArray<float>>
     {
         private NativeArray<float> _data1;
         private NativeArray<float> _data2;
@@ -27,14 +27,6 @@ namespace TestCase.BurstOptions
         public void Execute(int i)
         {
             _data2[i] = _data1[i];
-        }
-
-        public void Dispose()
-        {
-        }
-
-        public void Init()
-        {
         }
     }
 }

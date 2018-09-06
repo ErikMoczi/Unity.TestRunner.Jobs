@@ -1,9 +1,11 @@
 ﻿using TestCase.BurstOptions;
 using TestRunner;
+using TestRunner.Config.Data;
+using TestRunner.Config.Data.Interfaces;
+using TestRunner.Config.Worker;
+using TestRunner.Facades;
 using TestRunner.Generator;
 using TestRunner.Generator.Interfaces;
-using TestRunner.Wrappers.Base;
-using TestRunner.Wrappers.Base.Config;
 using Unity.Collections;
 using WorkSpace.Tests.Base;
 
@@ -11,52 +13,120 @@ namespace WorkSpace.Tests.BurstOptions
 {
     public sealed class CompileSynchronouslyTest : SampleGenerator
     {
-        private const string TestName = nameof(CompileSynchronouslyTest);
+        public override string TestName()
+        {
+            return nameof(CompileSynchronouslyTest);
+        }
 
         public override ISampleConfig[] InitSampleConfigs()
         {
             return new ISampleConfig[]
             {
-                new SampleConfig(typeof(int), DataConfig.DataInt1),
+                new SampleConfig(typeof(float), DataConfig.DataFloat1),
             };
         }
 
-        public override IWorkWrapper[] InitWorkWrappers(IInputDataContainer inputDataContainer, int dataSize)
+        public override ITestFacade[] InitTestFacades(IInputDataContainer inputDataContainer, int dataSize)
         {
             return new[]
             {
-                WorkerTests<int, int>.RunIJob(TestName, new BurstCompileSynchronouslyTrueJob(),
-                    inputDataContainer.GetData<int>(DataConfig.DataInt1),
-                    inputDataContainer.GetData<int>(DataConfig.DataInt1), new WorkConfigIJob(Allocator.Persistent)),
-                WorkerTests<int, int>.RunIJob(TestName, new BurstCompileSynchronouslyTrueJob(),
-                    inputDataContainer.GetData<int>(DataConfig.DataInt1),
-                    inputDataContainer.GetData<int>(DataConfig.DataInt1),
-                    new WorkConfigIJob(Allocator.Persistent, true)),
-                WorkerTests<int, int>.RunIJob(TestName, new BurstCompileSynchronouslyFalseJob(),
-                    inputDataContainer.GetData<int>(DataConfig.DataInt1),
-                    inputDataContainer.GetData<int>(DataConfig.DataInt1), new WorkConfigIJob(Allocator.Persistent)),
-                WorkerTests<int, int>.RunIJob(TestName, new BurstCompileSynchronouslyFalseJob(),
-                    inputDataContainer.GetData<int>(DataConfig.DataInt1),
-                    inputDataContainer.GetData<int>(DataConfig.DataInt1),
-                    new WorkConfigIJob(Allocator.Persistent, true)),
+                #region IJob
 
+                WorkerTests<NativeArray<float>, NativeArray<float>>.Run<BurstCompileSynchronouslyTrueJob>(
+                    TestName(),
+                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
+                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
+                    new WorkConfigIJob(),
+                    new IDataConfig[]
+                    {
+                        new DataConfigUnityCollection(Allocator.Persistent),
+                        new DataConfigUnityCollection(Allocator.Persistent),
+                    }
+                ),
+                WorkerTests<NativeArray<float>, NativeArray<float>>.Run<BurstCompileSynchronouslyTrueJob>(
+                    TestName(),
+                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
+                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
+                    new WorkConfigIJob(false),
+                    new IDataConfig[]
+                    {
+                        new DataConfigUnityCollection(Allocator.Persistent),
+                        new DataConfigUnityCollection(Allocator.Persistent),
+                    }
+                ),
+                WorkerTests<NativeArray<float>, NativeArray<float>>.Run<BurstCompileSynchronouslyFalseJob>(
+                    TestName(),
+                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
+                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
+                    new WorkConfigIJob(),
+                    new IDataConfig[]
+                    {
+                        new DataConfigUnityCollection(Allocator.Persistent),
+                        new DataConfigUnityCollection(Allocator.Persistent),
+                    }
+                ),
+                WorkerTests<NativeArray<float>, NativeArray<float>>.Run<BurstCompileSynchronouslyFalseJob>(
+                    TestName(),
+                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
+                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
+                    new WorkConfigIJob(false),
+                    new IDataConfig[]
+                    {
+                        new DataConfigUnityCollection(Allocator.Persistent),
+                        new DataConfigUnityCollection(Allocator.Persistent),
+                    }
+                ),
 
-                WorkerTests<int, int>.RunIJobParallelFor(TestName, new BurstCompileSynchronouslyTrueJobParallelFor(),
-                    inputDataContainer.GetData<int>(DataConfig.DataInt1),
-                    inputDataContainer.GetData<int>(DataConfig.DataInt1),
-                    new WorkConfigIJobParallelFor(Allocator.Persistent)),
-                WorkerTests<int, int>.RunIJobParallelFor(TestName, new BurstCompileSynchronouslyTrueJobParallelFor(),
-                    inputDataContainer.GetData<int>(DataConfig.DataInt1),
-                    inputDataContainer.GetData<int>(DataConfig.DataInt1),
-                    new WorkConfigIJobParallelFor(Allocator.Persistent, true, 64)),
-                WorkerTests<int, int>.RunIJobParallelFor(TestName, new BurstCompileSynchronouslyFalseJobParallelFor(),
-                    inputDataContainer.GetData<int>(DataConfig.DataInt1),
-                    inputDataContainer.GetData<int>(DataConfig.DataInt1),
-                    new WorkConfigIJobParallelFor(Allocator.Persistent)),
-                WorkerTests<int, int>.RunIJobParallelFor(TestName, new BurstCompileSynchronouslyFalseJobParallelFor(),
-                    inputDataContainer.GetData<int>(DataConfig.DataInt1),
-                    inputDataContainer.GetData<int>(DataConfig.DataInt1),
-                    new WorkConfigIJobParallelFor(Allocator.Persistent, true, 64)),
+                #endregion
+
+                #region IJobParallelFor
+
+                WorkerTests<NativeArray<float>, NativeArray<float>>.Run<BurstCompileSynchronouslyTrueJobParallelFor>(
+                    TestName(),
+                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
+                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
+                    new WorkConfigIJobParallelFor(),
+                    new IDataConfig[]
+                    {
+                        new DataConfigUnityCollection(Allocator.Persistent),
+                        new DataConfigUnityCollection(Allocator.Persistent),
+                    }
+                ),
+                WorkerTests<NativeArray<float>, NativeArray<float>>.Run<BurstCompileSynchronouslyTrueJobParallelFor>(
+                    TestName(),
+                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
+                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
+                    new WorkConfigIJobParallelFor(false),
+                    new IDataConfig[]
+                    {
+                        new DataConfigUnityCollection(Allocator.Persistent),
+                        new DataConfigUnityCollection(Allocator.Persistent),
+                    }
+                ),
+                WorkerTests<NativeArray<float>, NativeArray<float>>.Run<BurstCompileSynchronouslyFalseJobParallelFor>(
+                    TestName(),
+                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
+                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
+                    new WorkConfigIJobParallelFor(),
+                    new IDataConfig[]
+                    {
+                        new DataConfigUnityCollection(Allocator.Persistent),
+                        new DataConfigUnityCollection(Allocator.Persistent),
+                    }
+                ),
+                WorkerTests<NativeArray<float>, NativeArray<float>>.Run<BurstCompileSynchronouslyFalseJobParallelFor>(
+                    TestName(),
+                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
+                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
+                    new WorkConfigIJobParallelFor(false),
+                    new IDataConfig[]
+                    {
+                        new DataConfigUnityCollection(Allocator.Persistent),
+                        new DataConfigUnityCollection(Allocator.Persistent),
+                    }
+                ),
+
+                #endregion
             };
         }
     }

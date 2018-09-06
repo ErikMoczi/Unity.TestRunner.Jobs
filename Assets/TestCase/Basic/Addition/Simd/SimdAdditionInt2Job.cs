@@ -4,7 +4,7 @@ using Unity.Mathematics;
 
 namespace TestCase.Basic.Addition.Simd
 {
-    public struct SimdAdditionInt2Job : IJobExt<int2, int2, int2>
+    public struct SimdAdditionInt2Job : IJobExt<NativeArray<int2>, NativeArray<int2>, NativeArray<int2>>
     {
         private NativeArray<int2> _data1;
         private NativeArray<int2> _data2;
@@ -36,14 +36,6 @@ namespace TestCase.Basic.Addition.Simd
             {
                 _data3[i] = _data1[i] + _data2[i];
             }
-        }
-
-        public void Dispose()
-        {
-        }
-
-        public void Init()
-        {
         }
     }
 }

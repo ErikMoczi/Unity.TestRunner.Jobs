@@ -146,14 +146,14 @@ MonoBehaviour:
   _pauseAfterFinishFrames: 5
   _testCaseWrapper:
     Generators:
-    - WorkSpace.Tests.Basic.Division.Simple.TripleTypeInt1Test
-    - WorkSpace.Tests.Basic.Division.Simple.Optimalization.TripleTypeInt1Test
-    - WorkSpace.Tests.Basic.Subtraction.Simple.TripleTypeInt1Test
-    - WorkSpace.Tests.Basic.Subtraction.Simple.Optimalization.TripleTypeInt1Test
-    - WorkSpace.Tests.Basic.Addition.Simple.TripleTypeInt1Test
-    - WorkSpace.Tests.Basic.Addition.Simple.Optimalization.TripleTypeInt1Test
-    - WorkSpace.Tests.Basic.Multiplication.Simple.TripleTypeInt1Test
-    - WorkSpace.Tests.Basic.Multiplication.Simple.Optimalization.TripleTypeInt1Test
+    - WorkSpace.Tests.Basic.Multiplication.Simd.Float2TypeTest
+    - WorkSpace.Tests.Basic.Multiplication.Simd.Optimization.Float2TypeTest
+    - WorkSpace.Tests.Basic.Division.Simd.Float2TypeTest
+    - WorkSpace.Tests.Basic.Division.Simd.Optimization.Float2TypeTest
+    - WorkSpace.Tests.Basic.Addition.Simd.Float2TypeTest
+    - WorkSpace.Tests.Basic.Addition.Simd.Optimization.Float2TypeTest
+    - WorkSpace.Tests.Basic.Subtraction.Simd.Float2TypeTest
+    - WorkSpace.Tests.Basic.Subtraction.Simd.Optimization.Float2TypeTest
 --- !u!4 &70166439
 Transform:
   m_ObjectHideFlags: 0

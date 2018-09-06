@@ -5,20 +5,20 @@ using Unity.Collections;
 namespace TestCase.BurstOptions
 {
     [BurstCompile(CompileSynchronously = false)]
-    public struct BurstCompileSynchronouslyFalseJobParallelFor : IJobParallelForExt<int, int>
+    public struct BurstCompileSynchronouslyFalseJobParallelFor : IJobParallelForExt<NativeArray<float>, NativeArray<float>>
     {
-        private NativeArray<int> _data1;
-        private NativeArray<int> _data2;
+        private NativeArray<float> _data1;
+        private NativeArray<float> _data2;
 
         public int DataSize { get; set; }
 
-        public NativeArray<int> Data1
+        public NativeArray<float> Data1
         {
             get => _data1;
             set => _data1 = value;
         }
 
-        public NativeArray<int> Data2
+        public NativeArray<float> Data2
         {
             get => _data2;
             set => _data2 = value;
@@ -27,14 +27,6 @@ namespace TestCase.BurstOptions
         public void Execute(int i)
         {
             _data2[i] = _data1[i];
-        }
-
-        public void Dispose()
-        {
-        }
-
-        public void Init()
-        {
         }
     }
 }

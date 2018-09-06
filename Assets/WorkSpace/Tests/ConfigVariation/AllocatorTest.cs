@@ -1,9 +1,11 @@
-﻿using TestCase.Basic.Addition.Simple;
+﻿using TestCase.Basic;
 using TestRunner;
+using TestRunner.Config.Data;
+using TestRunner.Config.Data.Interfaces;
+using TestRunner.Config.Worker;
+using TestRunner.Facades;
 using TestRunner.Generator;
 using TestRunner.Generator.Interfaces;
-using TestRunner.Wrappers.Base;
-using TestRunner.Wrappers.Base.Config;
 using Unity.Collections;
 using WorkSpace.Tests.Base;
 
@@ -11,76 +13,324 @@ namespace WorkSpace.Tests.ConfigVariation
 {
     public sealed class AllocatorTest : SampleGenerator
     {
-        private const string TestName = nameof(AllocatorTest);
+        public override string TestName()
+        {
+            return nameof(AllocatorTest);
+        }
 
         public override ISampleConfig[] InitSampleConfigs()
         {
             return new ISampleConfig[]
             {
-                new SampleConfig(typeof(int), DataConfig.DataInt1),
+                new SampleConfig(typeof(float), DataConfig.DataFloat1),
             };
         }
 
-        public override IWorkWrapper[] InitWorkWrappers(IInputDataContainer inputDataContainer, int dataSize)
+        public override ITestFacade[] InitTestFacades(IInputDataContainer inputDataContainer, int dataSize)
         {
             return new[]
             {
-                WorkerTests<int, int, int>.RunIJob(TestName, new SimpleAdditionIntJob(),
-                    inputDataContainer.GetData<int>(DataConfig.DataInt1),
-                    inputDataContainer.GetData<int>(DataConfig.DataInt1),
-                    inputDataContainer.GetData<int>(DataConfig.DataInt1), new WorkConfigIJob(Allocator.Persistent)),
-                WorkerTests<int, int, int>.RunIJob(TestName, new SimpleAdditionIntJob(),
-                    inputDataContainer.GetData<int>(DataConfig.DataInt1),
-                    inputDataContainer.GetData<int>(DataConfig.DataInt1),
-                    inputDataContainer.GetData<int>(DataConfig.DataInt1),
-                    new WorkConfigIJob(Allocator.Persistent, true)),
-                WorkerTests<int, int, int>.RunIJob(TestName, new SimpleAdditionIntJob(),
-                    inputDataContainer.GetData<int>(DataConfig.DataInt1),
-                    inputDataContainer.GetData<int>(DataConfig.DataInt1),
-                    inputDataContainer.GetData<int>(DataConfig.DataInt1), new WorkConfigIJob(Allocator.Temp)),
-                WorkerTests<int, int, int>.RunIJob(TestName, new SimpleAdditionIntJob(),
-                    inputDataContainer.GetData<int>(DataConfig.DataInt1),
-                    inputDataContainer.GetData<int>(DataConfig.DataInt1),
-                    inputDataContainer.GetData<int>(DataConfig.DataInt1), new WorkConfigIJob(Allocator.Temp, true)),
-                WorkerTests<int, int, int>.RunIJob(TestName, new SimpleAdditionIntJob(),
-                    inputDataContainer.GetData<int>(DataConfig.DataInt1),
-                    inputDataContainer.GetData<int>(DataConfig.DataInt1),
-                    inputDataContainer.GetData<int>(DataConfig.DataInt1), new WorkConfigIJob(Allocator.TempJob)),
-                WorkerTests<int, int, int>.RunIJob(TestName, new SimpleAdditionIntJob(),
-                    inputDataContainer.GetData<int>(DataConfig.DataInt1),
-                    inputDataContainer.GetData<int>(DataConfig.DataInt1),
-                    inputDataContainer.GetData<int>(DataConfig.DataInt1), new WorkConfigIJob(Allocator.TempJob, true)),
+                #region IJob
 
-                WorkerTests<int, int, int>.RunIJobParallelFor(TestName, new SimpleAdditionIntJobParallelFor(),
-                    inputDataContainer.GetData<int>(DataConfig.DataInt1),
-                    inputDataContainer.GetData<int>(DataConfig.DataInt1),
-                    inputDataContainer.GetData<int>(DataConfig.DataInt1),
-                    new WorkConfigIJobParallelFor(Allocator.Persistent, false, 64)),
-                WorkerTests<int, int, int>.RunIJobParallelFor(TestName, new SimpleAdditionIntJobParallelFor(),
-                    inputDataContainer.GetData<int>(DataConfig.DataInt1),
-                    inputDataContainer.GetData<int>(DataConfig.DataInt1),
-                    inputDataContainer.GetData<int>(DataConfig.DataInt1),
-                    new WorkConfigIJobParallelFor(Allocator.Persistent, true, 64)),
-                WorkerTests<int, int, int>.RunIJobParallelFor(TestName, new SimpleAdditionIntJobParallelFor(),
-                    inputDataContainer.GetData<int>(DataConfig.DataInt1),
-                    inputDataContainer.GetData<int>(DataConfig.DataInt1),
-                    inputDataContainer.GetData<int>(DataConfig.DataInt1),
-                    new WorkConfigIJobParallelFor(Allocator.Temp, false, 64)),
-                WorkerTests<int, int, int>.RunIJobParallelFor(TestName, new SimpleAdditionIntJobParallelFor(),
-                    inputDataContainer.GetData<int>(DataConfig.DataInt1),
-                    inputDataContainer.GetData<int>(DataConfig.DataInt1),
-                    inputDataContainer.GetData<int>(DataConfig.DataInt1),
-                    new WorkConfigIJobParallelFor(Allocator.Temp, true, 64)),
-                WorkerTests<int, int, int>.RunIJobParallelFor(TestName, new SimpleAdditionIntJobParallelFor(),
-                    inputDataContainer.GetData<int>(DataConfig.DataInt1),
-                    inputDataContainer.GetData<int>(DataConfig.DataInt1),
-                    inputDataContainer.GetData<int>(DataConfig.DataInt1),
-                    new WorkConfigIJobParallelFor(Allocator.TempJob, false, 64)),
-                WorkerTests<int, int, int>.RunIJobParallelFor(TestName, new SimpleAdditionIntJobParallelFor(),
-                    inputDataContainer.GetData<int>(DataConfig.DataInt1),
-                    inputDataContainer.GetData<int>(DataConfig.DataInt1),
-                    inputDataContainer.GetData<int>(DataConfig.DataInt1),
-                    new WorkConfigIJobParallelFor(Allocator.TempJob, true, 64)),
+                #region Persistent
+
+                WorkerTests<NativeArray<float>, NativeArray<float>>.Run<BaseIJob>(
+                    TestName(),
+                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
+                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
+                    new WorkConfigIJob(),
+                    new IDataConfig[]
+                    {
+                        new DataConfigUnityCollection(Allocator.Persistent),
+                        new DataConfigUnityCollection(Allocator.Persistent),
+                    }
+                ),
+                WorkerTests<NativeArray<float>, NativeArray<float>>.Run<BaseIJob>(
+                    TestName(),
+                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
+                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
+                    new WorkConfigIJob(false),
+                    new IDataConfig[]
+                    {
+                        new DataConfigUnityCollection(Allocator.Persistent),
+                        new DataConfigUnityCollection(Allocator.Persistent),
+                    }
+                ),
+                WorkerTests<NativeArray<float>, NativeArray<float>>.Run<BaseBurstIJob>(
+                    TestName(),
+                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
+                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
+                    new WorkConfigIJob(),
+                    new IDataConfig[]
+                    {
+                        new DataConfigUnityCollection(Allocator.Persistent),
+                        new DataConfigUnityCollection(Allocator.Persistent),
+                    }
+                ),
+                WorkerTests<NativeArray<float>, NativeArray<float>>.Run<BaseBurstIJob>(
+                    TestName(),
+                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
+                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
+                    new WorkConfigIJob(false),
+                    new IDataConfig[]
+                    {
+                        new DataConfigUnityCollection(Allocator.Persistent),
+                        new DataConfigUnityCollection(Allocator.Persistent),
+                    }
+                ),
+
+                #endregion
+
+                #region Temp
+
+                WorkerTests<NativeArray<float>, NativeArray<float>>.Run<BaseIJob>(
+                    TestName(),
+                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
+                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
+                    new WorkConfigIJob(),
+                    new IDataConfig[]
+                    {
+                        new DataConfigUnityCollection(Allocator.Temp),
+                        new DataConfigUnityCollection(Allocator.Temp),
+                    }
+                ),
+                WorkerTests<NativeArray<float>, NativeArray<float>>.Run<BaseIJob>(
+                    TestName(),
+                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
+                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
+                    new WorkConfigIJob(false),
+                    new IDataConfig[]
+                    {
+                        new DataConfigUnityCollection(Allocator.Temp),
+                        new DataConfigUnityCollection(Allocator.Temp),
+                    }
+                ),
+                WorkerTests<NativeArray<float>, NativeArray<float>>.Run<BaseBurstIJob>(
+                    TestName(),
+                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
+                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
+                    new WorkConfigIJob(),
+                    new IDataConfig[]
+                    {
+                        new DataConfigUnityCollection(Allocator.Temp),
+                        new DataConfigUnityCollection(Allocator.Temp),
+                    }
+                ),
+                WorkerTests<NativeArray<float>, NativeArray<float>>.Run<BaseBurstIJob>(
+                    TestName(),
+                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
+                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
+                    new WorkConfigIJob(false),
+                    new IDataConfig[]
+                    {
+                        new DataConfigUnityCollection(Allocator.Temp),
+                        new DataConfigUnityCollection(Allocator.Temp),
+                    }
+                ),
+
+                #endregion
+
+                #region TempJob
+
+                WorkerTests<NativeArray<float>, NativeArray<float>>.Run<BaseIJob>(
+                    TestName(),
+                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
+                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
+                    new WorkConfigIJob(),
+                    new IDataConfig[]
+                    {
+                        new DataConfigUnityCollection(Allocator.TempJob),
+                        new DataConfigUnityCollection(Allocator.TempJob),
+                    }
+                ),
+                WorkerTests<NativeArray<float>, NativeArray<float>>.Run<BaseIJob>(
+                    TestName(),
+                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
+                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
+                    new WorkConfigIJob(false),
+                    new IDataConfig[]
+                    {
+                        new DataConfigUnityCollection(Allocator.TempJob),
+                        new DataConfigUnityCollection(Allocator.TempJob),
+                    }
+                ),
+                WorkerTests<NativeArray<float>, NativeArray<float>>.Run<BaseBurstIJob>(
+                    TestName(),
+                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
+                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
+                    new WorkConfigIJob(),
+                    new IDataConfig[]
+                    {
+                        new DataConfigUnityCollection(Allocator.TempJob),
+                        new DataConfigUnityCollection(Allocator.TempJob),
+                    }
+                ),
+                WorkerTests<NativeArray<float>, NativeArray<float>>.Run<BaseBurstIJob>(
+                    TestName(),
+                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
+                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
+                    new WorkConfigIJob(false),
+                    new IDataConfig[]
+                    {
+                        new DataConfigUnityCollection(Allocator.TempJob),
+                        new DataConfigUnityCollection(Allocator.TempJob),
+                    }
+                ),
+
+                #endregion
+
+                #endregion
+
+                #region IJobParallelFor
+
+                #region Persistent
+
+                WorkerTests<NativeArray<float>, NativeArray<float>>.Run<BaseIJobParallelFor>(
+                    TestName(),
+                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
+                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
+                    new WorkConfigIJobParallelFor(),
+                    new IDataConfig[]
+                    {
+                        new DataConfigUnityCollection(Allocator.Persistent),
+                        new DataConfigUnityCollection(Allocator.Persistent),
+                    }
+                ),
+                WorkerTests<NativeArray<float>, NativeArray<float>>.Run<BaseIJobParallelFor>(
+                    TestName(),
+                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
+                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
+                    new WorkConfigIJobParallelFor(false),
+                    new IDataConfig[]
+                    {
+                        new DataConfigUnityCollection(Allocator.Persistent),
+                        new DataConfigUnityCollection(Allocator.Persistent),
+                    }
+                ),
+                WorkerTests<NativeArray<float>, NativeArray<float>>.Run<BaseBurstIJobParallelFor>(
+                    TestName(),
+                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
+                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
+                    new WorkConfigIJobParallelFor(),
+                    new IDataConfig[]
+                    {
+                        new DataConfigUnityCollection(Allocator.Persistent),
+                        new DataConfigUnityCollection(Allocator.Persistent),
+                    }
+                ),
+                WorkerTests<NativeArray<float>, NativeArray<float>>.Run<BaseBurstIJobParallelFor>(
+                    TestName(),
+                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
+                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
+                    new WorkConfigIJobParallelFor(false),
+                    new IDataConfig[]
+                    {
+                        new DataConfigUnityCollection(Allocator.Persistent),
+                        new DataConfigUnityCollection(Allocator.Persistent),
+                    }
+                ),
+
+                #endregion
+
+                #region Temp
+
+                WorkerTests<NativeArray<float>, NativeArray<float>>.Run<BaseIJobParallelFor>(
+                    TestName(),
+                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
+                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
+                    new WorkConfigIJobParallelFor(),
+                    new IDataConfig[]
+                    {
+                        new DataConfigUnityCollection(Allocator.Temp),
+                        new DataConfigUnityCollection(Allocator.Temp),
+                    }
+                ),
+                WorkerTests<NativeArray<float>, NativeArray<float>>.Run<BaseIJobParallelFor>(
+                    TestName(),
+                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
+                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
+                    new WorkConfigIJobParallelFor(false),
+                    new IDataConfig[]
+                    {
+                        new DataConfigUnityCollection(Allocator.Temp),
+                        new DataConfigUnityCollection(Allocator.Temp),
+                    }
+                ),
+                WorkerTests<NativeArray<float>, NativeArray<float>>.Run<BaseBurstIJobParallelFor>(
+                    TestName(),
+                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
+                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
+                    new WorkConfigIJobParallelFor(),
+                    new IDataConfig[]
+                    {
+                        new DataConfigUnityCollection(Allocator.Temp),
+                        new DataConfigUnityCollection(Allocator.Temp),
+                    }
+                ),
+                WorkerTests<NativeArray<float>, NativeArray<float>>.Run<BaseBurstIJobParallelFor>(
+                    TestName(),
+                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
+                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
+                    new WorkConfigIJobParallelFor(false),
+                    new IDataConfig[]
+                    {
+                        new DataConfigUnityCollection(Allocator.Temp),
+                        new DataConfigUnityCollection(Allocator.Temp),
+                    }
+                ),
+
+                #endregion
+
+                #region TempJob
+
+                WorkerTests<NativeArray<float>, NativeArray<float>>.Run<BaseIJobParallelFor>(
+                    TestName(),
+                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
+                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
+                    new WorkConfigIJobParallelFor(),
+                    new IDataConfig[]
+                    {
+                        new DataConfigUnityCollection(Allocator.TempJob),
+                        new DataConfigUnityCollection(Allocator.TempJob),
+                    }
+                ),
+                WorkerTests<NativeArray<float>, NativeArray<float>>.Run<BaseIJobParallelFor>(
+                    TestName(),
+                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
+                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
+                    new WorkConfigIJobParallelFor(false),
+                    new IDataConfig[]
+                    {
+                        new DataConfigUnityCollection(Allocator.TempJob),
+                        new DataConfigUnityCollection(Allocator.TempJob),
+                    }
+                ),
+                WorkerTests<NativeArray<float>, NativeArray<float>>.Run<BaseBurstIJobParallelFor>(
+                    TestName(),
+                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
+                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
+                    new WorkConfigIJobParallelFor(),
+                    new IDataConfig[]
+                    {
+                        new DataConfigUnityCollection(Allocator.TempJob),
+                        new DataConfigUnityCollection(Allocator.TempJob),
+                    }
+                ),
+                WorkerTests<NativeArray<float>, NativeArray<float>>.Run<BaseBurstIJobParallelFor>(
+                    TestName(),
+                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
+                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
+                    new WorkConfigIJobParallelFor(false),
+                    new IDataConfig[]
+                    {
+                        new DataConfigUnityCollection(Allocator.TempJob),
+                        new DataConfigUnityCollection(Allocator.TempJob),
+                    }
+                ),
+
+                #endregion
+
+                #endregion
             };
         }
     }

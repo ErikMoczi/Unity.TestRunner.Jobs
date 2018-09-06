@@ -1,11 +1,12 @@
-﻿using TestRunner.Generator.Interfaces;
-using TestRunner.Wrappers.Base;
+﻿using TestRunner.Facades;
+using TestRunner.Generator.Interfaces;
 
 namespace WorkSpace.Tests.Base
 {
     public interface ISampleGenerator
     {
+        string TestName();
         ISampleConfig[] InitSampleConfigs();
-        IWorkWrapper[] InitWorkWrappers(IInputDataContainer inputDataContainer, int dataSize);
+        ITestFacade[] InitTestFacades(IInputDataContainer inputDataContainer, int dataSize);
     }
 }

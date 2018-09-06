@@ -11,7 +11,7 @@ namespace WorkSpace.Tests.Base
         public const string TargetPropertyName = "Generators";
         public const char KeySeparator = '.';
         public const char ValueSeparator = '/';
-        public const string PrefixBasicTests = "Type";
+        private const string SufixBasicTests = "TypeTest";
 
         private readonly string _prefixWorkspace;
 
@@ -26,7 +26,8 @@ namespace WorkSpace.Tests.Base
         public SampleGeneratorData()
         {
             var data = _lookingClasses.GetAllDerivedTypes().Select(type => type.FullName).ToArray();
-            _prefixWorkspace = Utils.CommonPrefix(data);
+            _prefixWorkspace =
+                data.Length == 1 ? Utils.RemoveLastItem(data[0], KeySeparator) : Utils.CommonPrefix(data);
             _sampleGenerators = data.ToDictionary(item => item, CreateValue);
             _sampleGeneratorCategories = GenerateCategories();
         }
@@ -61,7 +62,7 @@ namespace WorkSpace.Tests.Base
             var inputDataTypeName = typeof(InputDataTypeName).GetAllPublicConstantNames();
             foreach (var value in inputDataTypeName)
             {
-                var generators = _sampleGenerators.Keys.Where(item => item.Contains(PrefixBasicTests + value))
+                var generators = _sampleGenerators.Keys.Where(item => item.Contains(value + SufixBasicTests))
                     .ToArray();
                 yield return new KeyValuePair<string, string[]>(value, generators);
             }

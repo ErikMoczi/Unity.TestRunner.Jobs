@@ -1,65 +1,42 @@
-﻿using TestRunner.DataContainer.Array;
-using TestRunner.DataContainer.Struct;
+﻿using System;
+using TestRunner.Config.Data.Interfaces;
+using TestRunner.Config.Worker.Interfaces;
+using TestRunner.Extensions;
+using TestRunner.Facades;
 using TestRunner.InputData;
 using TestRunner.Workers;
-using TestRunner.Wrappers.Base;
-using TestRunner.Wrappers.Base.Config;
-using TestRunner.Wrappers.IJob;
-using TestRunner.Wrappers.IJobParallelFor;
-using TestRunner.Wrappers.INonJob;
+using TestRunner.Workers.Wrappers;
 
 namespace TestRunner
 {
     public static class WorkerTests<T1>
-        where T1 : struct
     {
-        internal static IWorkWrapper RunIJob<TWorker, TConfig>(string testName, TWorker worker, IInputData<T1> data,
-            TConfig config)
-            where TWorker : struct, IJobExt<T1>
-            where TConfig : class, IWorkConfigIJob
+        #region TestFacade
+
+        internal static ITestFacade TestFacadeInstance<TWorker, TWorkConfig, TDataConfig>(string testName,
+            IInputData<T1> data, TWorkConfig workConfig, TDataConfig[] dataConfig)
+            where TWorker : struct, IWorker<T1>
+            where TWorkConfig : class, IWorkConfig
+            where TDataConfig : class, IDataConfig
         {
-            return new JobWrapper<IStructContainer<TConfig, T1>, IInputData<T1>, TWorker, TConfig, T1>(testName, worker,
-                data, config);
+            return new WorkerWrapper<TWorker, TWorkConfig, T1>(workConfig).WorkerWrapper(testName, data, dataConfig);
         }
 
-        public static IWorkWrapper RunIJob<TWorker, TConfig>(string testName, TWorker worker, T1[] itemArray1,
-            TConfig config)
-            where TWorker : struct, IJobExt<T1>
-            where TConfig : class, IWorkConfigIJob
-        {
-            return RunIJob(testName, worker, new InputData<T1>(itemArray1), config);
-        }
+        #endregion
 
-        internal static IWorkWrapper RunIJobParallelFor<TWorker, TConfig>(string testName, TWorker worker,
-            IInputData<T1> data, TConfig config)
-            where TWorker : struct, IJobParallelForExt<T1>
-            where TConfig : class, IWorkConfigIJobParallelFor
+        public static ITestFacade Run<TWorker>(string testName, Array itemArray1, IWorkConfig workConfig,
+            IDataConfig[] dataConfig)
+            where TWorker : struct, IWorker<T1>
         {
-            return new JobParallelForWrapper<IStructContainer<TConfig, T1>, IInputData<T1>, TWorker, TConfig, T1>(
-                testName, worker, data, config);
-        }
-
-        public static IWorkWrapper RunIJobParallelFor<TWorker, TConfig>(string testName, TWorker worker,
-            T1[] itemArray1, TConfig config)
-            where TWorker : struct, IJobParallelForExt<T1>
-            where TConfig : class, IWorkConfigIJobParallelFor
-        {
-            return RunIJobParallelFor(testName, worker, new InputData<T1>(itemArray1), config);
-        }
-
-        internal static IWorkWrapper RunINonJob<TWorker, TConfig>(string testName, TWorker worker, IInputData<T1> data,
-            TConfig config = null)
-            where TWorker : struct, INonJobExt<T1>
-            where TConfig : class, IWorkConfigINonJob
-        {
-            return new NonJobWrapper<IArrayContainer<TConfig, T1>, IInputData<T1>, TWorker, TConfig, T1>(testName,
-                worker, data, config);
-        }
-
-        public static IWorkWrapper RunINonJob<TWorker>(string testName, TWorker worker, T1[] itemArray1)
-            where TWorker : struct, INonJobExt<T1>
-        {
-            return RunINonJob(testName, worker, new InputData<T1>(itemArray1), new WorkConfigINonJob());
+            var data = new InputData<T1>(itemArray1);
+            try
+            {
+                return TestFacadeInstance<TWorker, IWorkConfig, IDataConfig>(testName, data, workConfig, dataConfig);
+            }
+            catch (Exception e)
+            {
+                throw new Exception($"Problem with constructing test of {testName} - {typeof(TWorker)}", e);
+            }
         }
     }
 }

@@ -1,9 +1,11 @@
 ﻿using TestCase.BurstOptions;
 using TestRunner;
+using TestRunner.Config.Data;
+using TestRunner.Config.Data.Interfaces;
+using TestRunner.Config.Worker;
+using TestRunner.Facades;
 using TestRunner.Generator;
 using TestRunner.Generator.Interfaces;
-using TestRunner.Wrappers.Base;
-using TestRunner.Wrappers.Base.Config;
 using Unity.Collections;
 using WorkSpace.Tests.Base;
 
@@ -11,7 +13,10 @@ namespace WorkSpace.Tests.BurstOptions
 {
     public sealed class AccuracyTest : SampleGenerator
     {
-        private const string TestName = nameof(AccuracyTest);
+        public override string TestName()
+        {
+            return nameof(AccuracyTest);
+        }
 
         public override ISampleConfig[] InitSampleConfigs()
         {
@@ -21,71 +26,107 @@ namespace WorkSpace.Tests.BurstOptions
             };
         }
 
-        public override IWorkWrapper[] InitWorkWrappers(IInputDataContainer inputDataContainer, int dataSize)
+        public override ITestFacade[] InitTestFacades(IInputDataContainer inputDataContainer, int dataSize)
         {
             return new[]
             {
-                WorkerTests<float, float>.RunIJob(TestName, new BurstAccuracyStdJob(),
-                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
-                    inputDataContainer.GetData<float>(DataConfig.DataFloat1), new WorkConfigIJob(Allocator.Persistent)),
-                WorkerTests<float, float>.RunIJob(TestName, new BurstAccuracyStdJob(),
-                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
-                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
-                    new WorkConfigIJob(Allocator.Persistent, true)),
-                WorkerTests<float, float>.RunIJob(TestName, new BurstAccuracyLowJob(),
-                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
-                    inputDataContainer.GetData<float>(DataConfig.DataFloat1), new WorkConfigIJob(Allocator.Persistent)),
-                WorkerTests<float, float>.RunIJob(TestName, new BurstAccuracyLowJob(),
-                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
-                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
-                    new WorkConfigIJob(Allocator.Persistent, true)),
-                WorkerTests<float, float>.RunIJob(TestName, new BurstAccuracyMedJob(),
-                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
-                    inputDataContainer.GetData<float>(DataConfig.DataFloat1), new WorkConfigIJob(Allocator.Persistent)),
-                WorkerTests<float, float>.RunIJob(TestName, new BurstAccuracyMedJob(),
-                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
-                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
-                    new WorkConfigIJob(Allocator.Persistent, true)),
-                WorkerTests<float, float>.RunIJob(TestName, new BurstAccuracyHighJob(),
-                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
-                    inputDataContainer.GetData<float>(DataConfig.DataFloat1), new WorkConfigIJob(Allocator.Persistent)),
-                WorkerTests<float, float>.RunIJob(TestName, new BurstAccuracyHighJob(),
-                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
-                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
-                    new WorkConfigIJob(Allocator.Persistent, true)),
+                #region IJob
 
-                WorkerTests<float, float>.RunIJobParallelFor(TestName, new BurstAccuracyStdJobParallelFor(),
+                WorkerTests<NativeArray<float>, NativeArray<float>>.Run<BurstAccuracyStdJob>(
+                    TestName(),
                     inputDataContainer.GetData<float>(DataConfig.DataFloat1),
                     inputDataContainer.GetData<float>(DataConfig.DataFloat1),
-                    new WorkConfigIJobParallelFor(Allocator.Persistent)),
-                WorkerTests<float, float>.RunIJobParallelFor(TestName, new BurstAccuracyStdJobParallelFor(),
+                    new WorkConfigIJob(),
+                    new IDataConfig[]
+                    {
+                        new DataConfigUnityCollection(Allocator.Persistent),
+                        new DataConfigUnityCollection(Allocator.Persistent),
+                    }
+                ),
+                WorkerTests<NativeArray<float>, NativeArray<float>>.Run<BurstAccuracyLowJob>(
+                    TestName(),
                     inputDataContainer.GetData<float>(DataConfig.DataFloat1),
                     inputDataContainer.GetData<float>(DataConfig.DataFloat1),
-                    new WorkConfigIJobParallelFor(Allocator.Persistent, true, 64)),
-                WorkerTests<float, float>.RunIJobParallelFor(TestName, new BurstAccuracyLowJobParallelFor(),
+                    new WorkConfigIJob(),
+                    new IDataConfig[]
+                    {
+                        new DataConfigUnityCollection(Allocator.Persistent),
+                        new DataConfigUnityCollection(Allocator.Persistent),
+                    }
+                ),
+                WorkerTests<NativeArray<float>, NativeArray<float>>.Run<BurstAccuracyMedJob>(
+                    TestName(),
                     inputDataContainer.GetData<float>(DataConfig.DataFloat1),
                     inputDataContainer.GetData<float>(DataConfig.DataFloat1),
-                    new WorkConfigIJobParallelFor(Allocator.Persistent)),
-                WorkerTests<float, float>.RunIJobParallelFor(TestName, new BurstAccuracyLowJobParallelFor(),
+                    new WorkConfigIJob(),
+                    new IDataConfig[]
+                    {
+                        new DataConfigUnityCollection(Allocator.Persistent),
+                        new DataConfigUnityCollection(Allocator.Persistent),
+                    }
+                ),
+                WorkerTests<NativeArray<float>, NativeArray<float>>.Run<BurstAccuracyHighJob>(
+                    TestName(),
                     inputDataContainer.GetData<float>(DataConfig.DataFloat1),
                     inputDataContainer.GetData<float>(DataConfig.DataFloat1),
-                    new WorkConfigIJobParallelFor(Allocator.Persistent, true, 64)),
-                WorkerTests<float, float>.RunIJobParallelFor(TestName, new BurstAccuracyMedJobParallelFor(),
+                    new WorkConfigIJob(),
+                    new IDataConfig[]
+                    {
+                        new DataConfigUnityCollection(Allocator.Persistent),
+                        new DataConfigUnityCollection(Allocator.Persistent),
+                    }
+                ),
+
+                #endregion
+
+                #region IJobParallelFor
+
+                WorkerTests<NativeArray<float>, NativeArray<float>>.Run<BurstAccuracyStdJobParallelFor>(
+                    TestName(),
                     inputDataContainer.GetData<float>(DataConfig.DataFloat1),
                     inputDataContainer.GetData<float>(DataConfig.DataFloat1),
-                    new WorkConfigIJobParallelFor(Allocator.Persistent)),
-                WorkerTests<float, float>.RunIJobParallelFor(TestName, new BurstAccuracyMedJobParallelFor(),
+                    new WorkConfigIJobParallelFor(),
+                    new IDataConfig[]
+                    {
+                        new DataConfigUnityCollection(Allocator.Persistent),
+                        new DataConfigUnityCollection(Allocator.Persistent),
+                    }
+                ),
+                WorkerTests<NativeArray<float>, NativeArray<float>>.Run<BurstAccuracyLowJobParallelFor>(
+                    TestName(),
                     inputDataContainer.GetData<float>(DataConfig.DataFloat1),
                     inputDataContainer.GetData<float>(DataConfig.DataFloat1),
-                    new WorkConfigIJobParallelFor(Allocator.Persistent, true, 64)),
-                WorkerTests<float, float>.RunIJobParallelFor(TestName, new BurstAccuracyHighJobParallelFor(),
+                    new WorkConfigIJobParallelFor(),
+                    new IDataConfig[]
+                    {
+                        new DataConfigUnityCollection(Allocator.Persistent),
+                        new DataConfigUnityCollection(Allocator.Persistent),
+                    }
+                ),
+                WorkerTests<NativeArray<float>, NativeArray<float>>.Run<BurstAccuracyMedJobParallelFor>(
+                    TestName(),
                     inputDataContainer.GetData<float>(DataConfig.DataFloat1),
                     inputDataContainer.GetData<float>(DataConfig.DataFloat1),
-                    new WorkConfigIJobParallelFor(Allocator.Persistent)),
-                WorkerTests<float, float>.RunIJobParallelFor(TestName, new BurstAccuracyHighJobParallelFor(),
+                    new WorkConfigIJobParallelFor(),
+                    new IDataConfig[]
+                    {
+                        new DataConfigUnityCollection(Allocator.Persistent),
+                        new DataConfigUnityCollection(Allocator.Persistent),
+                    }
+                ),
+                WorkerTests<NativeArray<float>, NativeArray<float>>.Run<BurstAccuracyHighJobParallelFor>(
+                    TestName(),
                     inputDataContainer.GetData<float>(DataConfig.DataFloat1),
                     inputDataContainer.GetData<float>(DataConfig.DataFloat1),
-                    new WorkConfigIJobParallelFor(Allocator.Persistent, true, 64)),
+                    new WorkConfigIJobParallelFor(),
+                    new IDataConfig[]
+                    {
+                        new DataConfigUnityCollection(Allocator.Persistent),
+                        new DataConfigUnityCollection(Allocator.Persistent),
+                    }
+                ),
+
+                #endregion
             };
         }
     }

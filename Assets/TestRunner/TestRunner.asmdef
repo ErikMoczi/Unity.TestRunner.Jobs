@@ -1,4 +1,4 @@
-﻿{
+{
     "name": "TestRunner",
     "references": [
         "Unity.Mathematics"

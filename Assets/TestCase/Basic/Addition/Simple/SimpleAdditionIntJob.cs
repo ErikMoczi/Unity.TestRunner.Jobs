@@ -3,7 +3,7 @@ using Unity.Collections;
 
 namespace TestCase.Basic.Addition.Simple
 {
-    public struct SimpleAdditionIntJob : IJobExt<int, int, int>
+    public struct SimpleAdditionIntJob : IJobExt<NativeArray<int>, NativeArray<int>, NativeArray<int>>
     {
         private NativeArray<int> _data1;
         private NativeArray<int> _data2;
@@ -35,14 +35,6 @@ namespace TestCase.Basic.Addition.Simple
             {
                 _data3[i] = _data1[i] + _data2[i];
             }
-        }
-
-        public void Dispose()
-        {
-        }
-
-        public void Init()
-        {
         }
     }
 }

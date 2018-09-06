@@ -1,8 +1,8 @@
-﻿using System;
+using System;
 using System.Linq;
+using TestRunner.Facades;
 using TestRunner.Generator;
 using TestRunner.Generator.Interfaces;
-using TestRunner.Wrappers.Base;
 using UnityEditor;
 using UnityEngine;
 using WorkSpace.Tests.Base;
@@ -25,14 +25,14 @@ namespace WorkSpace
 
         private ISampleGenerator[] _sampleGenerators;
         private IInputDataContainer _inputDataContainer;
-        private IWorkWrapper[] _workWrappers;
+        private ITestFacade[] _testFacades;
         private int _currentRun;
 
         private void Awake()
         {
             _sampleGenerators = InitSampleGenerator();
             _inputDataContainer = InitInputDataContainer(_sampleGenerators);
-            _workWrappers = InitWorkWrappers(_sampleGenerators, _inputDataContainer);
+            _testFacades = InitTestFacades(_sampleGenerators, _inputDataContainer);
         }
 
         private void Update()
@@ -44,9 +44,9 @@ namespace WorkSpace
 
             if (_totalRuns > _currentRun)
             {
-                foreach (var workWrapper in _workWrappers)
+                foreach (var testFacade in _testFacades)
                 {
-                    workWrapper.Run();
+                    testFacade.Run();
                 }
 
                 _currentRun++;
@@ -85,10 +85,10 @@ namespace WorkSpace
                 _dataSize);
         }
 
-        private IWorkWrapper[] InitWorkWrappers(ISampleGenerator[] sampleGenerators,
+        private ITestFacade[] InitTestFacades(ISampleGenerator[] sampleGenerators,
             IInputDataContainer inputDataContainer)
         {
-            return sampleGenerators.SelectMany(item => item.InitWorkWrappers(inputDataContainer, _dataSize)).ToArray();
+            return sampleGenerators.SelectMany(item => item.InitTestFacades(inputDataContainer, _dataSize)).ToArray();
         }
     }
 }

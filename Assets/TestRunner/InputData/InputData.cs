@@ -1,6 +1,6 @@
 ﻿namespace TestRunner.InputData
 {
-    internal class InputData : IInputData
+    internal abstract class InputData : IInputData
     {
     }
 }
