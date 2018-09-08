@@ -1,13 +1,14 @@
 ﻿using TestCase.Basic.Addition.Simple.Optimization;
-using TestRunner;
-using TestRunner.Config.Data;
-using TestRunner.Config.Data.Interfaces;
-using TestRunner.Config.Worker;
-using TestRunner.Facades;
-using TestRunner.Generator;
-using TestRunner.Generator.Interfaces;
+using TestWrapper;
+using TestWrapper.Config.Data;
+using TestWrapper.Config.Data.Interfaces;
+using TestWrapper.Config.Worker;
+using TestWrapper.Facades;
+using TestWrapper.Generator;
+using TestWrapper.Generator.Interfaces;
 using Unity.Collections;
 using WorkSpace.Tests.Base;
+using DataConfig = WorkSpace.Tests.Base.DataConfig;
 
 namespace WorkSpace.Tests.Basic.Addition.Simple.Optimization
 {
@@ -26,12 +27,12 @@ namespace WorkSpace.Tests.Basic.Addition.Simple.Optimization
             };
         }
 
-        public override ITestFacade[] InitTestFacades(IInputDataContainer inputDataContainer, int dataSize)
+        public override IWorkFacade[] InitWorkFacades(IInputDataContainer inputDataContainer, int dataSize)
         {
             return new[]
             {
-                WorkerTests<NativeArray<short>, NativeArray<short>, NativeArray<short>>
-                    .Run<SimpleAdditionOptimizationShortJob>(
+                WorkerFactory<NativeArray<short>, NativeArray<short>, NativeArray<short>>
+                    .Create<SimpleAdditionOptimizationShortJob>(
                         TestName(),
                         inputDataContainer.GetData<short>(DataConfig.DataShort1),
                         inputDataContainer.GetData<short>(DataConfig.DataShort1),
@@ -44,8 +45,8 @@ namespace WorkSpace.Tests.Basic.Addition.Simple.Optimization
                             new DataConfigUnityCollection(Allocator.Persistent),
                         }
                     ),
-                WorkerTests<NativeArray<short>, NativeArray<short>, NativeArray<short>>
-                    .Run<SimpleAdditionOptimizationShortJobParallelFor>(
+                WorkerFactory<NativeArray<short>, NativeArray<short>, NativeArray<short>>
+                    .Create<SimpleAdditionOptimizationShortJobParallelFor>(
                         TestName(),
                         inputDataContainer.GetData<short>(DataConfig.DataShort1),
                         inputDataContainer.GetData<short>(DataConfig.DataShort1),

@@ -1,5 +1,5 @@
-﻿using TestRunner.Facades;
-using TestRunner.Generator.Interfaces;
+﻿using TestWrapper.Facades;
+using TestWrapper.Generator.Interfaces;
 
 namespace WorkSpace.Tests.Base
 {
@@ -7,6 +7,6 @@ namespace WorkSpace.Tests.Base
     {
         public abstract string TestName();
         public abstract ISampleConfig[] InitSampleConfigs();
-        public abstract ITestFacade[] InitTestFacades(IInputDataContainer inputDataContainer, int dataSize);
+        public abstract IWorkFacade[] InitWorkFacades(IInputDataContainer inputDataContainer, int dataSize);
     }
 }

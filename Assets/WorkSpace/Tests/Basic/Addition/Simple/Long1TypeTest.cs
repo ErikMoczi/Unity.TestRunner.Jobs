@@ -1,13 +1,14 @@
 ﻿using TestCase.Basic.Addition.Simple;
-using TestRunner;
-using TestRunner.Config.Data;
-using TestRunner.Config.Data.Interfaces;
-using TestRunner.Config.Worker;
-using TestRunner.Facades;
-using TestRunner.Generator;
-using TestRunner.Generator.Interfaces;
+using TestWrapper;
+using TestWrapper.Config.Data;
+using TestWrapper.Config.Data.Interfaces;
+using TestWrapper.Config.Worker;
+using TestWrapper.Facades;
+using TestWrapper.Generator;
+using TestWrapper.Generator.Interfaces;
 using Unity.Collections;
 using WorkSpace.Tests.Base;
+using DataConfig = WorkSpace.Tests.Base.DataConfig;
 
 namespace WorkSpace.Tests.Basic.Addition.Simple
 {
@@ -26,11 +27,11 @@ namespace WorkSpace.Tests.Basic.Addition.Simple
             };
         }
 
-        public override ITestFacade[] InitTestFacades(IInputDataContainer inputDataContainer, int dataSize)
+        public override IWorkFacade[] InitWorkFacades(IInputDataContainer inputDataContainer, int dataSize)
         {
             return new[]
             {
-                WorkerTests<NativeArray<long>, NativeArray<long>, NativeArray<long>>.Run<SimpleAdditionLongJob>(
+                WorkerFactory<NativeArray<long>, NativeArray<long>, NativeArray<long>>.Create<SimpleAdditionLongJob>(
                     TestName(),
                     inputDataContainer.GetData<long>(DataConfig.DataLong1),
                     inputDataContainer.GetData<long>(DataConfig.DataLong1),
@@ -43,8 +44,8 @@ namespace WorkSpace.Tests.Basic.Addition.Simple
                         new DataConfigUnityCollection(Allocator.Persistent),
                     }
                 ),
-                WorkerTests<NativeArray<long>, NativeArray<long>, NativeArray<long>>
-                    .Run<SimpleAdditionLongJobParallelFor>(
+                WorkerFactory<NativeArray<long>, NativeArray<long>, NativeArray<long>>
+                    .Create<SimpleAdditionLongJobParallelFor>(
                         TestName(),
                         inputDataContainer.GetData<long>(DataConfig.DataLong1),
                         inputDataContainer.GetData<long>(DataConfig.DataLong1),
@@ -57,7 +58,7 @@ namespace WorkSpace.Tests.Basic.Addition.Simple
                             new DataConfigUnityCollection(Allocator.Persistent),
                         }
                     ),
-                WorkerTests<long[], long[], long[]>.Run<SimpleAdditionLongPlain>(
+                WorkerFactory<long[], long[], long[]>.Create<SimpleAdditionLongPlain>(
                     TestName(),
                     inputDataContainer.GetData<long>(DataConfig.DataLong1),
                     inputDataContainer.GetData<long>(DataConfig.DataLong1),
@@ -70,7 +71,7 @@ namespace WorkSpace.Tests.Basic.Addition.Simple
                         new DataConfigDefault(),
                     }
                 ),
-                WorkerTests<long[], long[], long[]>.Run<SimpleAdditionLongSystemParallelFor>(
+                WorkerFactory<long[], long[], long[]>.Create<SimpleAdditionLongSystemParallelFor>(
                     TestName(),
                     inputDataContainer.GetData<long>(DataConfig.DataLong1),
                     inputDataContainer.GetData<long>(DataConfig.DataLong1),

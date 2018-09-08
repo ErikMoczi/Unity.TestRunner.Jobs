@@ -1,13 +1,14 @@
 ﻿using TestCase.Basic.Division.Simple;
-using TestRunner;
-using TestRunner.Config.Data;
-using TestRunner.Config.Data.Interfaces;
-using TestRunner.Config.Worker;
-using TestRunner.Facades;
-using TestRunner.Generator;
-using TestRunner.Generator.Interfaces;
+using TestWrapper;
+using TestWrapper.Config.Data;
+using TestWrapper.Config.Data.Interfaces;
+using TestWrapper.Config.Worker;
+using TestWrapper.Facades;
+using TestWrapper.Generator;
+using TestWrapper.Generator.Interfaces;
 using Unity.Collections;
 using WorkSpace.Tests.Base;
+using DataConfig = WorkSpace.Tests.Base.DataConfig;
 
 namespace WorkSpace.Tests.Basic.Division.Simple
 {
@@ -26,11 +27,11 @@ namespace WorkSpace.Tests.Basic.Division.Simple
             };
         }
 
-        public override ITestFacade[] InitTestFacades(IInputDataContainer inputDataContainer, int dataSize)
+        public override IWorkFacade[] InitWorkFacades(IInputDataContainer inputDataContainer, int dataSize)
         {
             return new[]
             {
-                WorkerTests<NativeArray<int>, NativeArray<int>, NativeArray<int>>.Run<SimpleDivisionIntJob>(
+                WorkerFactory<NativeArray<int>, NativeArray<int>, NativeArray<int>>.Create<SimpleDivisionIntJob>(
                     TestName(),
                     inputDataContainer.GetData<int>(DataConfig.DataInt1),
                     inputDataContainer.GetData<int>(DataConfig.DataInt1),
@@ -43,20 +44,21 @@ namespace WorkSpace.Tests.Basic.Division.Simple
                         new DataConfigUnityCollection(Allocator.Persistent),
                     }
                 ),
-                WorkerTests<NativeArray<int>, NativeArray<int>, NativeArray<int>>.Run<SimpleDivisionIntJobParallelFor>(
-                    TestName(),
-                    inputDataContainer.GetData<int>(DataConfig.DataInt1),
-                    inputDataContainer.GetData<int>(DataConfig.DataInt1),
-                    inputDataContainer.GetData<int>(DataConfig.DataInt1),
-                    new WorkConfigIJobParallelFor(),
-                    new IDataConfig[]
-                    {
-                        new DataConfigUnityCollection(Allocator.Persistent),
-                        new DataConfigUnityCollection(Allocator.Persistent),
-                        new DataConfigUnityCollection(Allocator.Persistent),
-                    }
-                ),
-                WorkerTests<int[], int[], int[]>.Run<SimpleDivisionIntPlain>(
+                WorkerFactory<NativeArray<int>, NativeArray<int>, NativeArray<int>>
+                    .Create<SimpleDivisionIntJobParallelFor>(
+                        TestName(),
+                        inputDataContainer.GetData<int>(DataConfig.DataInt1),
+                        inputDataContainer.GetData<int>(DataConfig.DataInt1),
+                        inputDataContainer.GetData<int>(DataConfig.DataInt1),
+                        new WorkConfigIJobParallelFor(),
+                        new IDataConfig[]
+                        {
+                            new DataConfigUnityCollection(Allocator.Persistent),
+                            new DataConfigUnityCollection(Allocator.Persistent),
+                            new DataConfigUnityCollection(Allocator.Persistent),
+                        }
+                    ),
+                WorkerFactory<int[], int[], int[]>.Create<SimpleDivisionIntPlain>(
                     TestName(),
                     inputDataContainer.GetData<int>(DataConfig.DataInt1),
                     inputDataContainer.GetData<int>(DataConfig.DataInt1),
@@ -69,7 +71,7 @@ namespace WorkSpace.Tests.Basic.Division.Simple
                         new DataConfigDefault(),
                     }
                 ),
-                WorkerTests<int[], int[], int[]>.Run<SimpleDivisionIntSystemParallelFor>(
+                WorkerFactory<int[], int[], int[]>.Create<SimpleDivisionIntSystemParallelFor>(
                     TestName(),
                     inputDataContainer.GetData<int>(DataConfig.DataInt1),
                     inputDataContainer.GetData<int>(DataConfig.DataInt1),

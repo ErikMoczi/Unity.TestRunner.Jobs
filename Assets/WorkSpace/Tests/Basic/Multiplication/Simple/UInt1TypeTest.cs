@@ -1,13 +1,14 @@
 ﻿using TestCase.Basic.Multiplication.Simple;
-using TestRunner;
-using TestRunner.Config.Data;
-using TestRunner.Config.Data.Interfaces;
-using TestRunner.Config.Worker;
-using TestRunner.Facades;
-using TestRunner.Generator;
-using TestRunner.Generator.Interfaces;
+using TestWrapper;
+using TestWrapper.Config.Data;
+using TestWrapper.Config.Data.Interfaces;
+using TestWrapper.Config.Worker;
+using TestWrapper.Facades;
+using TestWrapper.Generator;
+using TestWrapper.Generator.Interfaces;
 using Unity.Collections;
 using WorkSpace.Tests.Base;
+using DataConfig = WorkSpace.Tests.Base.DataConfig;
 
 namespace WorkSpace.Tests.Basic.Multiplication.Simple
 {
@@ -26,25 +27,26 @@ namespace WorkSpace.Tests.Basic.Multiplication.Simple
             };
         }
 
-        public override ITestFacade[] InitTestFacades(IInputDataContainer inputDataContainer, int dataSize)
+        public override IWorkFacade[] InitWorkFacades(IInputDataContainer inputDataContainer, int dataSize)
         {
             return new[]
             {
-                WorkerTests<NativeArray<uint>, NativeArray<uint>, NativeArray<uint>>.Run<SimpleMultiplicationUIntJob>(
-                    TestName(),
-                    inputDataContainer.GetData<uint>(DataConfig.DataUInt1),
-                    inputDataContainer.GetData<uint>(DataConfig.DataUInt1),
-                    inputDataContainer.GetData<uint>(DataConfig.DataUInt1),
-                    new WorkConfigIJob(),
-                    new IDataConfig[]
-                    {
-                        new DataConfigUnityCollection(Allocator.Persistent),
-                        new DataConfigUnityCollection(Allocator.Persistent),
-                        new DataConfigUnityCollection(Allocator.Persistent),
-                    }
-                ),
-                WorkerTests<NativeArray<uint>, NativeArray<uint>, NativeArray<uint>>
-                    .Run<SimpleMultiplicationUIntJobParallelFor>(
+                WorkerFactory<NativeArray<uint>, NativeArray<uint>, NativeArray<uint>>
+                    .Create<SimpleMultiplicationUIntJob>(
+                        TestName(),
+                        inputDataContainer.GetData<uint>(DataConfig.DataUInt1),
+                        inputDataContainer.GetData<uint>(DataConfig.DataUInt1),
+                        inputDataContainer.GetData<uint>(DataConfig.DataUInt1),
+                        new WorkConfigIJob(),
+                        new IDataConfig[]
+                        {
+                            new DataConfigUnityCollection(Allocator.Persistent),
+                            new DataConfigUnityCollection(Allocator.Persistent),
+                            new DataConfigUnityCollection(Allocator.Persistent),
+                        }
+                    ),
+                WorkerFactory<NativeArray<uint>, NativeArray<uint>, NativeArray<uint>>
+                    .Create<SimpleMultiplicationUIntJobParallelFor>(
                         TestName(),
                         inputDataContainer.GetData<uint>(DataConfig.DataUInt1),
                         inputDataContainer.GetData<uint>(DataConfig.DataUInt1),
@@ -57,7 +59,7 @@ namespace WorkSpace.Tests.Basic.Multiplication.Simple
                             new DataConfigUnityCollection(Allocator.Persistent),
                         }
                     ),
-                WorkerTests<uint[], uint[], uint[]>.Run<SimpleMultiplicationUIntPlain>(
+                WorkerFactory<uint[], uint[], uint[]>.Create<SimpleMultiplicationUIntPlain>(
                     TestName(),
                     inputDataContainer.GetData<uint>(DataConfig.DataUInt1),
                     inputDataContainer.GetData<uint>(DataConfig.DataUInt1),
@@ -70,7 +72,7 @@ namespace WorkSpace.Tests.Basic.Multiplication.Simple
                         new DataConfigDefault(),
                     }
                 ),
-                WorkerTests<uint[], uint[], uint[]>.Run<SimpleMultiplicationUIntSystemParallelFor>(
+                WorkerFactory<uint[], uint[], uint[]>.Create<SimpleMultiplicationUIntSystemParallelFor>(
                     TestName(),
                     inputDataContainer.GetData<uint>(DataConfig.DataUInt1),
                     inputDataContainer.GetData<uint>(DataConfig.DataUInt1),

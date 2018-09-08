@@ -1,13 +1,14 @@
 ﻿using TestCase.Basic.Addition.Simple.Optimization;
-using TestRunner;
-using TestRunner.Config.Data;
-using TestRunner.Config.Data.Interfaces;
-using TestRunner.Config.Worker;
-using TestRunner.Facades;
-using TestRunner.Generator;
-using TestRunner.Generator.Interfaces;
+using TestWrapper;
+using TestWrapper.Config.Data;
+using TestWrapper.Config.Data.Interfaces;
+using TestWrapper.Config.Worker;
+using TestWrapper.Facades;
+using TestWrapper.Generator;
+using TestWrapper.Generator.Interfaces;
 using Unity.Collections;
 using WorkSpace.Tests.Base;
+using DataConfig = WorkSpace.Tests.Base.DataConfig;
 
 namespace WorkSpace.Tests.Basic.Addition.Simple.Optimization
 {
@@ -26,25 +27,26 @@ namespace WorkSpace.Tests.Basic.Addition.Simple.Optimization
             };
         }
 
-        public override ITestFacade[] InitTestFacades(IInputDataContainer inputDataContainer, int dataSize)
+        public override IWorkFacade[] InitWorkFacades(IInputDataContainer inputDataContainer, int dataSize)
         {
             return new[]
             {
-                WorkerTests<NativeArray<int>, NativeArray<int>, NativeArray<int>>.Run<SimpleAdditionOptimizationIntJob>(
-                    TestName(),
-                    inputDataContainer.GetData<int>(DataConfig.DataInt1),
-                    inputDataContainer.GetData<int>(DataConfig.DataInt1),
-                    inputDataContainer.GetData<int>(DataConfig.DataInt1),
-                    new WorkConfigIJob(),
-                    new IDataConfig[]
-                    {
-                        new DataConfigUnityCollection(Allocator.Persistent),
-                        new DataConfigUnityCollection(Allocator.Persistent),
-                        new DataConfigUnityCollection(Allocator.Persistent),
-                    }
-                ),
-                WorkerTests<NativeArray<int>, NativeArray<int>, NativeArray<int>>
-                    .Run<SimpleAdditionOptimizationIntJobParallelFor>(
+                WorkerFactory<NativeArray<int>, NativeArray<int>, NativeArray<int>>
+                    .Create<SimpleAdditionOptimizationIntJob>(
+                        TestName(),
+                        inputDataContainer.GetData<int>(DataConfig.DataInt1),
+                        inputDataContainer.GetData<int>(DataConfig.DataInt1),
+                        inputDataContainer.GetData<int>(DataConfig.DataInt1),
+                        new WorkConfigIJob(),
+                        new IDataConfig[]
+                        {
+                            new DataConfigUnityCollection(Allocator.Persistent),
+                            new DataConfigUnityCollection(Allocator.Persistent),
+                            new DataConfigUnityCollection(Allocator.Persistent),
+                        }
+                    ),
+                WorkerFactory<NativeArray<int>, NativeArray<int>, NativeArray<int>>
+                    .Create<SimpleAdditionOptimizationIntJobParallelFor>(
                         TestName(),
                         inputDataContainer.GetData<int>(DataConfig.DataInt1),
                         inputDataContainer.GetData<int>(DataConfig.DataInt1),

@@ -140,20 +140,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b7cefbe58e647aa9e2e33cb9460a7c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _dataSize: 1000000
-  _totalRuns: 5
   _delayFrames: 3
   _pauseAfterFinishFrames: 5
-  _testCaseWrapper:
-    Generators:
-    - WorkSpace.Tests.Basic.Multiplication.Simd.Float2TypeTest
-    - WorkSpace.Tests.Basic.Multiplication.Simd.Optimization.Float2TypeTest
-    - WorkSpace.Tests.Basic.Division.Simd.Float2TypeTest
-    - WorkSpace.Tests.Basic.Division.Simd.Optimization.Float2TypeTest
-    - WorkSpace.Tests.Basic.Addition.Simd.Float2TypeTest
-    - WorkSpace.Tests.Basic.Addition.Simd.Optimization.Float2TypeTest
-    - WorkSpace.Tests.Basic.Subtraction.Simd.Float2TypeTest
-    - WorkSpace.Tests.Basic.Subtraction.Simd.Optimization.Float2TypeTest
+  _testSettings: {fileID: 11400000, guid: f39676d967dd9b1499baa856f02fa42d, type: 2}
 --- !u!4 &70166439
 Transform:
   m_ObjectHideFlags: 0

@@ -1,0 +1,12 @@
+{
+    "name": "WorkSpace",
+    "references": [
+        "TestWrapper",
+        "TestCase",
+        "Unity.Mathematics"
+    ],
+    "optionalUnityReferences": [],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false
+}

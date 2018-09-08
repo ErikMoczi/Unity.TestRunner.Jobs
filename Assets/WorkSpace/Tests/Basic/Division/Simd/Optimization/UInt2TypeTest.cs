@@ -1,14 +1,15 @@
 ﻿using TestCase.Basic.Division.Simd.Optimization;
-using TestRunner;
-using TestRunner.Config.Data;
-using TestRunner.Config.Data.Interfaces;
-using TestRunner.Config.Worker;
-using TestRunner.Facades;
-using TestRunner.Generator;
-using TestRunner.Generator.Interfaces;
+using TestWrapper;
+using TestWrapper.Config.Data;
+using TestWrapper.Config.Data.Interfaces;
+using TestWrapper.Config.Worker;
+using TestWrapper.Facades;
+using TestWrapper.Generator;
+using TestWrapper.Generator.Interfaces;
 using Unity.Collections;
 using Unity.Mathematics;
 using WorkSpace.Tests.Base;
+using DataConfig = WorkSpace.Tests.Base.DataConfig;
 
 namespace WorkSpace.Tests.Basic.Division.Simd.Optimization
 {
@@ -27,12 +28,12 @@ namespace WorkSpace.Tests.Basic.Division.Simd.Optimization
             };
         }
 
-        public override ITestFacade[] InitTestFacades(IInputDataContainer inputDataContainer, int dataSize)
+        public override IWorkFacade[] InitWorkFacades(IInputDataContainer inputDataContainer, int dataSize)
         {
             return new[]
             {
-                WorkerTests<NativeArray<uint2>, NativeArray<uint2>, NativeArray<uint2>>
-                    .Run<SimdDivisionOptimizationUInt2Job>(
+                WorkerFactory<NativeArray<uint2>, NativeArray<uint2>, NativeArray<uint2>>
+                    .Create<SimdDivisionOptimizationUInt2Job>(
                         TestName(),
                         inputDataContainer.GetData<uint2>(DataConfig.DataUInt2),
                         inputDataContainer.GetData<uint2>(DataConfig.DataUInt2),
@@ -45,8 +46,8 @@ namespace WorkSpace.Tests.Basic.Division.Simd.Optimization
                             new DataConfigUnityCollection(Allocator.Persistent),
                         }
                     ),
-                WorkerTests<NativeArray<uint2>, NativeArray<uint2>, NativeArray<uint2>>
-                    .Run<SimdDivisionOptimizationUInt2JobParallelFor>(
+                WorkerFactory<NativeArray<uint2>, NativeArray<uint2>, NativeArray<uint2>>
+                    .Create<SimdDivisionOptimizationUInt2JobParallelFor>(
                         TestName(),
                         inputDataContainer.GetData<uint2>(DataConfig.DataUInt2),
                         inputDataContainer.GetData<uint2>(DataConfig.DataUInt2),

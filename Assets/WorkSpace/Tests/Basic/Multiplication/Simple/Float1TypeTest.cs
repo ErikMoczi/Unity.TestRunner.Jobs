@@ -1,13 +1,14 @@
 ﻿using TestCase.Basic.Multiplication.Simple;
-using TestRunner;
-using TestRunner.Config.Data;
-using TestRunner.Config.Data.Interfaces;
-using TestRunner.Config.Worker;
-using TestRunner.Facades;
-using TestRunner.Generator;
-using TestRunner.Generator.Interfaces;
+using TestWrapper;
+using TestWrapper.Config.Data;
+using TestWrapper.Config.Data.Interfaces;
+using TestWrapper.Config.Worker;
+using TestWrapper.Facades;
+using TestWrapper.Generator;
+using TestWrapper.Generator.Interfaces;
 using Unity.Collections;
 using WorkSpace.Tests.Base;
+using DataConfig = WorkSpace.Tests.Base.DataConfig;
 
 namespace WorkSpace.Tests.Basic.Multiplication.Simple
 {
@@ -26,12 +27,12 @@ namespace WorkSpace.Tests.Basic.Multiplication.Simple
             };
         }
 
-        public override ITestFacade[] InitTestFacades(IInputDataContainer inputDataContainer, int dataSize)
+        public override IWorkFacade[] InitWorkFacades(IInputDataContainer inputDataContainer, int dataSize)
         {
             return new[]
             {
-                WorkerTests<NativeArray<float>, NativeArray<float>, NativeArray<float>>
-                    .Run<SimpleMultiplicationFloatJob>(
+                WorkerFactory<NativeArray<float>, NativeArray<float>, NativeArray<float>>
+                    .Create<SimpleMultiplicationFloatJob>(
                         TestName(),
                         inputDataContainer.GetData<float>(DataConfig.DataFloat1),
                         inputDataContainer.GetData<float>(DataConfig.DataFloat1),
@@ -44,8 +45,8 @@ namespace WorkSpace.Tests.Basic.Multiplication.Simple
                             new DataConfigUnityCollection(Allocator.Persistent),
                         }
                     ),
-                WorkerTests<NativeArray<float>, NativeArray<float>, NativeArray<float>>
-                    .Run<SimpleMultiplicationFloatJobParallelFor>(
+                WorkerFactory<NativeArray<float>, NativeArray<float>, NativeArray<float>>
+                    .Create<SimpleMultiplicationFloatJobParallelFor>(
                         TestName(),
                         inputDataContainer.GetData<float>(DataConfig.DataFloat1),
                         inputDataContainer.GetData<float>(DataConfig.DataFloat1),
@@ -58,7 +59,7 @@ namespace WorkSpace.Tests.Basic.Multiplication.Simple
                             new DataConfigUnityCollection(Allocator.Persistent),
                         }
                     ),
-                WorkerTests<float[], float[], float[]>.Run<SimpleMultiplicationFloatPlain>(
+                WorkerFactory<float[], float[], float[]>.Create<SimpleMultiplicationFloatPlain>(
                     TestName(),
                     inputDataContainer.GetData<float>(DataConfig.DataFloat1),
                     inputDataContainer.GetData<float>(DataConfig.DataFloat1),
@@ -71,7 +72,7 @@ namespace WorkSpace.Tests.Basic.Multiplication.Simple
                         new DataConfigDefault(),
                     }
                 ),
-                WorkerTests<float[], float[], float[]>.Run<SimpleMultiplicationFloatSystemParallelFor>(
+                WorkerFactory<float[], float[], float[]>.Create<SimpleMultiplicationFloatSystemParallelFor>(
                     TestName(),
                     inputDataContainer.GetData<float>(DataConfig.DataFloat1),
                     inputDataContainer.GetData<float>(DataConfig.DataFloat1),

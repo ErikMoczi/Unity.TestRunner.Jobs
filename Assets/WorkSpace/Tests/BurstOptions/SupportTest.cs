@@ -1,13 +1,14 @@
 ﻿using TestCase.BurstOptions;
-using TestRunner;
-using TestRunner.Config.Data;
-using TestRunner.Config.Data.Interfaces;
-using TestRunner.Config.Worker;
-using TestRunner.Facades;
-using TestRunner.Generator;
-using TestRunner.Generator.Interfaces;
+using TestWrapper;
+using TestWrapper.Config.Data;
+using TestWrapper.Config.Data.Interfaces;
+using TestWrapper.Config.Worker;
+using TestWrapper.Facades;
+using TestWrapper.Generator;
+using TestWrapper.Generator.Interfaces;
 using Unity.Collections;
 using WorkSpace.Tests.Base;
+using DataConfig = WorkSpace.Tests.Base.DataConfig;
 
 namespace WorkSpace.Tests.BurstOptions
 {
@@ -26,13 +27,13 @@ namespace WorkSpace.Tests.BurstOptions
             };
         }
 
-        public override ITestFacade[] InitTestFacades(IInputDataContainer inputDataContainer, int dataSize)
+        public override IWorkFacade[] InitWorkFacades(IInputDataContainer inputDataContainer, int dataSize)
         {
             return new[]
             {
                 #region IJob
 
-                WorkerTests<NativeArray<float>, NativeArray<float>>.Run<BurstSupportRelaxedJob>(
+                WorkerFactory<NativeArray<float>, NativeArray<float>>.Create<BurstSupportRelaxedJob>(
                     TestName(),
                     inputDataContainer.GetData<float>(DataConfig.DataFloat1),
                     inputDataContainer.GetData<float>(DataConfig.DataFloat1),
@@ -43,7 +44,7 @@ namespace WorkSpace.Tests.BurstOptions
                         new DataConfigUnityCollection(Allocator.Persistent),
                     }
                 ),
-                WorkerTests<NativeArray<float>, NativeArray<float>>.Run<BurstSupportRelaxedJob>(
+                WorkerFactory<NativeArray<float>, NativeArray<float>>.Create<BurstSupportRelaxedJob>(
                     TestName(),
                     inputDataContainer.GetData<float>(DataConfig.DataFloat1),
                     inputDataContainer.GetData<float>(DataConfig.DataFloat1),
@@ -54,7 +55,7 @@ namespace WorkSpace.Tests.BurstOptions
                         new DataConfigUnityCollection(Allocator.Persistent),
                     }
                 ),
-                WorkerTests<NativeArray<float>, NativeArray<float>>.Run<BurstSupportStrictJob>(
+                WorkerFactory<NativeArray<float>, NativeArray<float>>.Create<BurstSupportStrictJob>(
                     TestName(),
                     inputDataContainer.GetData<float>(DataConfig.DataFloat1),
                     inputDataContainer.GetData<float>(DataConfig.DataFloat1),
@@ -65,7 +66,7 @@ namespace WorkSpace.Tests.BurstOptions
                         new DataConfigUnityCollection(Allocator.Persistent),
                     }
                 ),
-                WorkerTests<NativeArray<float>, NativeArray<float>>.Run<BurstSupportStrictJob>(
+                WorkerFactory<NativeArray<float>, NativeArray<float>>.Create<BurstSupportStrictJob>(
                     TestName(),
                     inputDataContainer.GetData<float>(DataConfig.DataFloat1),
                     inputDataContainer.GetData<float>(DataConfig.DataFloat1),
@@ -81,7 +82,7 @@ namespace WorkSpace.Tests.BurstOptions
 
                 #region IJobParallelFor
 
-                WorkerTests<NativeArray<float>, NativeArray<float>>.Run<BurstSupportRelaxedJobParallelFor>(
+                WorkerFactory<NativeArray<float>, NativeArray<float>>.Create<BurstSupportRelaxedJobParallelFor>(
                     TestName(),
                     inputDataContainer.GetData<float>(DataConfig.DataFloat1),
                     inputDataContainer.GetData<float>(DataConfig.DataFloat1),
@@ -92,7 +93,7 @@ namespace WorkSpace.Tests.BurstOptions
                         new DataConfigUnityCollection(Allocator.Persistent),
                     }
                 ),
-                WorkerTests<NativeArray<float>, NativeArray<float>>.Run<BurstSupportRelaxedJobParallelFor>(
+                WorkerFactory<NativeArray<float>, NativeArray<float>>.Create<BurstSupportRelaxedJobParallelFor>(
                     TestName(),
                     inputDataContainer.GetData<float>(DataConfig.DataFloat1),
                     inputDataContainer.GetData<float>(DataConfig.DataFloat1),
@@ -103,7 +104,7 @@ namespace WorkSpace.Tests.BurstOptions
                         new DataConfigUnityCollection(Allocator.Persistent),
                     }
                 ),
-                WorkerTests<NativeArray<float>, NativeArray<float>>.Run<BurstSupportStrictJobParallelFor>(
+                WorkerFactory<NativeArray<float>, NativeArray<float>>.Create<BurstSupportStrictJobParallelFor>(
                     TestName(),
                     inputDataContainer.GetData<float>(DataConfig.DataFloat1),
                     inputDataContainer.GetData<float>(DataConfig.DataFloat1),
@@ -114,7 +115,7 @@ namespace WorkSpace.Tests.BurstOptions
                         new DataConfigUnityCollection(Allocator.Persistent),
                     }
                 ),
-                WorkerTests<NativeArray<float>, NativeArray<float>>.Run<BurstSupportStrictJobParallelFor>(
+                WorkerFactory<NativeArray<float>, NativeArray<float>>.Create<BurstSupportStrictJobParallelFor>(
                     TestName(),
                     inputDataContainer.GetData<float>(DataConfig.DataFloat1),
                     inputDataContainer.GetData<float>(DataConfig.DataFloat1),

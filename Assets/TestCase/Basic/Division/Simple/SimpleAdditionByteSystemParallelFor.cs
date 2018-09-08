@@ -1,4 +1,4 @@
-﻿using TestRunner.Workers;
+﻿using TestWrapper.Workers;
 
 namespace TestCase.Basic.Division.Simple
 {

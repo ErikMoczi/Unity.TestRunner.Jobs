@@ -1,14 +1,15 @@
 ﻿using TestCase.Basic.Multiplication.Simd;
-using TestRunner;
-using TestRunner.Config.Data;
-using TestRunner.Config.Data.Interfaces;
-using TestRunner.Config.Worker;
-using TestRunner.Facades;
-using TestRunner.Generator;
-using TestRunner.Generator.Interfaces;
+using TestWrapper;
+using TestWrapper.Config.Data;
+using TestWrapper.Config.Data.Interfaces;
+using TestWrapper.Config.Worker;
+using TestWrapper.Facades;
+using TestWrapper.Generator;
+using TestWrapper.Generator.Interfaces;
 using Unity.Collections;
 using Unity.Mathematics;
 using WorkSpace.Tests.Base;
+using DataConfig = WorkSpace.Tests.Base.DataConfig;
 
 namespace WorkSpace.Tests.Basic.Multiplication.Simd
 {
@@ -27,25 +28,26 @@ namespace WorkSpace.Tests.Basic.Multiplication.Simd
             };
         }
 
-        public override ITestFacade[] InitTestFacades(IInputDataContainer inputDataContainer, int dataSize)
+        public override IWorkFacade[] InitWorkFacades(IInputDataContainer inputDataContainer, int dataSize)
         {
             return new[]
             {
-                WorkerTests<NativeArray<uint2>, NativeArray<uint2>, NativeArray<uint2>>.Run<SimdMultiplicationUInt2Job>(
-                    TestName(),
-                    inputDataContainer.GetData<uint2>(DataConfig.DataUInt2),
-                    inputDataContainer.GetData<uint2>(DataConfig.DataUInt2),
-                    inputDataContainer.GetData<uint2>(DataConfig.DataUInt2),
-                    new WorkConfigIJob(),
-                    new IDataConfig[]
-                    {
-                        new DataConfigUnityCollection(Allocator.Persistent),
-                        new DataConfigUnityCollection(Allocator.Persistent),
-                        new DataConfigUnityCollection(Allocator.Persistent),
-                    }
-                ),
-                WorkerTests<NativeArray<uint2>, NativeArray<uint2>, NativeArray<uint2>>
-                    .Run<SimdMultiplicationUInt2JobParallelFor>(
+                WorkerFactory<NativeArray<uint2>, NativeArray<uint2>, NativeArray<uint2>>
+                    .Create<SimdMultiplicationUInt2Job>(
+                        TestName(),
+                        inputDataContainer.GetData<uint2>(DataConfig.DataUInt2),
+                        inputDataContainer.GetData<uint2>(DataConfig.DataUInt2),
+                        inputDataContainer.GetData<uint2>(DataConfig.DataUInt2),
+                        new WorkConfigIJob(),
+                        new IDataConfig[]
+                        {
+                            new DataConfigUnityCollection(Allocator.Persistent),
+                            new DataConfigUnityCollection(Allocator.Persistent),
+                            new DataConfigUnityCollection(Allocator.Persistent),
+                        }
+                    ),
+                WorkerFactory<NativeArray<uint2>, NativeArray<uint2>, NativeArray<uint2>>
+                    .Create<SimdMultiplicationUInt2JobParallelFor>(
                         TestName(),
                         inputDataContainer.GetData<uint2>(DataConfig.DataUInt2),
                         inputDataContainer.GetData<uint2>(DataConfig.DataUInt2),
@@ -58,7 +60,7 @@ namespace WorkSpace.Tests.Basic.Multiplication.Simd
                             new DataConfigUnityCollection(Allocator.Persistent),
                         }
                     ),
-                WorkerTests<uint2[], uint2[], uint2[]>.Run<SimdMultiplicationUInt2Plain>(
+                WorkerFactory<uint2[], uint2[], uint2[]>.Create<SimdMultiplicationUInt2Plain>(
                     TestName(),
                     inputDataContainer.GetData<uint2>(DataConfig.DataUInt2),
                     inputDataContainer.GetData<uint2>(DataConfig.DataUInt2),
@@ -71,7 +73,7 @@ namespace WorkSpace.Tests.Basic.Multiplication.Simd
                         new DataConfigDefault(),
                     }
                 ),
-                WorkerTests<uint2[], uint2[], uint2[]>.Run<SimdMultiplicationUInt2SystemParallelFor>(
+                WorkerFactory<uint2[], uint2[], uint2[]>.Create<SimdMultiplicationUInt2SystemParallelFor>(
                     TestName(),
                     inputDataContainer.GetData<uint2>(DataConfig.DataUInt2),
                     inputDataContainer.GetData<uint2>(DataConfig.DataUInt2),

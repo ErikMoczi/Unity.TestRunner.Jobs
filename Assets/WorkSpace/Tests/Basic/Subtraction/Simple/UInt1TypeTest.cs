@@ -1,13 +1,14 @@
 ﻿using TestCase.Basic.Subtraction.Simple;
-using TestRunner;
-using TestRunner.Config.Data;
-using TestRunner.Config.Data.Interfaces;
-using TestRunner.Config.Worker;
-using TestRunner.Facades;
-using TestRunner.Generator;
-using TestRunner.Generator.Interfaces;
+using TestWrapper;
+using TestWrapper.Config.Data;
+using TestWrapper.Config.Data.Interfaces;
+using TestWrapper.Config.Worker;
+using TestWrapper.Facades;
+using TestWrapper.Generator;
+using TestWrapper.Generator.Interfaces;
 using Unity.Collections;
 using WorkSpace.Tests.Base;
+using DataConfig = WorkSpace.Tests.Base.DataConfig;
 
 namespace WorkSpace.Tests.Basic.Subtraction.Simple
 {
@@ -26,11 +27,11 @@ namespace WorkSpace.Tests.Basic.Subtraction.Simple
             };
         }
 
-        public override ITestFacade[] InitTestFacades(IInputDataContainer inputDataContainer, int dataSize)
+        public override IWorkFacade[] InitWorkFacades(IInputDataContainer inputDataContainer, int dataSize)
         {
             return new[]
             {
-                WorkerTests<NativeArray<uint>, NativeArray<uint>, NativeArray<uint>>.Run<SimpleSubtractionUIntJob>(
+                WorkerFactory<NativeArray<uint>, NativeArray<uint>, NativeArray<uint>>.Create<SimpleSubtractionUIntJob>(
                     TestName(),
                     inputDataContainer.GetData<uint>(DataConfig.DataUInt1),
                     inputDataContainer.GetData<uint>(DataConfig.DataUInt1),
@@ -43,8 +44,8 @@ namespace WorkSpace.Tests.Basic.Subtraction.Simple
                         new DataConfigUnityCollection(Allocator.Persistent),
                     }
                 ),
-                WorkerTests<NativeArray<uint>, NativeArray<uint>, NativeArray<uint>>
-                    .Run<SimpleSubtractionUIntJobParallelFor>(
+                WorkerFactory<NativeArray<uint>, NativeArray<uint>, NativeArray<uint>>
+                    .Create<SimpleSubtractionUIntJobParallelFor>(
                         TestName(),
                         inputDataContainer.GetData<uint>(DataConfig.DataUInt1),
                         inputDataContainer.GetData<uint>(DataConfig.DataUInt1),
@@ -57,7 +58,7 @@ namespace WorkSpace.Tests.Basic.Subtraction.Simple
                             new DataConfigUnityCollection(Allocator.Persistent),
                         }
                     ),
-                WorkerTests<uint[], uint[], uint[]>.Run<SimpleSubtractionUIntPlain>(
+                WorkerFactory<uint[], uint[], uint[]>.Create<SimpleSubtractionUIntPlain>(
                     TestName(),
                     inputDataContainer.GetData<uint>(DataConfig.DataUInt1),
                     inputDataContainer.GetData<uint>(DataConfig.DataUInt1),
@@ -70,7 +71,7 @@ namespace WorkSpace.Tests.Basic.Subtraction.Simple
                         new DataConfigDefault(),
                     }
                 ),
-                WorkerTests<uint[], uint[], uint[]>.Run<SimpleSubtractionUIntSystemParallelFor>(
+                WorkerFactory<uint[], uint[], uint[]>.Create<SimpleSubtractionUIntSystemParallelFor>(
                     TestName(),
                     inputDataContainer.GetData<uint>(DataConfig.DataUInt1),
                     inputDataContainer.GetData<uint>(DataConfig.DataUInt1),

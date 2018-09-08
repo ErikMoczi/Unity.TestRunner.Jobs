@@ -1,13 +1,14 @@
 ﻿using TestCase.Basic.Division.Simple;
-using TestRunner;
-using TestRunner.Config.Data;
-using TestRunner.Config.Data.Interfaces;
-using TestRunner.Config.Worker;
-using TestRunner.Facades;
-using TestRunner.Generator;
-using TestRunner.Generator.Interfaces;
+using TestWrapper;
+using TestWrapper.Config.Data;
+using TestWrapper.Config.Data.Interfaces;
+using TestWrapper.Config.Worker;
+using TestWrapper.Facades;
+using TestWrapper.Generator;
+using TestWrapper.Generator.Interfaces;
 using Unity.Collections;
 using WorkSpace.Tests.Base;
+using DataConfig = WorkSpace.Tests.Base.DataConfig;
 
 namespace WorkSpace.Tests.Basic.Division.Simple
 {
@@ -26,11 +27,11 @@ namespace WorkSpace.Tests.Basic.Division.Simple
             };
         }
 
-        public override ITestFacade[] InitTestFacades(IInputDataContainer inputDataContainer, int dataSize)
+        public override IWorkFacade[] InitWorkFacades(IInputDataContainer inputDataContainer, int dataSize)
         {
             return new[]
             {
-                WorkerTests<NativeArray<byte>, NativeArray<byte>, NativeArray<byte>>.Run<SimpleDivisionByteJob>(
+                WorkerFactory<NativeArray<byte>, NativeArray<byte>, NativeArray<byte>>.Create<SimpleDivisionByteJob>(
                     TestName(),
                     inputDataContainer.GetData<byte>(DataConfig.DataByte1),
                     inputDataContainer.GetData<byte>(DataConfig.DataByte1),
@@ -43,8 +44,8 @@ namespace WorkSpace.Tests.Basic.Division.Simple
                         new DataConfigUnityCollection(Allocator.Persistent),
                     }
                 ),
-                WorkerTests<NativeArray<byte>, NativeArray<byte>, NativeArray<byte>>
-                    .Run<SimpleDivisionByteJobParallelFor>(
+                WorkerFactory<NativeArray<byte>, NativeArray<byte>, NativeArray<byte>>
+                    .Create<SimpleDivisionByteJobParallelFor>(
                         TestName(),
                         inputDataContainer.GetData<byte>(DataConfig.DataByte1),
                         inputDataContainer.GetData<byte>(DataConfig.DataByte1),
@@ -57,7 +58,7 @@ namespace WorkSpace.Tests.Basic.Division.Simple
                             new DataConfigUnityCollection(Allocator.Persistent),
                         }
                     ),
-                WorkerTests<byte[], byte[], byte[]>.Run<SimpleDivisionBytePlain>(
+                WorkerFactory<byte[], byte[], byte[]>.Create<SimpleDivisionBytePlain>(
                     TestName(),
                     inputDataContainer.GetData<byte>(DataConfig.DataByte1),
                     inputDataContainer.GetData<byte>(DataConfig.DataByte1),
@@ -70,7 +71,7 @@ namespace WorkSpace.Tests.Basic.Division.Simple
                         new DataConfigDefault(),
                     }
                 ),
-                WorkerTests<byte[], byte[], byte[]>.Run<SimpleDivisionByteSystemParallelFor>(
+                WorkerFactory<byte[], byte[], byte[]>.Create<SimpleDivisionByteSystemParallelFor>(
                     TestName(),
                     inputDataContainer.GetData<byte>(DataConfig.DataByte1),
                     inputDataContainer.GetData<byte>(DataConfig.DataByte1),

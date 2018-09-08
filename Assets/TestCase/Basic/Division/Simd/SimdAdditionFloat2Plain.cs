@@ -1,4 +1,4 @@
-﻿using TestRunner.Workers;
+﻿using TestWrapper.Workers;
 using Unity.Mathematics;
 
 namespace TestCase.Basic.Division.Simd

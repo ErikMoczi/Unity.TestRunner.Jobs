@@ -1,13 +1,14 @@
 ﻿using TestCase.Basic.Multiplication.Simple.Optimization;
-using TestRunner;
-using TestRunner.Config.Data;
-using TestRunner.Config.Data.Interfaces;
-using TestRunner.Config.Worker;
-using TestRunner.Facades;
-using TestRunner.Generator;
-using TestRunner.Generator.Interfaces;
+using TestWrapper;
+using TestWrapper.Config.Data;
+using TestWrapper.Config.Data.Interfaces;
+using TestWrapper.Config.Worker;
+using TestWrapper.Facades;
+using TestWrapper.Generator;
+using TestWrapper.Generator.Interfaces;
 using Unity.Collections;
 using WorkSpace.Tests.Base;
+using DataConfig = WorkSpace.Tests.Base.DataConfig;
 
 namespace WorkSpace.Tests.Basic.Multiplication.Simple.Optimization
 {
@@ -26,12 +27,12 @@ namespace WorkSpace.Tests.Basic.Multiplication.Simple.Optimization
             };
         }
 
-        public override ITestFacade[] InitTestFacades(IInputDataContainer inputDataContainer, int dataSize)
+        public override IWorkFacade[] InitWorkFacades(IInputDataContainer inputDataContainer, int dataSize)
         {
             return new[]
             {
-                WorkerTests<NativeArray<double>, NativeArray<double>, NativeArray<double>>
-                    .Run<SimpleMultiplicationOptimizationDoubleJob>(
+                WorkerFactory<NativeArray<double>, NativeArray<double>, NativeArray<double>>
+                    .Create<SimpleMultiplicationOptimizationDoubleJob>(
                         TestName(),
                         inputDataContainer.GetData<double>(DataConfig.DataDouble1),
                         inputDataContainer.GetData<double>(DataConfig.DataDouble1),
@@ -44,8 +45,8 @@ namespace WorkSpace.Tests.Basic.Multiplication.Simple.Optimization
                             new DataConfigUnityCollection(Allocator.Persistent),
                         }
                     ),
-                WorkerTests<NativeArray<double>, NativeArray<double>, NativeArray<double>>
-                    .Run<SimpleMultiplicationOptimizationDoubleJobParallelFor>(
+                WorkerFactory<NativeArray<double>, NativeArray<double>, NativeArray<double>>
+                    .Create<SimpleMultiplicationOptimizationDoubleJobParallelFor>(
                         TestName(),
                         inputDataContainer.GetData<double>(DataConfig.DataDouble1),
                         inputDataContainer.GetData<double>(DataConfig.DataDouble1),

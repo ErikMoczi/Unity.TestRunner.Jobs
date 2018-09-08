@@ -1,13 +1,14 @@
 ﻿using TestCase.Basic.Division.Simple;
-using TestRunner;
-using TestRunner.Config.Data;
-using TestRunner.Config.Data.Interfaces;
-using TestRunner.Config.Worker;
-using TestRunner.Facades;
-using TestRunner.Generator;
-using TestRunner.Generator.Interfaces;
+using TestWrapper;
+using TestWrapper.Config.Data;
+using TestWrapper.Config.Data.Interfaces;
+using TestWrapper.Config.Worker;
+using TestWrapper.Facades;
+using TestWrapper.Generator;
+using TestWrapper.Generator.Interfaces;
 using Unity.Collections;
 using WorkSpace.Tests.Base;
+using DataConfig = WorkSpace.Tests.Base.DataConfig;
 
 namespace WorkSpace.Tests.Basic.Division.Simple
 {
@@ -26,25 +27,26 @@ namespace WorkSpace.Tests.Basic.Division.Simple
             };
         }
 
-        public override ITestFacade[] InitTestFacades(IInputDataContainer inputDataContainer, int dataSize)
+        public override IWorkFacade[] InitWorkFacades(IInputDataContainer inputDataContainer, int dataSize)
         {
             return new[]
             {
-                WorkerTests<NativeArray<short>, NativeArray<short>, NativeArray<short>>.Run<SimpleDivisionShortJob>(
-                    TestName(),
-                    inputDataContainer.GetData<short>(DataConfig.DataShort1),
-                    inputDataContainer.GetData<short>(DataConfig.DataShort1),
-                    inputDataContainer.GetData<short>(DataConfig.DataShort1),
-                    new WorkConfigIJob(),
-                    new IDataConfig[]
-                    {
-                        new DataConfigUnityCollection(Allocator.Persistent),
-                        new DataConfigUnityCollection(Allocator.Persistent),
-                        new DataConfigUnityCollection(Allocator.Persistent),
-                    }
-                ),
-                WorkerTests<NativeArray<short>, NativeArray<short>, NativeArray<short>>
-                    .Run<SimpleDivisionShortJobParallelFor>(
+                WorkerFactory<NativeArray<short>, NativeArray<short>, NativeArray<short>>
+                    .Create<SimpleDivisionShortJob>(
+                        TestName(),
+                        inputDataContainer.GetData<short>(DataConfig.DataShort1),
+                        inputDataContainer.GetData<short>(DataConfig.DataShort1),
+                        inputDataContainer.GetData<short>(DataConfig.DataShort1),
+                        new WorkConfigIJob(),
+                        new IDataConfig[]
+                        {
+                            new DataConfigUnityCollection(Allocator.Persistent),
+                            new DataConfigUnityCollection(Allocator.Persistent),
+                            new DataConfigUnityCollection(Allocator.Persistent),
+                        }
+                    ),
+                WorkerFactory<NativeArray<short>, NativeArray<short>, NativeArray<short>>
+                    .Create<SimpleDivisionShortJobParallelFor>(
                         TestName(),
                         inputDataContainer.GetData<short>(DataConfig.DataShort1),
                         inputDataContainer.GetData<short>(DataConfig.DataShort1),
@@ -57,7 +59,7 @@ namespace WorkSpace.Tests.Basic.Division.Simple
                             new DataConfigUnityCollection(Allocator.Persistent),
                         }
                     ),
-                WorkerTests<short[], short[], short[]>.Run<SimpleDivisionShortPlain>(
+                WorkerFactory<short[], short[], short[]>.Create<SimpleDivisionShortPlain>(
                     TestName(),
                     inputDataContainer.GetData<short>(DataConfig.DataShort1),
                     inputDataContainer.GetData<short>(DataConfig.DataShort1),
@@ -70,7 +72,7 @@ namespace WorkSpace.Tests.Basic.Division.Simple
                         new DataConfigDefault(),
                     }
                 ),
-                WorkerTests<short[], short[], short[]>.Run<SimpleDivisionShortSystemParallelFor>(
+                WorkerFactory<short[], short[], short[]>.Create<SimpleDivisionShortSystemParallelFor>(
                     TestName(),
                     inputDataContainer.GetData<short>(DataConfig.DataShort1),
                     inputDataContainer.GetData<short>(DataConfig.DataShort1),

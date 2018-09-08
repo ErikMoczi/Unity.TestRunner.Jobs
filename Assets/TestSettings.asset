@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1dcc2aebf088467b8f54a59b065106a3, type: 3}
+  m_Name: TestSettings
+  m_EditorClassIdentifier: 
+  _dataSize: 1000000
+  _totalRuns: 10
+  _testCaseWrapper:
+    Generators:
+    - WorkSpace.Tests.Basic.Multiplication.Simple.Int1TypeTest
+    - WorkSpace.Tests.Basic.Multiplication.Simple.Optimization.Int1TypeTest
+    - WorkSpace.Tests.Basic.Subtraction.Simple.Int1TypeTest
+    - WorkSpace.Tests.Basic.Subtraction.Simple.Optimization.Int1TypeTest
+    - WorkSpace.Tests.Basic.Addition.Simple.Int1TypeTest
+    - WorkSpace.Tests.Basic.Addition.Simple.Optimization.Int1TypeTest
+    - WorkSpace.Tests.Basic.Division.Simple.Int1TypeTest
+    - WorkSpace.Tests.Basic.Division.Simple.Optimization.Int1TypeTest

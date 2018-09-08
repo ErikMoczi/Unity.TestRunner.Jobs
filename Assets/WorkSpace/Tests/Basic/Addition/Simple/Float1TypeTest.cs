@@ -1,13 +1,14 @@
 ﻿using TestCase.Basic.Addition.Simple;
-using TestRunner;
-using TestRunner.Config.Data;
-using TestRunner.Config.Data.Interfaces;
-using TestRunner.Config.Worker;
-using TestRunner.Facades;
-using TestRunner.Generator;
-using TestRunner.Generator.Interfaces;
+using TestWrapper;
+using TestWrapper.Config.Data;
+using TestWrapper.Config.Data.Interfaces;
+using TestWrapper.Config.Worker;
+using TestWrapper.Facades;
+using TestWrapper.Generator;
+using TestWrapper.Generator.Interfaces;
 using Unity.Collections;
 using WorkSpace.Tests.Base;
+using DataConfig = WorkSpace.Tests.Base.DataConfig;
 
 namespace WorkSpace.Tests.Basic.Addition.Simple
 {
@@ -26,25 +27,26 @@ namespace WorkSpace.Tests.Basic.Addition.Simple
             };
         }
 
-        public override ITestFacade[] InitTestFacades(IInputDataContainer inputDataContainer, int dataSize)
+        public override IWorkFacade[] InitWorkFacades(IInputDataContainer inputDataContainer, int dataSize)
         {
             return new[]
             {
-                WorkerTests<NativeArray<float>, NativeArray<float>, NativeArray<float>>.Run<SimpleAdditionFloatJob>(
-                    TestName(),
-                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
-                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
-                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
-                    new WorkConfigIJob(),
-                    new IDataConfig[]
-                    {
-                        new DataConfigUnityCollection(Allocator.Persistent),
-                        new DataConfigUnityCollection(Allocator.Persistent),
-                        new DataConfigUnityCollection(Allocator.Persistent),
-                    }
-                ),
-                WorkerTests<NativeArray<float>, NativeArray<float>, NativeArray<float>>
-                    .Run<SimpleAdditionFloatJobParallelFor>(
+                WorkerFactory<NativeArray<float>, NativeArray<float>, NativeArray<float>>
+                    .Create<SimpleAdditionFloatJob>(
+                        TestName(),
+                        inputDataContainer.GetData<float>(DataConfig.DataFloat1),
+                        inputDataContainer.GetData<float>(DataConfig.DataFloat1),
+                        inputDataContainer.GetData<float>(DataConfig.DataFloat1),
+                        new WorkConfigIJob(),
+                        new IDataConfig[]
+                        {
+                            new DataConfigUnityCollection(Allocator.Persistent),
+                            new DataConfigUnityCollection(Allocator.Persistent),
+                            new DataConfigUnityCollection(Allocator.Persistent),
+                        }
+                    ),
+                WorkerFactory<NativeArray<float>, NativeArray<float>, NativeArray<float>>
+                    .Create<SimpleAdditionFloatJobParallelFor>(
                         TestName(),
                         inputDataContainer.GetData<float>(DataConfig.DataFloat1),
                         inputDataContainer.GetData<float>(DataConfig.DataFloat1),
@@ -57,7 +59,7 @@ namespace WorkSpace.Tests.Basic.Addition.Simple
                             new DataConfigUnityCollection(Allocator.Persistent),
                         }
                     ),
-                WorkerTests<float[], float[], float[]>.Run<SimpleAdditionFloatPlain>(
+                WorkerFactory<float[], float[], float[]>.Create<SimpleAdditionFloatPlain>(
                     TestName(),
                     inputDataContainer.GetData<float>(DataConfig.DataFloat1),
                     inputDataContainer.GetData<float>(DataConfig.DataFloat1),
@@ -70,7 +72,7 @@ namespace WorkSpace.Tests.Basic.Addition.Simple
                         new DataConfigDefault(),
                     }
                 ),
-                WorkerTests<float[], float[], float[]>.Run<SimpleAdditionFloatSystemParallelFor>(
+                WorkerFactory<float[], float[], float[]>.Create<SimpleAdditionFloatSystemParallelFor>(
                     TestName(),
                     inputDataContainer.GetData<float>(DataConfig.DataFloat1),
                     inputDataContainer.GetData<float>(DataConfig.DataFloat1),

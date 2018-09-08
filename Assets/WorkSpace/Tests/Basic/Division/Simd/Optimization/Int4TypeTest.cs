@@ -1,14 +1,15 @@
 ﻿using TestCase.Basic.Division.Simd.Optimization;
-using TestRunner;
-using TestRunner.Config.Data;
-using TestRunner.Config.Data.Interfaces;
-using TestRunner.Config.Worker;
-using TestRunner.Facades;
-using TestRunner.Generator;
-using TestRunner.Generator.Interfaces;
+using TestWrapper;
+using TestWrapper.Config.Data;
+using TestWrapper.Config.Data.Interfaces;
+using TestWrapper.Config.Worker;
+using TestWrapper.Facades;
+using TestWrapper.Generator;
+using TestWrapper.Generator.Interfaces;
 using Unity.Collections;
 using Unity.Mathematics;
 using WorkSpace.Tests.Base;
+using DataConfig = WorkSpace.Tests.Base.DataConfig;
 
 namespace WorkSpace.Tests.Basic.Division.Simd.Optimization
 {
@@ -27,12 +28,12 @@ namespace WorkSpace.Tests.Basic.Division.Simd.Optimization
             };
         }
 
-        public override ITestFacade[] InitTestFacades(IInputDataContainer inputDataContainer, int dataSize)
+        public override IWorkFacade[] InitWorkFacades(IInputDataContainer inputDataContainer, int dataSize)
         {
             return new[]
             {
-                WorkerTests<NativeArray<int4>, NativeArray<int4>, NativeArray<int4>>
-                    .Run<SimdDivisionOptimizationInt4Job>(
+                WorkerFactory<NativeArray<int4>, NativeArray<int4>, NativeArray<int4>>
+                    .Create<SimdDivisionOptimizationInt4Job>(
                         TestName(),
                         inputDataContainer.GetData<int4>(DataConfig.DataInt4),
                         inputDataContainer.GetData<int4>(DataConfig.DataInt4),
@@ -45,8 +46,8 @@ namespace WorkSpace.Tests.Basic.Division.Simd.Optimization
                             new DataConfigUnityCollection(Allocator.Persistent),
                         }
                     ),
-                WorkerTests<NativeArray<int4>, NativeArray<int4>, NativeArray<int4>>
-                    .Run<SimdDivisionOptimizationInt4JobParallelFor>(
+                WorkerFactory<NativeArray<int4>, NativeArray<int4>, NativeArray<int4>>
+                    .Create<SimdDivisionOptimizationInt4JobParallelFor>(
                         TestName(),
                         inputDataContainer.GetData<int4>(DataConfig.DataInt4),
                         inputDataContainer.GetData<int4>(DataConfig.DataInt4),

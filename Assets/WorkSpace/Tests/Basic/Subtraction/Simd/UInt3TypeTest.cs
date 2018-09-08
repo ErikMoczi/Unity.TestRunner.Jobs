@@ -1,14 +1,15 @@
 ﻿using TestCase.Basic.Subtraction.Simd;
-using TestRunner;
-using TestRunner.Config.Data;
-using TestRunner.Config.Data.Interfaces;
-using TestRunner.Config.Worker;
-using TestRunner.Facades;
-using TestRunner.Generator;
-using TestRunner.Generator.Interfaces;
+using TestWrapper;
+using TestWrapper.Config.Data;
+using TestWrapper.Config.Data.Interfaces;
+using TestWrapper.Config.Worker;
+using TestWrapper.Facades;
+using TestWrapper.Generator;
+using TestWrapper.Generator.Interfaces;
 using Unity.Collections;
 using Unity.Mathematics;
 using WorkSpace.Tests.Base;
+using DataConfig = WorkSpace.Tests.Base.DataConfig;
 
 namespace WorkSpace.Tests.Basic.Subtraction.Simd
 {
@@ -27,25 +28,26 @@ namespace WorkSpace.Tests.Basic.Subtraction.Simd
             };
         }
 
-        public override ITestFacade[] InitTestFacades(IInputDataContainer inputDataContainer, int dataSize)
+        public override IWorkFacade[] InitWorkFacades(IInputDataContainer inputDataContainer, int dataSize)
         {
             return new[]
             {
-                WorkerTests<NativeArray<uint3>, NativeArray<uint3>, NativeArray<uint3>>.Run<SimdSubtractionUInt3Job>(
-                    TestName(),
-                    inputDataContainer.GetData<uint3>(DataConfig.DataUInt3),
-                    inputDataContainer.GetData<uint3>(DataConfig.DataUInt3),
-                    inputDataContainer.GetData<uint3>(DataConfig.DataUInt3),
-                    new WorkConfigIJob(),
-                    new IDataConfig[]
-                    {
-                        new DataConfigUnityCollection(Allocator.Persistent),
-                        new DataConfigUnityCollection(Allocator.Persistent),
-                        new DataConfigUnityCollection(Allocator.Persistent),
-                    }
-                ),
-                WorkerTests<NativeArray<uint3>, NativeArray<uint3>, NativeArray<uint3>>
-                    .Run<SimdSubtractionUInt3JobParallelFor>(
+                WorkerFactory<NativeArray<uint3>, NativeArray<uint3>, NativeArray<uint3>>
+                    .Create<SimdSubtractionUInt3Job>(
+                        TestName(),
+                        inputDataContainer.GetData<uint3>(DataConfig.DataUInt3),
+                        inputDataContainer.GetData<uint3>(DataConfig.DataUInt3),
+                        inputDataContainer.GetData<uint3>(DataConfig.DataUInt3),
+                        new WorkConfigIJob(),
+                        new IDataConfig[]
+                        {
+                            new DataConfigUnityCollection(Allocator.Persistent),
+                            new DataConfigUnityCollection(Allocator.Persistent),
+                            new DataConfigUnityCollection(Allocator.Persistent),
+                        }
+                    ),
+                WorkerFactory<NativeArray<uint3>, NativeArray<uint3>, NativeArray<uint3>>
+                    .Create<SimdSubtractionUInt3JobParallelFor>(
                         TestName(),
                         inputDataContainer.GetData<uint3>(DataConfig.DataUInt3),
                         inputDataContainer.GetData<uint3>(DataConfig.DataUInt3),
@@ -58,7 +60,7 @@ namespace WorkSpace.Tests.Basic.Subtraction.Simd
                             new DataConfigUnityCollection(Allocator.Persistent),
                         }
                     ),
-                WorkerTests<uint3[], uint3[], uint3[]>.Run<SimdSubtractionUInt3Plain>(
+                WorkerFactory<uint3[], uint3[], uint3[]>.Create<SimdSubtractionUInt3Plain>(
                     TestName(),
                     inputDataContainer.GetData<uint3>(DataConfig.DataUInt3),
                     inputDataContainer.GetData<uint3>(DataConfig.DataUInt3),
@@ -71,7 +73,7 @@ namespace WorkSpace.Tests.Basic.Subtraction.Simd
                         new DataConfigDefault(),
                     }
                 ),
-                WorkerTests<uint3[], uint3[], uint3[]>.Run<SimdSubtractionUInt3SystemParallelFor>(
+                WorkerFactory<uint3[], uint3[], uint3[]>.Create<SimdSubtractionUInt3SystemParallelFor>(
                     TestName(),
                     inputDataContainer.GetData<uint3>(DataConfig.DataUInt3),
                     inputDataContainer.GetData<uint3>(DataConfig.DataUInt3),

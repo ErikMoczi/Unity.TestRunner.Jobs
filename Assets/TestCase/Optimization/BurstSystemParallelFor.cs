@@ -1,4 +1,4 @@
-﻿using TestRunner.Workers;
+﻿using TestWrapper.Workers;
 using Unity.Burst;
 
 namespace TestCase.Optimization

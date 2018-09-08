@@ -1,13 +1,14 @@
 ﻿using TestCase.Basic;
-using TestRunner;
-using TestRunner.Config.Data;
-using TestRunner.Config.Data.Interfaces;
-using TestRunner.Config.Worker;
-using TestRunner.Facades;
-using TestRunner.Generator;
-using TestRunner.Generator.Interfaces;
+using TestWrapper;
+using TestWrapper.Config.Data;
+using TestWrapper.Config.Data.Interfaces;
+using TestWrapper.Config.Worker;
+using TestWrapper.Facades;
+using TestWrapper.Generator;
+using TestWrapper.Generator.Interfaces;
 using Unity.Collections;
 using WorkSpace.Tests.Base;
+using DataConfig = WorkSpace.Tests.Base.DataConfig;
 
 namespace WorkSpace.Tests.Basic.Base
 {
@@ -26,13 +27,13 @@ namespace WorkSpace.Tests.Basic.Base
             };
         }
 
-        public override ITestFacade[] InitTestFacades(IInputDataContainer inputDataContainer, int dataSize)
+        public override IWorkFacade[] InitWorkFacades(IInputDataContainer inputDataContainer, int dataSize)
         {
             return new[]
             {
                 #region IJob
 
-                WorkerTests<NativeArray<float>, NativeArray<float>>.Run<BaseIJob>(
+                WorkerFactory<NativeArray<float>, NativeArray<float>>.Create<BaseIJob>(
                     TestName(),
                     inputDataContainer.GetData<float>(DataConfig.DataFloat1),
                     inputDataContainer.GetData<float>(DataConfig.DataFloat1),
@@ -43,7 +44,7 @@ namespace WorkSpace.Tests.Basic.Base
                         new DataConfigUnityCollection(Allocator.Persistent),
                     }
                 ),
-                WorkerTests<NativeArray<float>, NativeArray<float>>.Run<BaseBurstIJob>(
+                WorkerFactory<NativeArray<float>, NativeArray<float>>.Create<BaseBurstIJob>(
                     TestName(),
                     inputDataContainer.GetData<float>(DataConfig.DataFloat1),
                     inputDataContainer.GetData<float>(DataConfig.DataFloat1),
@@ -59,7 +60,7 @@ namespace WorkSpace.Tests.Basic.Base
 
                 #region IJobParallelFor
 
-                WorkerTests<NativeArray<float>, NativeArray<float>>.Run<BaseIJobParallelFor>(
+                WorkerFactory<NativeArray<float>, NativeArray<float>>.Create<BaseIJobParallelFor>(
                     TestName(),
                     inputDataContainer.GetData<float>(DataConfig.DataFloat1),
                     inputDataContainer.GetData<float>(DataConfig.DataFloat1),
@@ -70,7 +71,7 @@ namespace WorkSpace.Tests.Basic.Base
                         new DataConfigUnityCollection(Allocator.Persistent),
                     }
                 ),
-                WorkerTests<NativeArray<float>, NativeArray<float>>.Run<BaseBurstIJobParallelFor>(
+                WorkerFactory<NativeArray<float>, NativeArray<float>>.Create<BaseBurstIJobParallelFor>(
                     TestName(),
                     inputDataContainer.GetData<float>(DataConfig.DataFloat1),
                     inputDataContainer.GetData<float>(DataConfig.DataFloat1),
@@ -86,7 +87,7 @@ namespace WorkSpace.Tests.Basic.Base
 
                 #region IPlain
 
-                WorkerTests<float[], float[]>.Run<BaseIPlain>(
+                WorkerFactory<float[], float[]>.Create<BaseIPlain>(
                     TestName(),
                     inputDataContainer.GetData<float>(DataConfig.DataFloat1),
                     inputDataContainer.GetData<float>(DataConfig.DataFloat1),
@@ -97,7 +98,7 @@ namespace WorkSpace.Tests.Basic.Base
                         new DataConfigDefault(),
                     }
                 ),
-                WorkerTests<NativeArray<float>, NativeArray<float>>.Run<BaseBurstIPlain>(
+                WorkerFactory<NativeArray<float>, NativeArray<float>>.Create<BaseBurstIPlain>(
                     TestName(),
                     inputDataContainer.GetData<float>(DataConfig.DataFloat1),
                     inputDataContainer.GetData<float>(DataConfig.DataFloat1),
@@ -108,7 +109,7 @@ namespace WorkSpace.Tests.Basic.Base
                         new DataConfigUnityCollection(Allocator.Persistent),
                     }
                 ),
-                WorkerTests<NativeArray<float>, NativeArray<float>>.Run<BaseNoBurstIPlain>(
+                WorkerFactory<NativeArray<float>, NativeArray<float>>.Create<BaseNoBurstIPlain>(
                     TestName(),
                     inputDataContainer.GetData<float>(DataConfig.DataFloat1),
                     inputDataContainer.GetData<float>(DataConfig.DataFloat1),
@@ -124,7 +125,7 @@ namespace WorkSpace.Tests.Basic.Base
 
                 #region ISystemParallelFor
 
-                WorkerTests<float[], float[]>.Run<BaseISystemParallelFor>(
+                WorkerFactory<float[], float[]>.Create<BaseISystemParallelFor>(
                     TestName(),
                     inputDataContainer.GetData<float>(DataConfig.DataFloat1),
                     inputDataContainer.GetData<float>(DataConfig.DataFloat1),
@@ -135,7 +136,7 @@ namespace WorkSpace.Tests.Basic.Base
                         new DataConfigDefault(),
                     }
                 ),
-                WorkerTests<NativeArray<float>, NativeArray<float>>.Run<BaseBurstISystemParallelFor>(
+                WorkerFactory<NativeArray<float>, NativeArray<float>>.Create<BaseBurstISystemParallelFor>(
                     TestName(),
                     inputDataContainer.GetData<float>(DataConfig.DataFloat1),
                     inputDataContainer.GetData<float>(DataConfig.DataFloat1),
@@ -146,7 +147,7 @@ namespace WorkSpace.Tests.Basic.Base
                         new DataConfigUnityCollection(Allocator.Persistent),
                     }
                 ),
-                WorkerTests<NativeArray<float>, NativeArray<float>>.Run<BaseNoBurstISystemParallelFor>(
+                WorkerFactory<NativeArray<float>, NativeArray<float>>.Create<BaseNoBurstISystemParallelFor>(
                     TestName(),
                     inputDataContainer.GetData<float>(DataConfig.DataFloat1),
                     inputDataContainer.GetData<float>(DataConfig.DataFloat1),

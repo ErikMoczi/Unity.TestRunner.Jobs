@@ -1,14 +1,15 @@
 ﻿using TestCase.Basic.Multiplication.Simd.Optimization;
-using TestRunner;
-using TestRunner.Config.Data;
-using TestRunner.Config.Data.Interfaces;
-using TestRunner.Config.Worker;
-using TestRunner.Facades;
-using TestRunner.Generator;
-using TestRunner.Generator.Interfaces;
+using TestWrapper;
+using TestWrapper.Config.Data;
+using TestWrapper.Config.Data.Interfaces;
+using TestWrapper.Config.Worker;
+using TestWrapper.Facades;
+using TestWrapper.Generator;
+using TestWrapper.Generator.Interfaces;
 using Unity.Collections;
 using Unity.Mathematics;
 using WorkSpace.Tests.Base;
+using DataConfig = WorkSpace.Tests.Base.DataConfig;
 
 namespace WorkSpace.Tests.Basic.Multiplication.Simd.Optimization
 {
@@ -27,12 +28,12 @@ namespace WorkSpace.Tests.Basic.Multiplication.Simd.Optimization
             };
         }
 
-        public override ITestFacade[] InitTestFacades(IInputDataContainer inputDataContainer, int dataSize)
+        public override IWorkFacade[] InitWorkFacades(IInputDataContainer inputDataContainer, int dataSize)
         {
             return new[]
             {
-                WorkerTests<NativeArray<double2>, NativeArray<double2>, NativeArray<double2>>
-                    .Run<SimdMultiplicationOptimizationDouble2Job>(
+                WorkerFactory<NativeArray<double2>, NativeArray<double2>, NativeArray<double2>>
+                    .Create<SimdMultiplicationOptimizationDouble2Job>(
                         TestName(),
                         inputDataContainer.GetData<double2>(DataConfig.DataDouble2),
                         inputDataContainer.GetData<double2>(DataConfig.DataDouble2),
@@ -45,8 +46,8 @@ namespace WorkSpace.Tests.Basic.Multiplication.Simd.Optimization
                             new DataConfigUnityCollection(Allocator.Persistent),
                         }
                     ),
-                WorkerTests<NativeArray<double2>, NativeArray<double2>, NativeArray<double2>>
-                    .Run<SimdMultiplicationOptimizationDouble2JobParallelFor>(
+                WorkerFactory<NativeArray<double2>, NativeArray<double2>, NativeArray<double2>>
+                    .Create<SimdMultiplicationOptimizationDouble2JobParallelFor>(
                         TestName(),
                         inputDataContainer.GetData<double2>(DataConfig.DataDouble2),
                         inputDataContainer.GetData<double2>(DataConfig.DataDouble2),

@@ -1,14 +1,15 @@
 ﻿using TestCase.Basic.Subtraction.Simd.Optimization;
-using TestRunner;
-using TestRunner.Config.Data;
-using TestRunner.Config.Data.Interfaces;
-using TestRunner.Config.Worker;
-using TestRunner.Facades;
-using TestRunner.Generator;
-using TestRunner.Generator.Interfaces;
+using TestWrapper;
+using TestWrapper.Config.Data;
+using TestWrapper.Config.Data.Interfaces;
+using TestWrapper.Config.Worker;
+using TestWrapper.Facades;
+using TestWrapper.Generator;
+using TestWrapper.Generator.Interfaces;
 using Unity.Collections;
 using Unity.Mathematics;
 using WorkSpace.Tests.Base;
+using DataConfig = WorkSpace.Tests.Base.DataConfig;
 
 namespace WorkSpace.Tests.Basic.Subtraction.Simd.Optimization
 {
@@ -27,12 +28,12 @@ namespace WorkSpace.Tests.Basic.Subtraction.Simd.Optimization
             };
         }
 
-        public override ITestFacade[] InitTestFacades(IInputDataContainer inputDataContainer, int dataSize)
+        public override IWorkFacade[] InitWorkFacades(IInputDataContainer inputDataContainer, int dataSize)
         {
             return new[]
             {
-                WorkerTests<NativeArray<double4>, NativeArray<double4>, NativeArray<double4>>
-                    .Run<SimdSubtractionOptimizationDouble4Job>(
+                WorkerFactory<NativeArray<double4>, NativeArray<double4>, NativeArray<double4>>
+                    .Create<SimdSubtractionOptimizationDouble4Job>(
                         TestName(),
                         inputDataContainer.GetData<double4>(DataConfig.DataDouble4),
                         inputDataContainer.GetData<double4>(DataConfig.DataDouble4),
@@ -45,8 +46,8 @@ namespace WorkSpace.Tests.Basic.Subtraction.Simd.Optimization
                             new DataConfigUnityCollection(Allocator.Persistent),
                         }
                     ),
-                WorkerTests<NativeArray<double4>, NativeArray<double4>, NativeArray<double4>>
-                    .Run<SimdSubtractionOptimizationDouble4JobParallelFor>(
+                WorkerFactory<NativeArray<double4>, NativeArray<double4>, NativeArray<double4>>
+                    .Create<SimdSubtractionOptimizationDouble4JobParallelFor>(
                         TestName(),
                         inputDataContainer.GetData<double4>(DataConfig.DataDouble4),
                         inputDataContainer.GetData<double4>(DataConfig.DataDouble4),

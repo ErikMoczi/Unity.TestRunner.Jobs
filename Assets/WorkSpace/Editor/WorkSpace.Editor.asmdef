@@ -1,0 +1,12 @@
+{
+    "name": "WorkSpace.Editor",
+    "references": [
+        "WorkSpace"
+    ],
+    "optionalUnityReferences": [],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false
+}

@@ -1,14 +1,15 @@
 ﻿using TestCase.Basic.Subtraction.Simd;
-using TestRunner;
-using TestRunner.Config.Data;
-using TestRunner.Config.Data.Interfaces;
-using TestRunner.Config.Worker;
-using TestRunner.Facades;
-using TestRunner.Generator;
-using TestRunner.Generator.Interfaces;
+using TestWrapper;
+using TestWrapper.Config.Data;
+using TestWrapper.Config.Data.Interfaces;
+using TestWrapper.Config.Worker;
+using TestWrapper.Facades;
+using TestWrapper.Generator;
+using TestWrapper.Generator.Interfaces;
 using Unity.Collections;
 using Unity.Mathematics;
 using WorkSpace.Tests.Base;
+using DataConfig = WorkSpace.Tests.Base.DataConfig;
 
 namespace WorkSpace.Tests.Basic.Subtraction.Simd
 {
@@ -27,11 +28,11 @@ namespace WorkSpace.Tests.Basic.Subtraction.Simd
             };
         }
 
-        public override ITestFacade[] InitTestFacades(IInputDataContainer inputDataContainer, int dataSize)
+        public override IWorkFacade[] InitWorkFacades(IInputDataContainer inputDataContainer, int dataSize)
         {
             return new[]
             {
-                WorkerTests<NativeArray<int4>, NativeArray<int4>, NativeArray<int4>>.Run<SimdSubtractionInt4Job>(
+                WorkerFactory<NativeArray<int4>, NativeArray<int4>, NativeArray<int4>>.Create<SimdSubtractionInt4Job>(
                     TestName(),
                     inputDataContainer.GetData<int4>(DataConfig.DataInt4),
                     inputDataContainer.GetData<int4>(DataConfig.DataInt4),
@@ -44,8 +45,8 @@ namespace WorkSpace.Tests.Basic.Subtraction.Simd
                         new DataConfigUnityCollection(Allocator.Persistent),
                     }
                 ),
-                WorkerTests<NativeArray<int4>, NativeArray<int4>, NativeArray<int4>>
-                    .Run<SimdSubtractionInt4JobParallelFor>(
+                WorkerFactory<NativeArray<int4>, NativeArray<int4>, NativeArray<int4>>
+                    .Create<SimdSubtractionInt4JobParallelFor>(
                         TestName(),
                         inputDataContainer.GetData<int4>(DataConfig.DataInt4),
                         inputDataContainer.GetData<int4>(DataConfig.DataInt4),
@@ -58,7 +59,7 @@ namespace WorkSpace.Tests.Basic.Subtraction.Simd
                             new DataConfigUnityCollection(Allocator.Persistent),
                         }
                     ),
-                WorkerTests<int4[], int4[], int4[]>.Run<SimdSubtractionInt4Plain>(
+                WorkerFactory<int4[], int4[], int4[]>.Create<SimdSubtractionInt4Plain>(
                     TestName(),
                     inputDataContainer.GetData<int4>(DataConfig.DataInt4),
                     inputDataContainer.GetData<int4>(DataConfig.DataInt4),
@@ -71,7 +72,7 @@ namespace WorkSpace.Tests.Basic.Subtraction.Simd
                         new DataConfigDefault(),
                     }
                 ),
-                WorkerTests<int4[], int4[], int4[]>.Run<SimdSubtractionInt4SystemParallelFor>(
+                WorkerFactory<int4[], int4[], int4[]>.Create<SimdSubtractionInt4SystemParallelFor>(
                     TestName(),
                     inputDataContainer.GetData<int4>(DataConfig.DataInt4),
                     inputDataContainer.GetData<int4>(DataConfig.DataInt4),

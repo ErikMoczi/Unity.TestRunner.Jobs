@@ -1,13 +1,14 @@
 ﻿using TestCase.Basic.Addition.Simple;
-using TestRunner;
-using TestRunner.Config.Data;
-using TestRunner.Config.Data.Interfaces;
-using TestRunner.Config.Worker;
-using TestRunner.Facades;
-using TestRunner.Generator;
-using TestRunner.Generator.Interfaces;
+using TestWrapper;
+using TestWrapper.Config.Data;
+using TestWrapper.Config.Data.Interfaces;
+using TestWrapper.Config.Worker;
+using TestWrapper.Facades;
+using TestWrapper.Generator;
+using TestWrapper.Generator.Interfaces;
 using Unity.Collections;
 using WorkSpace.Tests.Base;
+using DataConfig = WorkSpace.Tests.Base.DataConfig;
 
 namespace WorkSpace.Tests.Basic.Addition.Simple
 {
@@ -26,25 +27,26 @@ namespace WorkSpace.Tests.Basic.Addition.Simple
             };
         }
 
-        public override ITestFacade[] InitTestFacades(IInputDataContainer inputDataContainer, int dataSize)
+        public override IWorkFacade[] InitWorkFacades(IInputDataContainer inputDataContainer, int dataSize)
         {
             return new[]
             {
-                WorkerTests<NativeArray<double>, NativeArray<double>, NativeArray<double>>.Run<SimpleAdditionDoubleJob>(
-                    TestName(),
-                    inputDataContainer.GetData<double>(DataConfig.DataDouble1),
-                    inputDataContainer.GetData<double>(DataConfig.DataDouble1),
-                    inputDataContainer.GetData<double>(DataConfig.DataDouble1),
-                    new WorkConfigIJob(),
-                    new IDataConfig[]
-                    {
-                        new DataConfigUnityCollection(Allocator.Persistent),
-                        new DataConfigUnityCollection(Allocator.Persistent),
-                        new DataConfigUnityCollection(Allocator.Persistent),
-                    }
-                ),
-                WorkerTests<NativeArray<double>, NativeArray<double>, NativeArray<double>>
-                    .Run<SimpleAdditionDoubleJobParallelFor>(
+                WorkerFactory<NativeArray<double>, NativeArray<double>, NativeArray<double>>
+                    .Create<SimpleAdditionDoubleJob>(
+                        TestName(),
+                        inputDataContainer.GetData<double>(DataConfig.DataDouble1),
+                        inputDataContainer.GetData<double>(DataConfig.DataDouble1),
+                        inputDataContainer.GetData<double>(DataConfig.DataDouble1),
+                        new WorkConfigIJob(),
+                        new IDataConfig[]
+                        {
+                            new DataConfigUnityCollection(Allocator.Persistent),
+                            new DataConfigUnityCollection(Allocator.Persistent),
+                            new DataConfigUnityCollection(Allocator.Persistent),
+                        }
+                    ),
+                WorkerFactory<NativeArray<double>, NativeArray<double>, NativeArray<double>>
+                    .Create<SimpleAdditionDoubleJobParallelFor>(
                         TestName(),
                         inputDataContainer.GetData<double>(DataConfig.DataDouble1),
                         inputDataContainer.GetData<double>(DataConfig.DataDouble1),
@@ -57,7 +59,7 @@ namespace WorkSpace.Tests.Basic.Addition.Simple
                             new DataConfigUnityCollection(Allocator.Persistent),
                         }
                     ),
-                WorkerTests<double[], double[], double[]>.Run<SimpleAdditionDoublePlain>(
+                WorkerFactory<double[], double[], double[]>.Create<SimpleAdditionDoublePlain>(
                     TestName(),
                     inputDataContainer.GetData<double>(DataConfig.DataDouble1),
                     inputDataContainer.GetData<double>(DataConfig.DataDouble1),
@@ -70,7 +72,7 @@ namespace WorkSpace.Tests.Basic.Addition.Simple
                         new DataConfigDefault(),
                     }
                 ),
-                WorkerTests<double[], double[], double[]>.Run<SimpleAdditionDoubleSystemParallelFor>(
+                WorkerFactory<double[], double[], double[]>.Create<SimpleAdditionDoubleSystemParallelFor>(
                     TestName(),
                     inputDataContainer.GetData<double>(DataConfig.DataDouble1),
                     inputDataContainer.GetData<double>(DataConfig.DataDouble1),

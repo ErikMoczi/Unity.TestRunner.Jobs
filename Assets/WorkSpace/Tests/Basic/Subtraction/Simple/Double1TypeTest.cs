@@ -1,13 +1,14 @@
 ﻿using TestCase.Basic.Subtraction.Simple;
-using TestRunner;
-using TestRunner.Config.Data;
-using TestRunner.Config.Data.Interfaces;
-using TestRunner.Config.Worker;
-using TestRunner.Facades;
-using TestRunner.Generator;
-using TestRunner.Generator.Interfaces;
+using TestWrapper;
+using TestWrapper.Config.Data;
+using TestWrapper.Config.Data.Interfaces;
+using TestWrapper.Config.Worker;
+using TestWrapper.Facades;
+using TestWrapper.Generator;
+using TestWrapper.Generator.Interfaces;
 using Unity.Collections;
 using WorkSpace.Tests.Base;
+using DataConfig = WorkSpace.Tests.Base.DataConfig;
 
 namespace WorkSpace.Tests.Basic.Subtraction.Simple
 {
@@ -26,12 +27,12 @@ namespace WorkSpace.Tests.Basic.Subtraction.Simple
             };
         }
 
-        public override ITestFacade[] InitTestFacades(IInputDataContainer inputDataContainer, int dataSize)
+        public override IWorkFacade[] InitWorkFacades(IInputDataContainer inputDataContainer, int dataSize)
         {
             return new[]
             {
-                WorkerTests<NativeArray<double>, NativeArray<double>, NativeArray<double>>
-                    .Run<SimpleSubtractionDoubleJob>(
+                WorkerFactory<NativeArray<double>, NativeArray<double>, NativeArray<double>>
+                    .Create<SimpleSubtractionDoubleJob>(
                         TestName(),
                         inputDataContainer.GetData<double>(DataConfig.DataDouble1),
                         inputDataContainer.GetData<double>(DataConfig.DataDouble1),
@@ -44,8 +45,8 @@ namespace WorkSpace.Tests.Basic.Subtraction.Simple
                             new DataConfigUnityCollection(Allocator.Persistent),
                         }
                     ),
-                WorkerTests<NativeArray<double>, NativeArray<double>, NativeArray<double>>
-                    .Run<SimpleSubtractionDoubleJobParallelFor>(
+                WorkerFactory<NativeArray<double>, NativeArray<double>, NativeArray<double>>
+                    .Create<SimpleSubtractionDoubleJobParallelFor>(
                         TestName(),
                         inputDataContainer.GetData<double>(DataConfig.DataDouble1),
                         inputDataContainer.GetData<double>(DataConfig.DataDouble1),
@@ -58,7 +59,7 @@ namespace WorkSpace.Tests.Basic.Subtraction.Simple
                             new DataConfigUnityCollection(Allocator.Persistent),
                         }
                     ),
-                WorkerTests<double[], double[], double[]>.Run<SimpleSubtractionDoublePlain>(
+                WorkerFactory<double[], double[], double[]>.Create<SimpleSubtractionDoublePlain>(
                     TestName(),
                     inputDataContainer.GetData<double>(DataConfig.DataDouble1),
                     inputDataContainer.GetData<double>(DataConfig.DataDouble1),
@@ -71,7 +72,7 @@ namespace WorkSpace.Tests.Basic.Subtraction.Simple
                         new DataConfigDefault(),
                     }
                 ),
-                WorkerTests<double[], double[], double[]>.Run<SimpleSubtractionDoubleSystemParallelFor>(
+                WorkerFactory<double[], double[], double[]>.Create<SimpleSubtractionDoubleSystemParallelFor>(
                     TestName(),
                     inputDataContainer.GetData<double>(DataConfig.DataDouble1),
                     inputDataContainer.GetData<double>(DataConfig.DataDouble1),

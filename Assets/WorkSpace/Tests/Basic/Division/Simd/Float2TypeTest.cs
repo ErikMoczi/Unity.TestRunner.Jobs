@@ -1,14 +1,15 @@
 ﻿using TestCase.Basic.Division.Simd;
-using TestRunner;
-using TestRunner.Config.Data;
-using TestRunner.Config.Data.Interfaces;
-using TestRunner.Config.Worker;
-using TestRunner.Facades;
-using TestRunner.Generator;
-using TestRunner.Generator.Interfaces;
+using TestWrapper;
+using TestWrapper.Config.Data;
+using TestWrapper.Config.Data.Interfaces;
+using TestWrapper.Config.Worker;
+using TestWrapper.Facades;
+using TestWrapper.Generator;
+using TestWrapper.Generator.Interfaces;
 using Unity.Collections;
 using Unity.Mathematics;
 using WorkSpace.Tests.Base;
+using DataConfig = WorkSpace.Tests.Base.DataConfig;
 
 namespace WorkSpace.Tests.Basic.Division.Simd
 {
@@ -27,25 +28,26 @@ namespace WorkSpace.Tests.Basic.Division.Simd
             };
         }
 
-        public override ITestFacade[] InitTestFacades(IInputDataContainer inputDataContainer, int dataSize)
+        public override IWorkFacade[] InitWorkFacades(IInputDataContainer inputDataContainer, int dataSize)
         {
             return new[]
             {
-                WorkerTests<NativeArray<float2>, NativeArray<float2>, NativeArray<float2>>.Run<SimdDivisionFloat2Job>(
-                    TestName(),
-                    inputDataContainer.GetData<float2>(DataConfig.DataFloat2),
-                    inputDataContainer.GetData<float2>(DataConfig.DataFloat2),
-                    inputDataContainer.GetData<float2>(DataConfig.DataFloat2),
-                    new WorkConfigIJob(),
-                    new IDataConfig[]
-                    {
-                        new DataConfigUnityCollection(Allocator.Persistent),
-                        new DataConfigUnityCollection(Allocator.Persistent),
-                        new DataConfigUnityCollection(Allocator.Persistent),
-                    }
-                ),
-                WorkerTests<NativeArray<float2>, NativeArray<float2>, NativeArray<float2>>
-                    .Run<SimdDivisionFloat2JobParallelFor>(
+                WorkerFactory<NativeArray<float2>, NativeArray<float2>, NativeArray<float2>>
+                    .Create<SimdDivisionFloat2Job>(
+                        TestName(),
+                        inputDataContainer.GetData<float2>(DataConfig.DataFloat2),
+                        inputDataContainer.GetData<float2>(DataConfig.DataFloat2),
+                        inputDataContainer.GetData<float2>(DataConfig.DataFloat2),
+                        new WorkConfigIJob(),
+                        new IDataConfig[]
+                        {
+                            new DataConfigUnityCollection(Allocator.Persistent),
+                            new DataConfigUnityCollection(Allocator.Persistent),
+                            new DataConfigUnityCollection(Allocator.Persistent),
+                        }
+                    ),
+                WorkerFactory<NativeArray<float2>, NativeArray<float2>, NativeArray<float2>>
+                    .Create<SimdDivisionFloat2JobParallelFor>(
                         TestName(),
                         inputDataContainer.GetData<float2>(DataConfig.DataFloat2),
                         inputDataContainer.GetData<float2>(DataConfig.DataFloat2),
@@ -58,7 +60,7 @@ namespace WorkSpace.Tests.Basic.Division.Simd
                             new DataConfigUnityCollection(Allocator.Persistent),
                         }
                     ),
-                WorkerTests<float2[], float2[], float2[]>.Run<SimdDivisionFloat2Plain>(
+                WorkerFactory<float2[], float2[], float2[]>.Create<SimdDivisionFloat2Plain>(
                     TestName(),
                     inputDataContainer.GetData<float2>(DataConfig.DataFloat2),
                     inputDataContainer.GetData<float2>(DataConfig.DataFloat2),
@@ -71,7 +73,7 @@ namespace WorkSpace.Tests.Basic.Division.Simd
                         new DataConfigDefault(),
                     }
                 ),
-                WorkerTests<float2[], float2[], float2[]>.Run<SimdDivisionFloat2SystemParallelFor>(
+                WorkerFactory<float2[], float2[], float2[]>.Create<SimdDivisionFloat2SystemParallelFor>(
                     TestName(),
                     inputDataContainer.GetData<float2>(DataConfig.DataFloat2),
                     inputDataContainer.GetData<float2>(DataConfig.DataFloat2),

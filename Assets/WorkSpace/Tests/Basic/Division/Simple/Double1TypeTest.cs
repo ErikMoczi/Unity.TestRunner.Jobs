@@ -1,13 +1,14 @@
 ﻿using TestCase.Basic.Division.Simple;
-using TestRunner;
-using TestRunner.Config.Data;
-using TestRunner.Config.Data.Interfaces;
-using TestRunner.Config.Worker;
-using TestRunner.Facades;
-using TestRunner.Generator;
-using TestRunner.Generator.Interfaces;
+using TestWrapper;
+using TestWrapper.Config.Data;
+using TestWrapper.Config.Data.Interfaces;
+using TestWrapper.Config.Worker;
+using TestWrapper.Facades;
+using TestWrapper.Generator;
+using TestWrapper.Generator.Interfaces;
 using Unity.Collections;
 using WorkSpace.Tests.Base;
+using DataConfig = WorkSpace.Tests.Base.DataConfig;
 
 namespace WorkSpace.Tests.Basic.Division.Simple
 {
@@ -26,25 +27,26 @@ namespace WorkSpace.Tests.Basic.Division.Simple
             };
         }
 
-        public override ITestFacade[] InitTestFacades(IInputDataContainer inputDataContainer, int dataSize)
+        public override IWorkFacade[] InitWorkFacades(IInputDataContainer inputDataContainer, int dataSize)
         {
             return new[]
             {
-                WorkerTests<NativeArray<double>, NativeArray<double>, NativeArray<double>>.Run<SimpleDivisionDoubleJob>(
-                    TestName(),
-                    inputDataContainer.GetData<double>(DataConfig.DataDouble1),
-                    inputDataContainer.GetData<double>(DataConfig.DataDouble1),
-                    inputDataContainer.GetData<double>(DataConfig.DataDouble1),
-                    new WorkConfigIJob(),
-                    new IDataConfig[]
-                    {
-                        new DataConfigUnityCollection(Allocator.Persistent),
-                        new DataConfigUnityCollection(Allocator.Persistent),
-                        new DataConfigUnityCollection(Allocator.Persistent),
-                    }
-                ),
-                WorkerTests<NativeArray<double>, NativeArray<double>, NativeArray<double>>
-                    .Run<SimpleDivisionDoubleJobParallelFor>(
+                WorkerFactory<NativeArray<double>, NativeArray<double>, NativeArray<double>>
+                    .Create<SimpleDivisionDoubleJob>(
+                        TestName(),
+                        inputDataContainer.GetData<double>(DataConfig.DataDouble1),
+                        inputDataContainer.GetData<double>(DataConfig.DataDouble1),
+                        inputDataContainer.GetData<double>(DataConfig.DataDouble1),
+                        new WorkConfigIJob(),
+                        new IDataConfig[]
+                        {
+                            new DataConfigUnityCollection(Allocator.Persistent),
+                            new DataConfigUnityCollection(Allocator.Persistent),
+                            new DataConfigUnityCollection(Allocator.Persistent),
+                        }
+                    ),
+                WorkerFactory<NativeArray<double>, NativeArray<double>, NativeArray<double>>
+                    .Create<SimpleDivisionDoubleJobParallelFor>(
                         TestName(),
                         inputDataContainer.GetData<double>(DataConfig.DataDouble1),
                         inputDataContainer.GetData<double>(DataConfig.DataDouble1),
@@ -57,7 +59,7 @@ namespace WorkSpace.Tests.Basic.Division.Simple
                             new DataConfigUnityCollection(Allocator.Persistent),
                         }
                     ),
-                WorkerTests<double[], double[], double[]>.Run<SimpleDivisionDoublePlain>(
+                WorkerFactory<double[], double[], double[]>.Create<SimpleDivisionDoublePlain>(
                     TestName(),
                     inputDataContainer.GetData<double>(DataConfig.DataDouble1),
                     inputDataContainer.GetData<double>(DataConfig.DataDouble1),
@@ -70,7 +72,7 @@ namespace WorkSpace.Tests.Basic.Division.Simple
                         new DataConfigDefault(),
                     }
                 ),
-                WorkerTests<double[], double[], double[]>.Run<SimpleDivisionDoubleSystemParallelFor>(
+                WorkerFactory<double[], double[], double[]>.Create<SimpleDivisionDoubleSystemParallelFor>(
                     TestName(),
                     inputDataContainer.GetData<double>(DataConfig.DataDouble1),
                     inputDataContainer.GetData<double>(DataConfig.DataDouble1),

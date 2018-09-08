@@ -1,13 +1,14 @@
 ﻿using TestCase.Optimization;
-using TestRunner;
-using TestRunner.Config.Data;
-using TestRunner.Config.Data.Interfaces;
-using TestRunner.Config.Worker;
-using TestRunner.Facades;
-using TestRunner.Generator;
-using TestRunner.Generator.Interfaces;
+using TestWrapper;
+using TestWrapper.Config.Data;
+using TestWrapper.Config.Data.Interfaces;
+using TestWrapper.Config.Worker;
+using TestWrapper.Facades;
+using TestWrapper.Generator;
+using TestWrapper.Generator.Interfaces;
 using Unity.Collections;
 using WorkSpace.Tests.Base;
+using DataConfig = WorkSpace.Tests.Base.DataConfig;
 
 namespace WorkSpace.Tests.Optimization
 {
@@ -26,11 +27,11 @@ namespace WorkSpace.Tests.Optimization
             };
         }
 
-        public override ITestFacade[] InitTestFacades(IInputDataContainer inputDataContainer, int dataSize)
+        public override IWorkFacade[] InitWorkFacades(IInputDataContainer inputDataContainer, int dataSize)
         {
             return new[]
             {
-                WorkerTests<NativeArray<float>, NativeArray<float>>.Run<UnOptimizedJob>(
+                WorkerFactory<NativeArray<float>, NativeArray<float>>.Create<UnOptimizedJob>(
                     TestName(),
                     inputDataContainer.GetData<float>(DataConfig.DataFloat1),
                     inputDataContainer.GetData<float>(DataConfig.DataFloat1),
@@ -41,7 +42,7 @@ namespace WorkSpace.Tests.Optimization
                         new DataConfigUnityCollection(Allocator.Persistent),
                     }
                 ),
-                WorkerTests<NativeArray<float>, NativeArray<float>>.Run<UnOptimizedJobParallelFor>(
+                WorkerFactory<NativeArray<float>, NativeArray<float>>.Create<UnOptimizedJobParallelFor>(
                     TestName(),
                     inputDataContainer.GetData<float>(DataConfig.DataFloat1),
                     inputDataContainer.GetData<float>(DataConfig.DataFloat1),
@@ -52,7 +53,7 @@ namespace WorkSpace.Tests.Optimization
                         new DataConfigUnityCollection(Allocator.Persistent),
                     }
                 ),
-                WorkerTests<float[], float[]>.Run<UnOptimizedPlain>(
+                WorkerFactory<float[], float[]>.Create<UnOptimizedPlain>(
                     TestName(),
                     inputDataContainer.GetData<float>(DataConfig.DataFloat1),
                     inputDataContainer.GetData<float>(DataConfig.DataFloat1),
@@ -63,7 +64,7 @@ namespace WorkSpace.Tests.Optimization
                         new DataConfigDefault(),
                     }
                 ),
-                WorkerTests<float[], float[]>.Run<UnOptimizedSystemParallelFor>(
+                WorkerFactory<float[], float[]>.Create<UnOptimizedSystemParallelFor>(
                     TestName(),
                     inputDataContainer.GetData<float>(DataConfig.DataFloat1),
                     inputDataContainer.GetData<float>(DataConfig.DataFloat1),

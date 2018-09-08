@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using TestRunner.Utils;
+using TestWrapper.Utils;
 using WorkSpace.Extensions;
 
 namespace WorkSpace.Tests.Base
@@ -62,7 +62,7 @@ namespace WorkSpace.Tests.Base
             var inputDataTypeName = typeof(InputDataTypeName).GetAllPublicConstantNames();
             foreach (var value in inputDataTypeName)
             {
-                var generators = _sampleGenerators.Keys.Where(item => item.Contains(value + SufixBasicTests))
+                var generators = _sampleGenerators.Keys.Where(item => item.Contains("." + value + SufixBasicTests))
                     .ToArray();
                 yield return new KeyValuePair<string, string[]>(value, generators);
             }
