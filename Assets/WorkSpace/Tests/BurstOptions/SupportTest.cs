@@ -7,12 +7,12 @@ using TestWrapper.Facades;
 using TestWrapper.Generator;
 using TestWrapper.Generator.Interfaces;
 using Unity.Collections;
-using WorkSpace.Tests.Base;
-using DataConfig = WorkSpace.Tests.Base.DataConfig;
+using WorkSpace.Provider.Containers;
+using WorkSpace.Provider.Settings;
 
 namespace WorkSpace.Tests.BurstOptions
 {
-    public sealed class SupportTest : SampleGenerator
+    internal sealed class SupportTest : SampleGenerator
     {
         public override string TestName()
         {
@@ -23,7 +23,7 @@ namespace WorkSpace.Tests.BurstOptions
         {
             return new ISampleConfig[]
             {
-                new SampleConfig(typeof(float), DataConfig.DataFloat1),
+                new SampleConfig(typeof(float), TypeConfig.DataFloat1),
             };
         }
 
@@ -35,8 +35,8 @@ namespace WorkSpace.Tests.BurstOptions
 
                 WorkerFactory<NativeArray<float>, NativeArray<float>>.Create<BurstSupportRelaxedJob>(
                     TestName(),
-                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
-                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
+                    inputDataContainer.GetData<float>(TypeConfig.DataFloat1),
+                    inputDataContainer.GetData<float>(TypeConfig.DataFloat1),
                     new WorkConfigIJob(),
                     new IDataConfig[]
                     {
@@ -46,8 +46,8 @@ namespace WorkSpace.Tests.BurstOptions
                 ),
                 WorkerFactory<NativeArray<float>, NativeArray<float>>.Create<BurstSupportRelaxedJob>(
                     TestName(),
-                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
-                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
+                    inputDataContainer.GetData<float>(TypeConfig.DataFloat1),
+                    inputDataContainer.GetData<float>(TypeConfig.DataFloat1),
                     new WorkConfigIJob(false),
                     new IDataConfig[]
                     {
@@ -57,8 +57,8 @@ namespace WorkSpace.Tests.BurstOptions
                 ),
                 WorkerFactory<NativeArray<float>, NativeArray<float>>.Create<BurstSupportStrictJob>(
                     TestName(),
-                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
-                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
+                    inputDataContainer.GetData<float>(TypeConfig.DataFloat1),
+                    inputDataContainer.GetData<float>(TypeConfig.DataFloat1),
                     new WorkConfigIJob(),
                     new IDataConfig[]
                     {
@@ -68,8 +68,8 @@ namespace WorkSpace.Tests.BurstOptions
                 ),
                 WorkerFactory<NativeArray<float>, NativeArray<float>>.Create<BurstSupportStrictJob>(
                     TestName(),
-                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
-                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
+                    inputDataContainer.GetData<float>(TypeConfig.DataFloat1),
+                    inputDataContainer.GetData<float>(TypeConfig.DataFloat1),
                     new WorkConfigIJob(false),
                     new IDataConfig[]
                     {
@@ -84,8 +84,8 @@ namespace WorkSpace.Tests.BurstOptions
 
                 WorkerFactory<NativeArray<float>, NativeArray<float>>.Create<BurstSupportRelaxedJobParallelFor>(
                     TestName(),
-                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
-                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
+                    inputDataContainer.GetData<float>(TypeConfig.DataFloat1),
+                    inputDataContainer.GetData<float>(TypeConfig.DataFloat1),
                     new WorkConfigIJobParallelFor(),
                     new IDataConfig[]
                     {
@@ -95,8 +95,8 @@ namespace WorkSpace.Tests.BurstOptions
                 ),
                 WorkerFactory<NativeArray<float>, NativeArray<float>>.Create<BurstSupportRelaxedJobParallelFor>(
                     TestName(),
-                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
-                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
+                    inputDataContainer.GetData<float>(TypeConfig.DataFloat1),
+                    inputDataContainer.GetData<float>(TypeConfig.DataFloat1),
                     new WorkConfigIJobParallelFor(false),
                     new IDataConfig[]
                     {
@@ -106,8 +106,8 @@ namespace WorkSpace.Tests.BurstOptions
                 ),
                 WorkerFactory<NativeArray<float>, NativeArray<float>>.Create<BurstSupportStrictJobParallelFor>(
                     TestName(),
-                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
-                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
+                    inputDataContainer.GetData<float>(TypeConfig.DataFloat1),
+                    inputDataContainer.GetData<float>(TypeConfig.DataFloat1),
                     new WorkConfigIJobParallelFor(),
                     new IDataConfig[]
                     {
@@ -117,8 +117,8 @@ namespace WorkSpace.Tests.BurstOptions
                 ),
                 WorkerFactory<NativeArray<float>, NativeArray<float>>.Create<BurstSupportStrictJobParallelFor>(
                     TestName(),
-                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
-                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
+                    inputDataContainer.GetData<float>(TypeConfig.DataFloat1),
+                    inputDataContainer.GetData<float>(TypeConfig.DataFloat1),
                     new WorkConfigIJobParallelFor(false),
                     new IDataConfig[]
                     {

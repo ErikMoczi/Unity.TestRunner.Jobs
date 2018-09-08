@@ -7,12 +7,12 @@ using TestWrapper.Facades;
 using TestWrapper.Generator;
 using TestWrapper.Generator.Interfaces;
 using Unity.Collections;
-using WorkSpace.Tests.Base;
-using DataConfig = WorkSpace.Tests.Base.DataConfig;
+using WorkSpace.Provider.Containers;
+using WorkSpace.Provider.Settings;
 
 namespace WorkSpace.Tests.Basic.Addition.Simple
 {
-    public sealed class Int1TypeTest : SampleGenerator
+    internal sealed class Int1TypeTest : SampleGenerator
     {
         public override string TestName()
         {
@@ -23,7 +23,7 @@ namespace WorkSpace.Tests.Basic.Addition.Simple
         {
             return new ISampleConfig[]
             {
-                new SampleConfig(typeof(int), DataConfig.DataInt1),
+                new SampleConfig(typeof(int), TypeConfig.DataInt1),
             };
         }
 
@@ -33,9 +33,9 @@ namespace WorkSpace.Tests.Basic.Addition.Simple
             {
                 WorkerFactory<NativeArray<int>, NativeArray<int>, NativeArray<int>>.Create<SimpleAdditionIntJob>(
                     TestName(),
-                    inputDataContainer.GetData<int>(DataConfig.DataInt1),
-                    inputDataContainer.GetData<int>(DataConfig.DataInt1),
-                    inputDataContainer.GetData<int>(DataConfig.DataInt1),
+                    inputDataContainer.GetData<int>(TypeConfig.DataInt1),
+                    inputDataContainer.GetData<int>(TypeConfig.DataInt1),
+                    inputDataContainer.GetData<int>(TypeConfig.DataInt1),
                     new WorkConfigIJob(),
                     new IDataConfig[]
                     {
@@ -47,9 +47,9 @@ namespace WorkSpace.Tests.Basic.Addition.Simple
                 WorkerFactory<NativeArray<int>, NativeArray<int>, NativeArray<int>>
                     .Create<SimpleAdditionIntJobParallelFor>(
                         TestName(),
-                        inputDataContainer.GetData<int>(DataConfig.DataInt1),
-                        inputDataContainer.GetData<int>(DataConfig.DataInt1),
-                        inputDataContainer.GetData<int>(DataConfig.DataInt1),
+                        inputDataContainer.GetData<int>(TypeConfig.DataInt1),
+                        inputDataContainer.GetData<int>(TypeConfig.DataInt1),
+                        inputDataContainer.GetData<int>(TypeConfig.DataInt1),
                         new WorkConfigIJobParallelFor(),
                         new IDataConfig[]
                         {
@@ -60,9 +60,9 @@ namespace WorkSpace.Tests.Basic.Addition.Simple
                     ),
                 WorkerFactory<int[], int[], int[]>.Create<SimpleAdditionIntPlain>(
                     TestName(),
-                    inputDataContainer.GetData<int>(DataConfig.DataInt1),
-                    inputDataContainer.GetData<int>(DataConfig.DataInt1),
-                    inputDataContainer.GetData<int>(DataConfig.DataInt1),
+                    inputDataContainer.GetData<int>(TypeConfig.DataInt1),
+                    inputDataContainer.GetData<int>(TypeConfig.DataInt1),
+                    inputDataContainer.GetData<int>(TypeConfig.DataInt1),
                     new WorkConfigDefault(),
                     new IDataConfig[]
                     {
@@ -73,9 +73,9 @@ namespace WorkSpace.Tests.Basic.Addition.Simple
                 ),
                 WorkerFactory<int[], int[], int[]>.Create<SimpleAdditionIntSystemParallelFor>(
                     TestName(),
-                    inputDataContainer.GetData<int>(DataConfig.DataInt1),
-                    inputDataContainer.GetData<int>(DataConfig.DataInt1),
-                    inputDataContainer.GetData<int>(DataConfig.DataInt1),
+                    inputDataContainer.GetData<int>(TypeConfig.DataInt1),
+                    inputDataContainer.GetData<int>(TypeConfig.DataInt1),
+                    inputDataContainer.GetData<int>(TypeConfig.DataInt1),
                     new WorkConfigDefault(),
                     new IDataConfig[]
                     {

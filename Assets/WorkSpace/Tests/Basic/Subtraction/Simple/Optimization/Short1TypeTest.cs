@@ -7,12 +7,12 @@ using TestWrapper.Facades;
 using TestWrapper.Generator;
 using TestWrapper.Generator.Interfaces;
 using Unity.Collections;
-using WorkSpace.Tests.Base;
-using DataConfig = WorkSpace.Tests.Base.DataConfig;
+using WorkSpace.Provider.Containers;
+using WorkSpace.Provider.Settings;
 
 namespace WorkSpace.Tests.Basic.Subtraction.Simple.Optimization
 {
-    public sealed class Short1TypeTest : SampleGenerator
+    internal sealed class Short1TypeTest : SampleGenerator
     {
         public override string TestName()
         {
@@ -23,7 +23,7 @@ namespace WorkSpace.Tests.Basic.Subtraction.Simple.Optimization
         {
             return new ISampleConfig[]
             {
-                new SampleConfig(typeof(short), DataConfig.DataShort1),
+                new SampleConfig(typeof(short), TypeConfig.DataShort1),
             };
         }
 
@@ -34,9 +34,9 @@ namespace WorkSpace.Tests.Basic.Subtraction.Simple.Optimization
                 WorkerFactory<NativeArray<short>, NativeArray<short>, NativeArray<short>>
                     .Create<SimpleSubtractionOptimizationShortJob>(
                         TestName(),
-                        inputDataContainer.GetData<short>(DataConfig.DataShort1),
-                        inputDataContainer.GetData<short>(DataConfig.DataShort1),
-                        inputDataContainer.GetData<short>(DataConfig.DataShort1),
+                        inputDataContainer.GetData<short>(TypeConfig.DataShort1),
+                        inputDataContainer.GetData<short>(TypeConfig.DataShort1),
+                        inputDataContainer.GetData<short>(TypeConfig.DataShort1),
                         new WorkConfigIJob(),
                         new IDataConfig[]
                         {
@@ -48,9 +48,9 @@ namespace WorkSpace.Tests.Basic.Subtraction.Simple.Optimization
                 WorkerFactory<NativeArray<short>, NativeArray<short>, NativeArray<short>>
                     .Create<SimpleSubtractionOptimizationShortJobParallelFor>(
                         TestName(),
-                        inputDataContainer.GetData<short>(DataConfig.DataShort1),
-                        inputDataContainer.GetData<short>(DataConfig.DataShort1),
-                        inputDataContainer.GetData<short>(DataConfig.DataShort1),
+                        inputDataContainer.GetData<short>(TypeConfig.DataShort1),
+                        inputDataContainer.GetData<short>(TypeConfig.DataShort1),
+                        inputDataContainer.GetData<short>(TypeConfig.DataShort1),
                         new WorkConfigIJobParallelFor(),
                         new IDataConfig[]
                         {

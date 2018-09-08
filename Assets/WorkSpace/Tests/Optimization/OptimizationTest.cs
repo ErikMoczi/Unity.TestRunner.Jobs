@@ -7,12 +7,12 @@ using TestWrapper.Facades;
 using TestWrapper.Generator;
 using TestWrapper.Generator.Interfaces;
 using Unity.Collections;
-using WorkSpace.Tests.Base;
-using DataConfig = WorkSpace.Tests.Base.DataConfig;
+using WorkSpace.Provider.Containers;
+using WorkSpace.Provider.Settings;
 
 namespace WorkSpace.Tests.Optimization
 {
-    public sealed class OptimizationTest : SampleGenerator
+    internal sealed class OptimizationTest : SampleGenerator
     {
         public override string TestName()
         {
@@ -23,7 +23,7 @@ namespace WorkSpace.Tests.Optimization
         {
             return new ISampleConfig[]
             {
-                new SampleConfig(typeof(float), DataConfig.DataFloat1),
+                new SampleConfig(typeof(float), TypeConfig.DataFloat1),
             };
         }
 
@@ -35,8 +35,8 @@ namespace WorkSpace.Tests.Optimization
 
                 WorkerFactory<float[], float[]>.Create<BurstPlain>(
                     TestName(),
-                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
-                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
+                    inputDataContainer.GetData<float>(TypeConfig.DataFloat1),
+                    inputDataContainer.GetData<float>(TypeConfig.DataFloat1),
                     new WorkConfigDefault(),
                     new IDataConfig[]
                     {
@@ -46,8 +46,8 @@ namespace WorkSpace.Tests.Optimization
                 ),
                 WorkerFactory<float[], float[]>.Create<BurstReadPlain>(
                     TestName(),
-                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
-                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
+                    inputDataContainer.GetData<float>(TypeConfig.DataFloat1),
+                    inputDataContainer.GetData<float>(TypeConfig.DataFloat1),
                     new WorkConfigDefault(),
                     new IDataConfig[]
                     {
@@ -57,8 +57,8 @@ namespace WorkSpace.Tests.Optimization
                 ),
                 WorkerFactory<float[], float[]>.Create<BurstWritePlain>(
                     TestName(),
-                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
-                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
+                    inputDataContainer.GetData<float>(TypeConfig.DataFloat1),
+                    inputDataContainer.GetData<float>(TypeConfig.DataFloat1),
                     new WorkConfigDefault(),
                     new IDataConfig[]
                     {
@@ -68,8 +68,8 @@ namespace WorkSpace.Tests.Optimization
                 ),
                 WorkerFactory<float[], float[]>.Create<FullOptimizedPlain>(
                     TestName(),
-                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
-                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
+                    inputDataContainer.GetData<float>(TypeConfig.DataFloat1),
+                    inputDataContainer.GetData<float>(TypeConfig.DataFloat1),
                     new WorkConfigDefault(),
                     new IDataConfig[]
                     {
@@ -79,8 +79,8 @@ namespace WorkSpace.Tests.Optimization
                 ),
                 WorkerFactory<float[], float[]>.Create<ReadWritePlain>(
                     TestName(),
-                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
-                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
+                    inputDataContainer.GetData<float>(TypeConfig.DataFloat1),
+                    inputDataContainer.GetData<float>(TypeConfig.DataFloat1),
                     new WorkConfigDefault(),
                     new IDataConfig[]
                     {
@@ -95,8 +95,8 @@ namespace WorkSpace.Tests.Optimization
 
                 WorkerFactory<float[], float[]>.Create<BurstSystemParallelFor>(
                     TestName(),
-                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
-                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
+                    inputDataContainer.GetData<float>(TypeConfig.DataFloat1),
+                    inputDataContainer.GetData<float>(TypeConfig.DataFloat1),
                     new WorkConfigDefault(),
                     new IDataConfig[]
                     {
@@ -106,8 +106,8 @@ namespace WorkSpace.Tests.Optimization
                 ),
                 WorkerFactory<float[], float[]>.Create<BurstReadSystemParallelFor>(
                     TestName(),
-                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
-                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
+                    inputDataContainer.GetData<float>(TypeConfig.DataFloat1),
+                    inputDataContainer.GetData<float>(TypeConfig.DataFloat1),
                     new WorkConfigDefault(),
                     new IDataConfig[]
                     {
@@ -117,8 +117,8 @@ namespace WorkSpace.Tests.Optimization
                 ),
                 WorkerFactory<float[], float[]>.Create<BurstWriteSystemParallelFor>(
                     TestName(),
-                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
-                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
+                    inputDataContainer.GetData<float>(TypeConfig.DataFloat1),
+                    inputDataContainer.GetData<float>(TypeConfig.DataFloat1),
                     new WorkConfigDefault(),
                     new IDataConfig[]
                     {
@@ -128,8 +128,8 @@ namespace WorkSpace.Tests.Optimization
                 ),
                 WorkerFactory<float[], float[]>.Create<FullOptimizedSystemParallelFor>(
                     TestName(),
-                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
-                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
+                    inputDataContainer.GetData<float>(TypeConfig.DataFloat1),
+                    inputDataContainer.GetData<float>(TypeConfig.DataFloat1),
                     new WorkConfigDefault(),
                     new IDataConfig[]
                     {
@@ -139,8 +139,8 @@ namespace WorkSpace.Tests.Optimization
                 ),
                 WorkerFactory<float[], float[]>.Create<ReadWriteSystemParallelFor>(
                     TestName(),
-                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
-                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
+                    inputDataContainer.GetData<float>(TypeConfig.DataFloat1),
+                    inputDataContainer.GetData<float>(TypeConfig.DataFloat1),
                     new WorkConfigDefault(),
                     new IDataConfig[]
                     {
@@ -155,8 +155,8 @@ namespace WorkSpace.Tests.Optimization
 
                 WorkerFactory<NativeArray<float>, NativeArray<float>>.Create<BurstJob>(
                     TestName(),
-                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
-                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
+                    inputDataContainer.GetData<float>(TypeConfig.DataFloat1),
+                    inputDataContainer.GetData<float>(TypeConfig.DataFloat1),
                     new WorkConfigIJob(true),
                     new IDataConfig[]
                     {
@@ -166,8 +166,8 @@ namespace WorkSpace.Tests.Optimization
                 ),
                 WorkerFactory<NativeArray<float>, NativeArray<float>>.Create<BurstReadJob>(
                     TestName(),
-                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
-                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
+                    inputDataContainer.GetData<float>(TypeConfig.DataFloat1),
+                    inputDataContainer.GetData<float>(TypeConfig.DataFloat1),
                     new WorkConfigIJob(true),
                     new IDataConfig[]
                     {
@@ -177,8 +177,8 @@ namespace WorkSpace.Tests.Optimization
                 ),
                 WorkerFactory<NativeArray<float>, NativeArray<float>>.Create<BurstWriteJob>(
                     TestName(),
-                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
-                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
+                    inputDataContainer.GetData<float>(TypeConfig.DataFloat1),
+                    inputDataContainer.GetData<float>(TypeConfig.DataFloat1),
                     new WorkConfigIJob(true),
                     new IDataConfig[]
                     {
@@ -188,8 +188,8 @@ namespace WorkSpace.Tests.Optimization
                 ),
                 WorkerFactory<NativeArray<float>, NativeArray<float>>.Create<FullOptimizedJob>(
                     TestName(),
-                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
-                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
+                    inputDataContainer.GetData<float>(TypeConfig.DataFloat1),
+                    inputDataContainer.GetData<float>(TypeConfig.DataFloat1),
                     new WorkConfigIJob(true),
                     new IDataConfig[]
                     {
@@ -199,8 +199,8 @@ namespace WorkSpace.Tests.Optimization
                 ),
                 WorkerFactory<NativeArray<float>, NativeArray<float>>.Create<ReadWriteJob>(
                     TestName(),
-                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
-                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
+                    inputDataContainer.GetData<float>(TypeConfig.DataFloat1),
+                    inputDataContainer.GetData<float>(TypeConfig.DataFloat1),
                     new WorkConfigIJob(true),
                     new IDataConfig[]
                     {
@@ -215,8 +215,8 @@ namespace WorkSpace.Tests.Optimization
 
                 WorkerFactory<NativeArray<float>, NativeArray<float>>.Create<BurstJobParallelFor>(
                     TestName(),
-                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
-                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
+                    inputDataContainer.GetData<float>(TypeConfig.DataFloat1),
+                    inputDataContainer.GetData<float>(TypeConfig.DataFloat1),
                     new WorkConfigIJobParallelFor(),
                     new IDataConfig[]
                     {
@@ -226,8 +226,8 @@ namespace WorkSpace.Tests.Optimization
                 ),
                 WorkerFactory<NativeArray<float>, NativeArray<float>>.Create<BurstReadJobParallelFor>(
                     TestName(),
-                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
-                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
+                    inputDataContainer.GetData<float>(TypeConfig.DataFloat1),
+                    inputDataContainer.GetData<float>(TypeConfig.DataFloat1),
                     new WorkConfigIJobParallelFor(),
                     new IDataConfig[]
                     {
@@ -237,8 +237,8 @@ namespace WorkSpace.Tests.Optimization
                 ),
                 WorkerFactory<NativeArray<float>, NativeArray<float>>.Create<BurstWriteJobParallelFor>(
                     TestName(),
-                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
-                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
+                    inputDataContainer.GetData<float>(TypeConfig.DataFloat1),
+                    inputDataContainer.GetData<float>(TypeConfig.DataFloat1),
                     new WorkConfigIJobParallelFor(),
                     new IDataConfig[]
                     {
@@ -248,8 +248,8 @@ namespace WorkSpace.Tests.Optimization
                 ),
                 WorkerFactory<NativeArray<float>, NativeArray<float>>.Create<FullOptimizedJobParallelFor>(
                     TestName(),
-                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
-                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
+                    inputDataContainer.GetData<float>(TypeConfig.DataFloat1),
+                    inputDataContainer.GetData<float>(TypeConfig.DataFloat1),
                     new WorkConfigIJobParallelFor(),
                     new IDataConfig[]
                     {
@@ -259,8 +259,8 @@ namespace WorkSpace.Tests.Optimization
                 ),
                 WorkerFactory<NativeArray<float>, NativeArray<float>>.Create<ReadWriteJobParallelFor>(
                     TestName(),
-                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
-                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
+                    inputDataContainer.GetData<float>(TypeConfig.DataFloat1),
+                    inputDataContainer.GetData<float>(TypeConfig.DataFloat1),
                     new WorkConfigIJobParallelFor(),
                     new IDataConfig[]
                     {

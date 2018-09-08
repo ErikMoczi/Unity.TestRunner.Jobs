@@ -8,12 +8,12 @@ using TestWrapper.Generator;
 using TestWrapper.Generator.Interfaces;
 using Unity.Collections;
 using Unity.Mathematics;
-using WorkSpace.Tests.Base;
-using DataConfig = WorkSpace.Tests.Base.DataConfig;
+using WorkSpace.Provider.Containers;
+using WorkSpace.Provider.Settings;
 
 namespace WorkSpace.Tests.Basic.Addition.Simd
 {
-    public sealed class Double2TypeTest : SampleGenerator
+    internal sealed class Double2TypeTest : SampleGenerator
     {
         public override string TestName()
         {
@@ -24,7 +24,7 @@ namespace WorkSpace.Tests.Basic.Addition.Simd
         {
             return new ISampleConfig[]
             {
-                new SampleConfig(typeof(double2), DataConfig.DataDouble2),
+                new SampleConfig(typeof(double2), TypeConfig.DataDouble2),
             };
         }
 
@@ -35,9 +35,9 @@ namespace WorkSpace.Tests.Basic.Addition.Simd
                 WorkerFactory<NativeArray<double2>, NativeArray<double2>, NativeArray<double2>>
                     .Create<SimdAdditionDouble2Job>(
                         TestName(),
-                        inputDataContainer.GetData<double2>(DataConfig.DataDouble2),
-                        inputDataContainer.GetData<double2>(DataConfig.DataDouble2),
-                        inputDataContainer.GetData<double2>(DataConfig.DataDouble2),
+                        inputDataContainer.GetData<double2>(TypeConfig.DataDouble2),
+                        inputDataContainer.GetData<double2>(TypeConfig.DataDouble2),
+                        inputDataContainer.GetData<double2>(TypeConfig.DataDouble2),
                         new WorkConfigIJob(),
                         new IDataConfig[]
                         {
@@ -49,9 +49,9 @@ namespace WorkSpace.Tests.Basic.Addition.Simd
                 WorkerFactory<NativeArray<double2>, NativeArray<double2>, NativeArray<double2>>
                     .Create<SimdAdditionDouble2JobParallelFor>(
                         TestName(),
-                        inputDataContainer.GetData<double2>(DataConfig.DataDouble2),
-                        inputDataContainer.GetData<double2>(DataConfig.DataDouble2),
-                        inputDataContainer.GetData<double2>(DataConfig.DataDouble2),
+                        inputDataContainer.GetData<double2>(TypeConfig.DataDouble2),
+                        inputDataContainer.GetData<double2>(TypeConfig.DataDouble2),
+                        inputDataContainer.GetData<double2>(TypeConfig.DataDouble2),
                         new WorkConfigIJobParallelFor(),
                         new IDataConfig[]
                         {
@@ -62,9 +62,9 @@ namespace WorkSpace.Tests.Basic.Addition.Simd
                     ),
                 WorkerFactory<double2[], double2[], double2[]>.Create<SimdAdditionDouble2Plain>(
                     TestName(),
-                    inputDataContainer.GetData<double2>(DataConfig.DataDouble2),
-                    inputDataContainer.GetData<double2>(DataConfig.DataDouble2),
-                    inputDataContainer.GetData<double2>(DataConfig.DataDouble2),
+                    inputDataContainer.GetData<double2>(TypeConfig.DataDouble2),
+                    inputDataContainer.GetData<double2>(TypeConfig.DataDouble2),
+                    inputDataContainer.GetData<double2>(TypeConfig.DataDouble2),
                     new WorkConfigDefault(),
                     new IDataConfig[]
                     {
@@ -75,9 +75,9 @@ namespace WorkSpace.Tests.Basic.Addition.Simd
                 ),
                 WorkerFactory<double2[], double2[], double2[]>.Create<SimdAdditionDouble2SystemParallelFor>(
                     TestName(),
-                    inputDataContainer.GetData<double2>(DataConfig.DataDouble2),
-                    inputDataContainer.GetData<double2>(DataConfig.DataDouble2),
-                    inputDataContainer.GetData<double2>(DataConfig.DataDouble2),
+                    inputDataContainer.GetData<double2>(TypeConfig.DataDouble2),
+                    inputDataContainer.GetData<double2>(TypeConfig.DataDouble2),
+                    inputDataContainer.GetData<double2>(TypeConfig.DataDouble2),
                     new WorkConfigDefault(),
                     new IDataConfig[]
                     {

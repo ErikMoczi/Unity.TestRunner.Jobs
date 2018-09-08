@@ -7,12 +7,12 @@ using TestWrapper.Facades;
 using TestWrapper.Generator;
 using TestWrapper.Generator.Interfaces;
 using Unity.Collections;
-using WorkSpace.Tests.Base;
-using DataConfig = WorkSpace.Tests.Base.DataConfig;
+using WorkSpace.Provider.Containers;
+using WorkSpace.Provider.Settings;
 
 namespace WorkSpace.Tests.DataStructure
 {
-    public sealed class DataStructureTest : SampleGenerator
+    internal sealed class DataStructureTest : SampleGenerator
     {
         public override string TestName()
         {
@@ -23,7 +23,7 @@ namespace WorkSpace.Tests.DataStructure
         {
             return new ISampleConfig[]
             {
-                new SampleConfig(typeof(float), DataConfig.DataFloat1),
+                new SampleConfig(typeof(float), TypeConfig.DataFloat1),
             };
         }
 
@@ -33,8 +33,8 @@ namespace WorkSpace.Tests.DataStructure
             {
                 WorkerFactory<float[], float[]>.Create<ArrayPlain>(
                     TestName(),
-                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
-                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
+                    inputDataContainer.GetData<float>(TypeConfig.DataFloat1),
+                    inputDataContainer.GetData<float>(TypeConfig.DataFloat1),
                     new WorkConfigDefault(),
                     new IDataConfig[]
                     {
@@ -44,8 +44,8 @@ namespace WorkSpace.Tests.DataStructure
                 ),
                 WorkerFactory<float[], float[]>.Create<ArraySystemParallelFor>(
                     TestName(),
-                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
-                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
+                    inputDataContainer.GetData<float>(TypeConfig.DataFloat1),
+                    inputDataContainer.GetData<float>(TypeConfig.DataFloat1),
                     new WorkConfigDefault(),
                     new IDataConfig[]
                     {
@@ -56,8 +56,8 @@ namespace WorkSpace.Tests.DataStructure
 
                 WorkerFactory<NativeArray<float>, NativeArray<float>>.Create<NativeArraySystemParallelFor>(
                     TestName(),
-                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
-                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
+                    inputDataContainer.GetData<float>(TypeConfig.DataFloat1),
+                    inputDataContainer.GetData<float>(TypeConfig.DataFloat1),
                     new WorkConfigDefault(),
                     new IDataConfig[]
                     {
@@ -67,8 +67,8 @@ namespace WorkSpace.Tests.DataStructure
                 ),
                 WorkerFactory<NativeArray<float>, NativeArray<float>>.Create<NativeArrayPlain>(
                     TestName(),
-                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
-                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
+                    inputDataContainer.GetData<float>(TypeConfig.DataFloat1),
+                    inputDataContainer.GetData<float>(TypeConfig.DataFloat1),
                     new WorkConfigDefault(),
                     new IDataConfig[]
                     {

@@ -7,12 +7,12 @@ using TestWrapper.Facades;
 using TestWrapper.Generator;
 using TestWrapper.Generator.Interfaces;
 using Unity.Collections;
-using WorkSpace.Tests.Base;
-using DataConfig = WorkSpace.Tests.Base.DataConfig;
+using WorkSpace.Provider.Containers;
+using WorkSpace.Provider.Settings;
 
 namespace WorkSpace.Tests.Basic.Subtraction.Simple
 {
-    public sealed class Byte1TypeTest : SampleGenerator
+    internal sealed class Byte1TypeTest : SampleGenerator
     {
         public override string TestName()
         {
@@ -23,7 +23,7 @@ namespace WorkSpace.Tests.Basic.Subtraction.Simple
         {
             return new ISampleConfig[]
             {
-                new SampleConfig(typeof(byte), DataConfig.DataByte1),
+                new SampleConfig(typeof(byte), TypeConfig.DataByte1),
             };
         }
 
@@ -33,9 +33,9 @@ namespace WorkSpace.Tests.Basic.Subtraction.Simple
             {
                 WorkerFactory<NativeArray<byte>, NativeArray<byte>, NativeArray<byte>>.Create<SimpleSubtractionByteJob>(
                     TestName(),
-                    inputDataContainer.GetData<byte>(DataConfig.DataByte1),
-                    inputDataContainer.GetData<byte>(DataConfig.DataByte1),
-                    inputDataContainer.GetData<byte>(DataConfig.DataByte1),
+                    inputDataContainer.GetData<byte>(TypeConfig.DataByte1),
+                    inputDataContainer.GetData<byte>(TypeConfig.DataByte1),
+                    inputDataContainer.GetData<byte>(TypeConfig.DataByte1),
                     new WorkConfigIJob(),
                     new IDataConfig[]
                     {
@@ -47,9 +47,9 @@ namespace WorkSpace.Tests.Basic.Subtraction.Simple
                 WorkerFactory<NativeArray<byte>, NativeArray<byte>, NativeArray<byte>>
                     .Create<SimpleSubtractionByteJobParallelFor>(
                         TestName(),
-                        inputDataContainer.GetData<byte>(DataConfig.DataByte1),
-                        inputDataContainer.GetData<byte>(DataConfig.DataByte1),
-                        inputDataContainer.GetData<byte>(DataConfig.DataByte1),
+                        inputDataContainer.GetData<byte>(TypeConfig.DataByte1),
+                        inputDataContainer.GetData<byte>(TypeConfig.DataByte1),
+                        inputDataContainer.GetData<byte>(TypeConfig.DataByte1),
                         new WorkConfigIJobParallelFor(),
                         new IDataConfig[]
                         {
@@ -60,9 +60,9 @@ namespace WorkSpace.Tests.Basic.Subtraction.Simple
                     ),
                 WorkerFactory<byte[], byte[], byte[]>.Create<SimpleSubtractionBytePlain>(
                     TestName(),
-                    inputDataContainer.GetData<byte>(DataConfig.DataByte1),
-                    inputDataContainer.GetData<byte>(DataConfig.DataByte1),
-                    inputDataContainer.GetData<byte>(DataConfig.DataByte1),
+                    inputDataContainer.GetData<byte>(TypeConfig.DataByte1),
+                    inputDataContainer.GetData<byte>(TypeConfig.DataByte1),
+                    inputDataContainer.GetData<byte>(TypeConfig.DataByte1),
                     new WorkConfigDefault(),
                     new IDataConfig[]
                     {
@@ -73,9 +73,9 @@ namespace WorkSpace.Tests.Basic.Subtraction.Simple
                 ),
                 WorkerFactory<byte[], byte[], byte[]>.Create<SimpleSubtractionByteSystemParallelFor>(
                     TestName(),
-                    inputDataContainer.GetData<byte>(DataConfig.DataByte1),
-                    inputDataContainer.GetData<byte>(DataConfig.DataByte1),
-                    inputDataContainer.GetData<byte>(DataConfig.DataByte1),
+                    inputDataContainer.GetData<byte>(TypeConfig.DataByte1),
+                    inputDataContainer.GetData<byte>(TypeConfig.DataByte1),
+                    inputDataContainer.GetData<byte>(TypeConfig.DataByte1),
                     new WorkConfigDefault(),
                     new IDataConfig[]
                     {

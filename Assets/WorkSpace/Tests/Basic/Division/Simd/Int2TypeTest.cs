@@ -8,12 +8,12 @@ using TestWrapper.Generator;
 using TestWrapper.Generator.Interfaces;
 using Unity.Collections;
 using Unity.Mathematics;
-using WorkSpace.Tests.Base;
-using DataConfig = WorkSpace.Tests.Base.DataConfig;
+using WorkSpace.Provider.Containers;
+using WorkSpace.Provider.Settings;
 
 namespace WorkSpace.Tests.Basic.Division.Simd
 {
-    public sealed class Int2TypeTest : SampleGenerator
+    internal sealed class Int2TypeTest : SampleGenerator
     {
         public override string TestName()
         {
@@ -24,7 +24,7 @@ namespace WorkSpace.Tests.Basic.Division.Simd
         {
             return new ISampleConfig[]
             {
-                new SampleConfig(typeof(int2), DataConfig.DataInt2),
+                new SampleConfig(typeof(int2), TypeConfig.DataInt2),
             };
         }
 
@@ -34,9 +34,9 @@ namespace WorkSpace.Tests.Basic.Division.Simd
             {
                 WorkerFactory<NativeArray<int2>, NativeArray<int2>, NativeArray<int2>>.Create<SimdDivisionInt2Job>(
                     TestName(),
-                    inputDataContainer.GetData<int2>(DataConfig.DataInt2),
-                    inputDataContainer.GetData<int2>(DataConfig.DataInt2),
-                    inputDataContainer.GetData<int2>(DataConfig.DataInt2),
+                    inputDataContainer.GetData<int2>(TypeConfig.DataInt2),
+                    inputDataContainer.GetData<int2>(TypeConfig.DataInt2),
+                    inputDataContainer.GetData<int2>(TypeConfig.DataInt2),
                     new WorkConfigIJob(),
                     new IDataConfig[]
                     {
@@ -48,9 +48,9 @@ namespace WorkSpace.Tests.Basic.Division.Simd
                 WorkerFactory<NativeArray<int2>, NativeArray<int2>, NativeArray<int2>>
                     .Create<SimdDivisionInt2JobParallelFor>(
                         TestName(),
-                        inputDataContainer.GetData<int2>(DataConfig.DataInt2),
-                        inputDataContainer.GetData<int2>(DataConfig.DataInt2),
-                        inputDataContainer.GetData<int2>(DataConfig.DataInt2),
+                        inputDataContainer.GetData<int2>(TypeConfig.DataInt2),
+                        inputDataContainer.GetData<int2>(TypeConfig.DataInt2),
+                        inputDataContainer.GetData<int2>(TypeConfig.DataInt2),
                         new WorkConfigIJobParallelFor(),
                         new IDataConfig[]
                         {
@@ -61,9 +61,9 @@ namespace WorkSpace.Tests.Basic.Division.Simd
                     ),
                 WorkerFactory<int2[], int2[], int2[]>.Create<SimdDivisionInt2Plain>(
                     TestName(),
-                    inputDataContainer.GetData<int2>(DataConfig.DataInt2),
-                    inputDataContainer.GetData<int2>(DataConfig.DataInt2),
-                    inputDataContainer.GetData<int2>(DataConfig.DataInt2),
+                    inputDataContainer.GetData<int2>(TypeConfig.DataInt2),
+                    inputDataContainer.GetData<int2>(TypeConfig.DataInt2),
+                    inputDataContainer.GetData<int2>(TypeConfig.DataInt2),
                     new WorkConfigDefault(),
                     new IDataConfig[]
                     {
@@ -74,9 +74,9 @@ namespace WorkSpace.Tests.Basic.Division.Simd
                 ),
                 WorkerFactory<int2[], int2[], int2[]>.Create<SimdDivisionInt2SystemParallelFor>(
                     TestName(),
-                    inputDataContainer.GetData<int2>(DataConfig.DataInt2),
-                    inputDataContainer.GetData<int2>(DataConfig.DataInt2),
-                    inputDataContainer.GetData<int2>(DataConfig.DataInt2),
+                    inputDataContainer.GetData<int2>(TypeConfig.DataInt2),
+                    inputDataContainer.GetData<int2>(TypeConfig.DataInt2),
+                    inputDataContainer.GetData<int2>(TypeConfig.DataInt2),
                     new WorkConfigDefault(),
                     new IDataConfig[]
                     {

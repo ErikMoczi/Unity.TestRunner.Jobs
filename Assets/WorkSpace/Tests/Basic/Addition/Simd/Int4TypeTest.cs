@@ -8,12 +8,12 @@ using TestWrapper.Generator;
 using TestWrapper.Generator.Interfaces;
 using Unity.Collections;
 using Unity.Mathematics;
-using WorkSpace.Tests.Base;
-using DataConfig = WorkSpace.Tests.Base.DataConfig;
+using WorkSpace.Provider.Containers;
+using WorkSpace.Provider.Settings;
 
 namespace WorkSpace.Tests.Basic.Addition.Simd
 {
-    public sealed class Int4TypeTest : SampleGenerator
+    internal sealed class Int4TypeTest : SampleGenerator
     {
         public override string TestName()
         {
@@ -24,7 +24,7 @@ namespace WorkSpace.Tests.Basic.Addition.Simd
         {
             return new ISampleConfig[]
             {
-                new SampleConfig(typeof(int4), DataConfig.DataInt4),
+                new SampleConfig(typeof(int4), TypeConfig.DataInt4),
             };
         }
 
@@ -34,9 +34,9 @@ namespace WorkSpace.Tests.Basic.Addition.Simd
             {
                 WorkerFactory<NativeArray<int4>, NativeArray<int4>, NativeArray<int4>>.Create<SimdAdditionInt4Job>(
                     TestName(),
-                    inputDataContainer.GetData<int4>(DataConfig.DataInt4),
-                    inputDataContainer.GetData<int4>(DataConfig.DataInt4),
-                    inputDataContainer.GetData<int4>(DataConfig.DataInt4),
+                    inputDataContainer.GetData<int4>(TypeConfig.DataInt4),
+                    inputDataContainer.GetData<int4>(TypeConfig.DataInt4),
+                    inputDataContainer.GetData<int4>(TypeConfig.DataInt4),
                     new WorkConfigIJob(),
                     new IDataConfig[]
                     {
@@ -48,9 +48,9 @@ namespace WorkSpace.Tests.Basic.Addition.Simd
                 WorkerFactory<NativeArray<int4>, NativeArray<int4>, NativeArray<int4>>
                     .Create<SimdAdditionInt4JobParallelFor>(
                         TestName(),
-                        inputDataContainer.GetData<int4>(DataConfig.DataInt4),
-                        inputDataContainer.GetData<int4>(DataConfig.DataInt4),
-                        inputDataContainer.GetData<int4>(DataConfig.DataInt4),
+                        inputDataContainer.GetData<int4>(TypeConfig.DataInt4),
+                        inputDataContainer.GetData<int4>(TypeConfig.DataInt4),
+                        inputDataContainer.GetData<int4>(TypeConfig.DataInt4),
                         new WorkConfigIJobParallelFor(),
                         new IDataConfig[]
                         {
@@ -61,9 +61,9 @@ namespace WorkSpace.Tests.Basic.Addition.Simd
                     ),
                 WorkerFactory<int4[], int4[], int4[]>.Create<SimdAdditionInt4Plain>(
                     TestName(),
-                    inputDataContainer.GetData<int4>(DataConfig.DataInt4),
-                    inputDataContainer.GetData<int4>(DataConfig.DataInt4),
-                    inputDataContainer.GetData<int4>(DataConfig.DataInt4),
+                    inputDataContainer.GetData<int4>(TypeConfig.DataInt4),
+                    inputDataContainer.GetData<int4>(TypeConfig.DataInt4),
+                    inputDataContainer.GetData<int4>(TypeConfig.DataInt4),
                     new WorkConfigDefault(),
                     new IDataConfig[]
                     {
@@ -74,9 +74,9 @@ namespace WorkSpace.Tests.Basic.Addition.Simd
                 ),
                 WorkerFactory<int4[], int4[], int4[]>.Create<SimdAdditionInt4SystemParallelFor>(
                     TestName(),
-                    inputDataContainer.GetData<int4>(DataConfig.DataInt4),
-                    inputDataContainer.GetData<int4>(DataConfig.DataInt4),
-                    inputDataContainer.GetData<int4>(DataConfig.DataInt4),
+                    inputDataContainer.GetData<int4>(TypeConfig.DataInt4),
+                    inputDataContainer.GetData<int4>(TypeConfig.DataInt4),
+                    inputDataContainer.GetData<int4>(TypeConfig.DataInt4),
                     new WorkConfigDefault(),
                     new IDataConfig[]
                     {

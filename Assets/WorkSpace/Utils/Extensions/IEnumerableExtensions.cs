@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 
-namespace WorkSpace.Extensions
+namespace WorkSpace.Utils.Extensions
 {
-    public static class IEnumerableExtensions
+    internal static class IEnumerableExtensions
     {
         public static HashSet<T> ToHashSet<T>(this IEnumerable<T> source)
         {

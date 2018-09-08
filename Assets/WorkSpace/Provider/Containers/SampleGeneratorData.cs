@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using TestWrapper.Utils;
-using WorkSpace.Extensions;
+using WorkSpace.Utils;
+using WorkSpace.Utils.Extensions;
 
-namespace WorkSpace.Tests.Base
+namespace WorkSpace.Provider.Containers
 {
     public sealed class SampleGeneratorData : ISampleGeneratorData
     {
@@ -27,7 +28,7 @@ namespace WorkSpace.Tests.Base
         {
             var data = _lookingClasses.GetAllDerivedTypes().Select(type => type.FullName).ToArray();
             _prefixWorkspace =
-                data.Length == 1 ? Utils.RemoveLastItem(data[0], KeySeparator) : Utils.CommonPrefix(data);
+                data.Length == 1 ? Common.RemoveLastItem(data[0], KeySeparator) : Common.CommonPrefix(data);
             _sampleGenerators = data.ToDictionary(item => item, CreateValue);
             _sampleGeneratorCategories = GenerateCategories();
         }
@@ -96,7 +97,7 @@ namespace WorkSpace.Tests.Base
 
         private Dictionary<string, string> GenerateCategories()
         {
-            return _sampleGenerators.Keys.GroupBy(item => Utils.RemoveLastItem(item, KeySeparator))
+            return _sampleGenerators.Keys.GroupBy(item => Common.RemoveLastItem(item, KeySeparator))
                 .Select(item => item.Key).ToDictionary(item => item, CreateValue);
         }
     }

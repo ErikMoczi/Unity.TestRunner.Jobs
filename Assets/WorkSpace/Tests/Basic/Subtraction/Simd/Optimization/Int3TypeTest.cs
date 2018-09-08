@@ -8,12 +8,12 @@ using TestWrapper.Generator;
 using TestWrapper.Generator.Interfaces;
 using Unity.Collections;
 using Unity.Mathematics;
-using WorkSpace.Tests.Base;
-using DataConfig = WorkSpace.Tests.Base.DataConfig;
+using WorkSpace.Provider.Containers;
+using WorkSpace.Provider.Settings;
 
 namespace WorkSpace.Tests.Basic.Subtraction.Simd.Optimization
 {
-    public sealed class Int3TypeTest : SampleGenerator
+    internal sealed class Int3TypeTest : SampleGenerator
     {
         public override string TestName()
         {
@@ -24,7 +24,7 @@ namespace WorkSpace.Tests.Basic.Subtraction.Simd.Optimization
         {
             return new ISampleConfig[]
             {
-                new SampleConfig(typeof(int3), DataConfig.DataInt3),
+                new SampleConfig(typeof(int3), TypeConfig.DataInt3),
             };
         }
 
@@ -35,9 +35,9 @@ namespace WorkSpace.Tests.Basic.Subtraction.Simd.Optimization
                 WorkerFactory<NativeArray<int3>, NativeArray<int3>, NativeArray<int3>>
                     .Create<SimdSubtractionOptimizationInt3Job>(
                         TestName(),
-                        inputDataContainer.GetData<int3>(DataConfig.DataInt3),
-                        inputDataContainer.GetData<int3>(DataConfig.DataInt3),
-                        inputDataContainer.GetData<int3>(DataConfig.DataInt3),
+                        inputDataContainer.GetData<int3>(TypeConfig.DataInt3),
+                        inputDataContainer.GetData<int3>(TypeConfig.DataInt3),
+                        inputDataContainer.GetData<int3>(TypeConfig.DataInt3),
                         new WorkConfigIJob(),
                         new IDataConfig[]
                         {
@@ -49,9 +49,9 @@ namespace WorkSpace.Tests.Basic.Subtraction.Simd.Optimization
                 WorkerFactory<NativeArray<int3>, NativeArray<int3>, NativeArray<int3>>
                     .Create<SimdSubtractionOptimizationInt3JobParallelFor>(
                         TestName(),
-                        inputDataContainer.GetData<int3>(DataConfig.DataInt3),
-                        inputDataContainer.GetData<int3>(DataConfig.DataInt3),
-                        inputDataContainer.GetData<int3>(DataConfig.DataInt3),
+                        inputDataContainer.GetData<int3>(TypeConfig.DataInt3),
+                        inputDataContainer.GetData<int3>(TypeConfig.DataInt3),
+                        inputDataContainer.GetData<int3>(TypeConfig.DataInt3),
                         new WorkConfigIJobParallelFor(),
                         new IDataConfig[]
                         {

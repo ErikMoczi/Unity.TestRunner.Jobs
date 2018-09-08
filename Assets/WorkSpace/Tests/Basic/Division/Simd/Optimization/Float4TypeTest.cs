@@ -8,12 +8,12 @@ using TestWrapper.Generator;
 using TestWrapper.Generator.Interfaces;
 using Unity.Collections;
 using Unity.Mathematics;
-using WorkSpace.Tests.Base;
-using DataConfig = WorkSpace.Tests.Base.DataConfig;
+using WorkSpace.Provider.Containers;
+using WorkSpace.Provider.Settings;
 
 namespace WorkSpace.Tests.Basic.Division.Simd.Optimization
 {
-    public sealed class Float4TypeTest : SampleGenerator
+    internal sealed class Float4TypeTest : SampleGenerator
     {
         public override string TestName()
         {
@@ -24,7 +24,7 @@ namespace WorkSpace.Tests.Basic.Division.Simd.Optimization
         {
             return new ISampleConfig[]
             {
-                new SampleConfig(typeof(float4), DataConfig.DataFloat4),
+                new SampleConfig(typeof(float4), TypeConfig.DataFloat4),
             };
         }
 
@@ -35,9 +35,9 @@ namespace WorkSpace.Tests.Basic.Division.Simd.Optimization
                 WorkerFactory<NativeArray<float4>, NativeArray<float4>, NativeArray<float4>>
                     .Create<SimdDivisionOptimizationFloat4Job>(
                         TestName(),
-                        inputDataContainer.GetData<float4>(DataConfig.DataFloat4),
-                        inputDataContainer.GetData<float4>(DataConfig.DataFloat4),
-                        inputDataContainer.GetData<float4>(DataConfig.DataFloat4),
+                        inputDataContainer.GetData<float4>(TypeConfig.DataFloat4),
+                        inputDataContainer.GetData<float4>(TypeConfig.DataFloat4),
+                        inputDataContainer.GetData<float4>(TypeConfig.DataFloat4),
                         new WorkConfigIJob(),
                         new IDataConfig[]
                         {
@@ -49,9 +49,9 @@ namespace WorkSpace.Tests.Basic.Division.Simd.Optimization
                 WorkerFactory<NativeArray<float4>, NativeArray<float4>, NativeArray<float4>>
                     .Create<SimdDivisionOptimizationFloat4JobParallelFor>(
                         TestName(),
-                        inputDataContainer.GetData<float4>(DataConfig.DataFloat4),
-                        inputDataContainer.GetData<float4>(DataConfig.DataFloat4),
-                        inputDataContainer.GetData<float4>(DataConfig.DataFloat4),
+                        inputDataContainer.GetData<float4>(TypeConfig.DataFloat4),
+                        inputDataContainer.GetData<float4>(TypeConfig.DataFloat4),
+                        inputDataContainer.GetData<float4>(TypeConfig.DataFloat4),
                         new WorkConfigIJobParallelFor(),
                         new IDataConfig[]
                         {

@@ -3,8 +3,10 @@ using System.Linq;
 using TestWrapper.Facades;
 using TestWrapper.Generator;
 using TestWrapper.Generator.Interfaces;
+using WorkSpace.Provider.Containers;
+using WorkSpace.Provider.Settings;
 
-namespace WorkSpace.Tests.Base
+namespace WorkSpace.Provider
 {
     public sealed class TestProvider
     {

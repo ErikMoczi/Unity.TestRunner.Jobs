@@ -7,12 +7,12 @@ using TestWrapper.Facades;
 using TestWrapper.Generator;
 using TestWrapper.Generator.Interfaces;
 using Unity.Collections;
-using WorkSpace.Tests.Base;
-using DataConfig = WorkSpace.Tests.Base.DataConfig;
+using WorkSpace.Provider.Containers;
+using WorkSpace.Provider.Settings;
 
 namespace WorkSpace.Tests.Basic.Subtraction.Simple.Optimization
 {
-    public sealed class Double1TypeTest : SampleGenerator
+    internal sealed class Double1TypeTest : SampleGenerator
     {
         public override string TestName()
         {
@@ -23,7 +23,7 @@ namespace WorkSpace.Tests.Basic.Subtraction.Simple.Optimization
         {
             return new ISampleConfig[]
             {
-                new SampleConfig(typeof(double), DataConfig.DataDouble1),
+                new SampleConfig(typeof(double), TypeConfig.DataDouble1),
             };
         }
 
@@ -34,9 +34,9 @@ namespace WorkSpace.Tests.Basic.Subtraction.Simple.Optimization
                 WorkerFactory<NativeArray<double>, NativeArray<double>, NativeArray<double>>
                     .Create<SimpleSubtractionOptimizationDoubleJob>(
                         TestName(),
-                        inputDataContainer.GetData<double>(DataConfig.DataDouble1),
-                        inputDataContainer.GetData<double>(DataConfig.DataDouble1),
-                        inputDataContainer.GetData<double>(DataConfig.DataDouble1),
+                        inputDataContainer.GetData<double>(TypeConfig.DataDouble1),
+                        inputDataContainer.GetData<double>(TypeConfig.DataDouble1),
+                        inputDataContainer.GetData<double>(TypeConfig.DataDouble1),
                         new WorkConfigIJob(),
                         new IDataConfig[]
                         {
@@ -48,9 +48,9 @@ namespace WorkSpace.Tests.Basic.Subtraction.Simple.Optimization
                 WorkerFactory<NativeArray<double>, NativeArray<double>, NativeArray<double>>
                     .Create<SimpleSubtractionOptimizationDoubleJobParallelFor>(
                         TestName(),
-                        inputDataContainer.GetData<double>(DataConfig.DataDouble1),
-                        inputDataContainer.GetData<double>(DataConfig.DataDouble1),
-                        inputDataContainer.GetData<double>(DataConfig.DataDouble1),
+                        inputDataContainer.GetData<double>(TypeConfig.DataDouble1),
+                        inputDataContainer.GetData<double>(TypeConfig.DataDouble1),
+                        inputDataContainer.GetData<double>(TypeConfig.DataDouble1),
                         new WorkConfigIJobParallelFor(),
                         new IDataConfig[]
                         {

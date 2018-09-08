@@ -7,12 +7,12 @@ using TestWrapper.Facades;
 using TestWrapper.Generator;
 using TestWrapper.Generator.Interfaces;
 using Unity.Collections;
-using WorkSpace.Tests.Base;
-using DataConfig = WorkSpace.Tests.Base.DataConfig;
+using WorkSpace.Provider.Containers;
+using WorkSpace.Provider.Settings;
 
 namespace WorkSpace.Tests.Basic.Addition.Simple
 {
-    public sealed class Float1TypeTest : SampleGenerator
+    internal sealed class Float1TypeTest : SampleGenerator
     {
         public override string TestName()
         {
@@ -23,7 +23,7 @@ namespace WorkSpace.Tests.Basic.Addition.Simple
         {
             return new ISampleConfig[]
             {
-                new SampleConfig(typeof(float), DataConfig.DataFloat1),
+                new SampleConfig(typeof(float), TypeConfig.DataFloat1),
             };
         }
 
@@ -34,9 +34,9 @@ namespace WorkSpace.Tests.Basic.Addition.Simple
                 WorkerFactory<NativeArray<float>, NativeArray<float>, NativeArray<float>>
                     .Create<SimpleAdditionFloatJob>(
                         TestName(),
-                        inputDataContainer.GetData<float>(DataConfig.DataFloat1),
-                        inputDataContainer.GetData<float>(DataConfig.DataFloat1),
-                        inputDataContainer.GetData<float>(DataConfig.DataFloat1),
+                        inputDataContainer.GetData<float>(TypeConfig.DataFloat1),
+                        inputDataContainer.GetData<float>(TypeConfig.DataFloat1),
+                        inputDataContainer.GetData<float>(TypeConfig.DataFloat1),
                         new WorkConfigIJob(),
                         new IDataConfig[]
                         {
@@ -48,9 +48,9 @@ namespace WorkSpace.Tests.Basic.Addition.Simple
                 WorkerFactory<NativeArray<float>, NativeArray<float>, NativeArray<float>>
                     .Create<SimpleAdditionFloatJobParallelFor>(
                         TestName(),
-                        inputDataContainer.GetData<float>(DataConfig.DataFloat1),
-                        inputDataContainer.GetData<float>(DataConfig.DataFloat1),
-                        inputDataContainer.GetData<float>(DataConfig.DataFloat1),
+                        inputDataContainer.GetData<float>(TypeConfig.DataFloat1),
+                        inputDataContainer.GetData<float>(TypeConfig.DataFloat1),
+                        inputDataContainer.GetData<float>(TypeConfig.DataFloat1),
                         new WorkConfigIJobParallelFor(),
                         new IDataConfig[]
                         {
@@ -61,9 +61,9 @@ namespace WorkSpace.Tests.Basic.Addition.Simple
                     ),
                 WorkerFactory<float[], float[], float[]>.Create<SimpleAdditionFloatPlain>(
                     TestName(),
-                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
-                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
-                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
+                    inputDataContainer.GetData<float>(TypeConfig.DataFloat1),
+                    inputDataContainer.GetData<float>(TypeConfig.DataFloat1),
+                    inputDataContainer.GetData<float>(TypeConfig.DataFloat1),
                     new WorkConfigDefault(),
                     new IDataConfig[]
                     {
@@ -74,9 +74,9 @@ namespace WorkSpace.Tests.Basic.Addition.Simple
                 ),
                 WorkerFactory<float[], float[], float[]>.Create<SimpleAdditionFloatSystemParallelFor>(
                     TestName(),
-                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
-                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
-                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
+                    inputDataContainer.GetData<float>(TypeConfig.DataFloat1),
+                    inputDataContainer.GetData<float>(TypeConfig.DataFloat1),
+                    inputDataContainer.GetData<float>(TypeConfig.DataFloat1),
                     new WorkConfigDefault(),
                     new IDataConfig[]
                     {

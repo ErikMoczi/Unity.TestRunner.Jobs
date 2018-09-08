@@ -8,12 +8,12 @@ using TestWrapper.Generator;
 using TestWrapper.Generator.Interfaces;
 using Unity.Collections;
 using Unity.Mathematics;
-using WorkSpace.Tests.Base;
-using DataConfig = WorkSpace.Tests.Base.DataConfig;
+using WorkSpace.Provider.Containers;
+using WorkSpace.Provider.Settings;
 
 namespace WorkSpace.Tests.Basic.Addition.Simd
 {
-    public sealed class Float2TypeTest : SampleGenerator
+    internal sealed class Float2TypeTest : SampleGenerator
     {
         public override string TestName()
         {
@@ -24,7 +24,7 @@ namespace WorkSpace.Tests.Basic.Addition.Simd
         {
             return new ISampleConfig[]
             {
-                new SampleConfig(typeof(float2), DataConfig.DataFloat2),
+                new SampleConfig(typeof(float2), TypeConfig.DataFloat2),
             };
         }
 
@@ -35,9 +35,9 @@ namespace WorkSpace.Tests.Basic.Addition.Simd
                 WorkerFactory<NativeArray<float2>, NativeArray<float2>, NativeArray<float2>>
                     .Create<SimdAdditionFloat2Job>(
                         TestName(),
-                        inputDataContainer.GetData<float2>(DataConfig.DataFloat2),
-                        inputDataContainer.GetData<float2>(DataConfig.DataFloat2),
-                        inputDataContainer.GetData<float2>(DataConfig.DataFloat2),
+                        inputDataContainer.GetData<float2>(TypeConfig.DataFloat2),
+                        inputDataContainer.GetData<float2>(TypeConfig.DataFloat2),
+                        inputDataContainer.GetData<float2>(TypeConfig.DataFloat2),
                         new WorkConfigIJob(),
                         new IDataConfig[]
                         {
@@ -49,9 +49,9 @@ namespace WorkSpace.Tests.Basic.Addition.Simd
                 WorkerFactory<NativeArray<float2>, NativeArray<float2>, NativeArray<float2>>
                     .Create<SimdAdditionFloat2JobParallelFor>(
                         TestName(),
-                        inputDataContainer.GetData<float2>(DataConfig.DataFloat2),
-                        inputDataContainer.GetData<float2>(DataConfig.DataFloat2),
-                        inputDataContainer.GetData<float2>(DataConfig.DataFloat2),
+                        inputDataContainer.GetData<float2>(TypeConfig.DataFloat2),
+                        inputDataContainer.GetData<float2>(TypeConfig.DataFloat2),
+                        inputDataContainer.GetData<float2>(TypeConfig.DataFloat2),
                         new WorkConfigIJobParallelFor(),
                         new IDataConfig[]
                         {
@@ -62,9 +62,9 @@ namespace WorkSpace.Tests.Basic.Addition.Simd
                     ),
                 WorkerFactory<float2[], float2[], float2[]>.Create<SimdAdditionFloat2Plain>(
                     TestName(),
-                    inputDataContainer.GetData<float2>(DataConfig.DataFloat2),
-                    inputDataContainer.GetData<float2>(DataConfig.DataFloat2),
-                    inputDataContainer.GetData<float2>(DataConfig.DataFloat2),
+                    inputDataContainer.GetData<float2>(TypeConfig.DataFloat2),
+                    inputDataContainer.GetData<float2>(TypeConfig.DataFloat2),
+                    inputDataContainer.GetData<float2>(TypeConfig.DataFloat2),
                     new WorkConfigDefault(),
                     new IDataConfig[]
                     {
@@ -75,9 +75,9 @@ namespace WorkSpace.Tests.Basic.Addition.Simd
                 ),
                 WorkerFactory<float2[], float2[], float2[]>.Create<SimdAdditionFloat2SystemParallelFor>(
                     TestName(),
-                    inputDataContainer.GetData<float2>(DataConfig.DataFloat2),
-                    inputDataContainer.GetData<float2>(DataConfig.DataFloat2),
-                    inputDataContainer.GetData<float2>(DataConfig.DataFloat2),
+                    inputDataContainer.GetData<float2>(TypeConfig.DataFloat2),
+                    inputDataContainer.GetData<float2>(TypeConfig.DataFloat2),
+                    inputDataContainer.GetData<float2>(TypeConfig.DataFloat2),
                     new WorkConfigDefault(),
                     new IDataConfig[]
                     {

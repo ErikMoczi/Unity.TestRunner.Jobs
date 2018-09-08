@@ -141,8 +141,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _delayFrames: 3
-  _pauseAfterFinishFrames: 5
-  _testSettings: {fileID: 11400000, guid: f39676d967dd9b1499baa856f02fa42d, type: 2}
+  _stopAfterFinishFrames: 5
+  _testSettings: {fileID: 11400000, guid: 2e8fac3e2925b464c80b4134e7f984cb, type: 2}
 --- !u!4 &70166439
 Transform:
   m_ObjectHideFlags: 0

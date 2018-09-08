@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace WorkSpace.Tests.Base
+namespace WorkSpace.Provider.Containers
 {
     [Serializable]
     public sealed class TestCaseWrapper

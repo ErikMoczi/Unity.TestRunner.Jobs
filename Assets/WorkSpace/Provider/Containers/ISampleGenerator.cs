@@ -1,9 +1,9 @@
 ﻿using TestWrapper.Facades;
 using TestWrapper.Generator.Interfaces;
 
-namespace WorkSpace.Tests.Base
+namespace WorkSpace.Provider.Containers
 {
-    public interface ISampleGenerator
+    internal interface ISampleGenerator
     {
         string TestName();
         ISampleConfig[] InitSampleConfigs();

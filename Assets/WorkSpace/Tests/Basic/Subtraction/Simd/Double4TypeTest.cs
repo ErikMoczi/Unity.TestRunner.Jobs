@@ -8,12 +8,12 @@ using TestWrapper.Generator;
 using TestWrapper.Generator.Interfaces;
 using Unity.Collections;
 using Unity.Mathematics;
-using WorkSpace.Tests.Base;
-using DataConfig = WorkSpace.Tests.Base.DataConfig;
+using WorkSpace.Provider.Containers;
+using WorkSpace.Provider.Settings;
 
 namespace WorkSpace.Tests.Basic.Subtraction.Simd
 {
-    public sealed class Double4TypeTest : SampleGenerator
+    internal sealed class Double4TypeTest : SampleGenerator
     {
         public override string TestName()
         {
@@ -24,7 +24,7 @@ namespace WorkSpace.Tests.Basic.Subtraction.Simd
         {
             return new ISampleConfig[]
             {
-                new SampleConfig(typeof(double4), DataConfig.DataDouble4),
+                new SampleConfig(typeof(double4), TypeConfig.DataDouble4),
             };
         }
 
@@ -35,9 +35,9 @@ namespace WorkSpace.Tests.Basic.Subtraction.Simd
                 WorkerFactory<NativeArray<double4>, NativeArray<double4>, NativeArray<double4>>
                     .Create<SimdSubtractionDouble4Job>(
                         TestName(),
-                        inputDataContainer.GetData<double4>(DataConfig.DataDouble4),
-                        inputDataContainer.GetData<double4>(DataConfig.DataDouble4),
-                        inputDataContainer.GetData<double4>(DataConfig.DataDouble4),
+                        inputDataContainer.GetData<double4>(TypeConfig.DataDouble4),
+                        inputDataContainer.GetData<double4>(TypeConfig.DataDouble4),
+                        inputDataContainer.GetData<double4>(TypeConfig.DataDouble4),
                         new WorkConfigIJob(),
                         new IDataConfig[]
                         {
@@ -49,9 +49,9 @@ namespace WorkSpace.Tests.Basic.Subtraction.Simd
                 WorkerFactory<NativeArray<double4>, NativeArray<double4>, NativeArray<double4>>
                     .Create<SimdSubtractionDouble4JobParallelFor>(
                         TestName(),
-                        inputDataContainer.GetData<double4>(DataConfig.DataDouble4),
-                        inputDataContainer.GetData<double4>(DataConfig.DataDouble4),
-                        inputDataContainer.GetData<double4>(DataConfig.DataDouble4),
+                        inputDataContainer.GetData<double4>(TypeConfig.DataDouble4),
+                        inputDataContainer.GetData<double4>(TypeConfig.DataDouble4),
+                        inputDataContainer.GetData<double4>(TypeConfig.DataDouble4),
                         new WorkConfigIJobParallelFor(),
                         new IDataConfig[]
                         {
@@ -62,9 +62,9 @@ namespace WorkSpace.Tests.Basic.Subtraction.Simd
                     ),
                 WorkerFactory<double4[], double4[], double4[]>.Create<SimdSubtractionDouble4Plain>(
                     TestName(),
-                    inputDataContainer.GetData<double4>(DataConfig.DataDouble4),
-                    inputDataContainer.GetData<double4>(DataConfig.DataDouble4),
-                    inputDataContainer.GetData<double4>(DataConfig.DataDouble4),
+                    inputDataContainer.GetData<double4>(TypeConfig.DataDouble4),
+                    inputDataContainer.GetData<double4>(TypeConfig.DataDouble4),
+                    inputDataContainer.GetData<double4>(TypeConfig.DataDouble4),
                     new WorkConfigDefault(),
                     new IDataConfig[]
                     {
@@ -75,9 +75,9 @@ namespace WorkSpace.Tests.Basic.Subtraction.Simd
                 ),
                 WorkerFactory<double4[], double4[], double4[]>.Create<SimdSubtractionDouble4SystemParallelFor>(
                     TestName(),
-                    inputDataContainer.GetData<double4>(DataConfig.DataDouble4),
-                    inputDataContainer.GetData<double4>(DataConfig.DataDouble4),
-                    inputDataContainer.GetData<double4>(DataConfig.DataDouble4),
+                    inputDataContainer.GetData<double4>(TypeConfig.DataDouble4),
+                    inputDataContainer.GetData<double4>(TypeConfig.DataDouble4),
+                    inputDataContainer.GetData<double4>(TypeConfig.DataDouble4),
                     new WorkConfigDefault(),
                     new IDataConfig[]
                     {

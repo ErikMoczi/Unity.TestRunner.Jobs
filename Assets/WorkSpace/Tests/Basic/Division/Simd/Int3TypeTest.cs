@@ -8,12 +8,12 @@ using TestWrapper.Generator;
 using TestWrapper.Generator.Interfaces;
 using Unity.Collections;
 using Unity.Mathematics;
-using WorkSpace.Tests.Base;
-using DataConfig = WorkSpace.Tests.Base.DataConfig;
+using WorkSpace.Provider.Containers;
+using WorkSpace.Provider.Settings;
 
 namespace WorkSpace.Tests.Basic.Division.Simd
 {
-    public sealed class Int3TypeTest : SampleGenerator
+    internal sealed class Int3TypeTest : SampleGenerator
     {
         public override string TestName()
         {
@@ -24,7 +24,7 @@ namespace WorkSpace.Tests.Basic.Division.Simd
         {
             return new ISampleConfig[]
             {
-                new SampleConfig(typeof(int3), DataConfig.DataInt3),
+                new SampleConfig(typeof(int3), TypeConfig.DataInt3),
             };
         }
 
@@ -34,9 +34,9 @@ namespace WorkSpace.Tests.Basic.Division.Simd
             {
                 WorkerFactory<NativeArray<int3>, NativeArray<int3>, NativeArray<int3>>.Create<SimdDivisionInt3Job>(
                     TestName(),
-                    inputDataContainer.GetData<int3>(DataConfig.DataInt3),
-                    inputDataContainer.GetData<int3>(DataConfig.DataInt3),
-                    inputDataContainer.GetData<int3>(DataConfig.DataInt3),
+                    inputDataContainer.GetData<int3>(TypeConfig.DataInt3),
+                    inputDataContainer.GetData<int3>(TypeConfig.DataInt3),
+                    inputDataContainer.GetData<int3>(TypeConfig.DataInt3),
                     new WorkConfigIJob(),
                     new IDataConfig[]
                     {
@@ -48,9 +48,9 @@ namespace WorkSpace.Tests.Basic.Division.Simd
                 WorkerFactory<NativeArray<int3>, NativeArray<int3>, NativeArray<int3>>
                     .Create<SimdDivisionInt3JobParallelFor>(
                         TestName(),
-                        inputDataContainer.GetData<int3>(DataConfig.DataInt3),
-                        inputDataContainer.GetData<int3>(DataConfig.DataInt3),
-                        inputDataContainer.GetData<int3>(DataConfig.DataInt3),
+                        inputDataContainer.GetData<int3>(TypeConfig.DataInt3),
+                        inputDataContainer.GetData<int3>(TypeConfig.DataInt3),
+                        inputDataContainer.GetData<int3>(TypeConfig.DataInt3),
                         new WorkConfigIJobParallelFor(),
                         new IDataConfig[]
                         {
@@ -61,9 +61,9 @@ namespace WorkSpace.Tests.Basic.Division.Simd
                     ),
                 WorkerFactory<int3[], int3[], int3[]>.Create<SimdDivisionInt3Plain>(
                     TestName(),
-                    inputDataContainer.GetData<int3>(DataConfig.DataInt3),
-                    inputDataContainer.GetData<int3>(DataConfig.DataInt3),
-                    inputDataContainer.GetData<int3>(DataConfig.DataInt3),
+                    inputDataContainer.GetData<int3>(TypeConfig.DataInt3),
+                    inputDataContainer.GetData<int3>(TypeConfig.DataInt3),
+                    inputDataContainer.GetData<int3>(TypeConfig.DataInt3),
                     new WorkConfigDefault(),
                     new IDataConfig[]
                     {
@@ -74,9 +74,9 @@ namespace WorkSpace.Tests.Basic.Division.Simd
                 ),
                 WorkerFactory<int3[], int3[], int3[]>.Create<SimdDivisionInt3SystemParallelFor>(
                     TestName(),
-                    inputDataContainer.GetData<int3>(DataConfig.DataInt3),
-                    inputDataContainer.GetData<int3>(DataConfig.DataInt3),
-                    inputDataContainer.GetData<int3>(DataConfig.DataInt3),
+                    inputDataContainer.GetData<int3>(TypeConfig.DataInt3),
+                    inputDataContainer.GetData<int3>(TypeConfig.DataInt3),
+                    inputDataContainer.GetData<int3>(TypeConfig.DataInt3),
                     new WorkConfigDefault(),
                     new IDataConfig[]
                     {

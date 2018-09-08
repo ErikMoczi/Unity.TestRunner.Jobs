@@ -7,12 +7,12 @@ using TestWrapper.Facades;
 using TestWrapper.Generator;
 using TestWrapper.Generator.Interfaces;
 using Unity.Collections;
-using WorkSpace.Tests.Base;
-using DataConfig = WorkSpace.Tests.Base.DataConfig;
+using WorkSpace.Provider.Containers;
+using WorkSpace.Provider.Settings;
 
 namespace WorkSpace.Tests.Basic.Base
 {
-    public sealed class BaseSetUp : SampleGenerator
+    internal sealed class BaseSetUp : SampleGenerator
     {
         public override string TestName()
         {
@@ -23,7 +23,7 @@ namespace WorkSpace.Tests.Basic.Base
         {
             return new ISampleConfig[]
             {
-                new SampleConfig(typeof(float), DataConfig.DataFloat1),
+                new SampleConfig(typeof(float), TypeConfig.DataFloat1),
             };
         }
 
@@ -35,8 +35,8 @@ namespace WorkSpace.Tests.Basic.Base
 
                 WorkerFactory<NativeArray<float>, NativeArray<float>>.Create<BaseIJob>(
                     TestName(),
-                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
-                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
+                    inputDataContainer.GetData<float>(TypeConfig.DataFloat1),
+                    inputDataContainer.GetData<float>(TypeConfig.DataFloat1),
                     new WorkConfigIJob(),
                     new IDataConfig[]
                     {
@@ -46,8 +46,8 @@ namespace WorkSpace.Tests.Basic.Base
                 ),
                 WorkerFactory<NativeArray<float>, NativeArray<float>>.Create<BaseBurstIJob>(
                     TestName(),
-                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
-                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
+                    inputDataContainer.GetData<float>(TypeConfig.DataFloat1),
+                    inputDataContainer.GetData<float>(TypeConfig.DataFloat1),
                     new WorkConfigIJob(),
                     new IDataConfig[]
                     {
@@ -62,8 +62,8 @@ namespace WorkSpace.Tests.Basic.Base
 
                 WorkerFactory<NativeArray<float>, NativeArray<float>>.Create<BaseIJobParallelFor>(
                     TestName(),
-                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
-                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
+                    inputDataContainer.GetData<float>(TypeConfig.DataFloat1),
+                    inputDataContainer.GetData<float>(TypeConfig.DataFloat1),
                     new WorkConfigIJobParallelFor(),
                     new IDataConfig[]
                     {
@@ -73,8 +73,8 @@ namespace WorkSpace.Tests.Basic.Base
                 ),
                 WorkerFactory<NativeArray<float>, NativeArray<float>>.Create<BaseBurstIJobParallelFor>(
                     TestName(),
-                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
-                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
+                    inputDataContainer.GetData<float>(TypeConfig.DataFloat1),
+                    inputDataContainer.GetData<float>(TypeConfig.DataFloat1),
                     new WorkConfigIJobParallelFor(),
                     new IDataConfig[]
                     {
@@ -89,8 +89,8 @@ namespace WorkSpace.Tests.Basic.Base
 
                 WorkerFactory<float[], float[]>.Create<BaseIPlain>(
                     TestName(),
-                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
-                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
+                    inputDataContainer.GetData<float>(TypeConfig.DataFloat1),
+                    inputDataContainer.GetData<float>(TypeConfig.DataFloat1),
                     new WorkConfigDefault(),
                     new IDataConfig[]
                     {
@@ -100,8 +100,8 @@ namespace WorkSpace.Tests.Basic.Base
                 ),
                 WorkerFactory<NativeArray<float>, NativeArray<float>>.Create<BaseBurstIPlain>(
                     TestName(),
-                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
-                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
+                    inputDataContainer.GetData<float>(TypeConfig.DataFloat1),
+                    inputDataContainer.GetData<float>(TypeConfig.DataFloat1),
                     new WorkConfigDefault(),
                     new IDataConfig[]
                     {
@@ -111,8 +111,8 @@ namespace WorkSpace.Tests.Basic.Base
                 ),
                 WorkerFactory<NativeArray<float>, NativeArray<float>>.Create<BaseNoBurstIPlain>(
                     TestName(),
-                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
-                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
+                    inputDataContainer.GetData<float>(TypeConfig.DataFloat1),
+                    inputDataContainer.GetData<float>(TypeConfig.DataFloat1),
                     new WorkConfigDefault(),
                     new IDataConfig[]
                     {
@@ -127,8 +127,8 @@ namespace WorkSpace.Tests.Basic.Base
 
                 WorkerFactory<float[], float[]>.Create<BaseISystemParallelFor>(
                     TestName(),
-                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
-                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
+                    inputDataContainer.GetData<float>(TypeConfig.DataFloat1),
+                    inputDataContainer.GetData<float>(TypeConfig.DataFloat1),
                     new WorkConfigDefault(),
                     new IDataConfig[]
                     {
@@ -138,8 +138,8 @@ namespace WorkSpace.Tests.Basic.Base
                 ),
                 WorkerFactory<NativeArray<float>, NativeArray<float>>.Create<BaseBurstISystemParallelFor>(
                     TestName(),
-                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
-                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
+                    inputDataContainer.GetData<float>(TypeConfig.DataFloat1),
+                    inputDataContainer.GetData<float>(TypeConfig.DataFloat1),
                     new WorkConfigDefault(),
                     new IDataConfig[]
                     {
@@ -149,8 +149,8 @@ namespace WorkSpace.Tests.Basic.Base
                 ),
                 WorkerFactory<NativeArray<float>, NativeArray<float>>.Create<BaseNoBurstISystemParallelFor>(
                     TestName(),
-                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
-                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
+                    inputDataContainer.GetData<float>(TypeConfig.DataFloat1),
+                    inputDataContainer.GetData<float>(TypeConfig.DataFloat1),
                     new WorkConfigDefault(),
                     new IDataConfig[]
                     {

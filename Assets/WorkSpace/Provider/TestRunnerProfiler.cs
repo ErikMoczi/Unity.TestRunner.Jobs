@@ -4,9 +4,9 @@ using TestWrapper.Facades.Info;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Profiling;
-using WorkSpace.Tests.Base;
+using WorkSpace.Provider.Settings;
 
-namespace WorkSpace
+namespace WorkSpace.Provider
 {
     public sealed class TestRunnerProfiler : MonoBehaviour
     {

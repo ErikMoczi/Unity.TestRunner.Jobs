@@ -7,12 +7,12 @@ using TestWrapper.Facades;
 using TestWrapper.Generator;
 using TestWrapper.Generator.Interfaces;
 using Unity.Collections;
-using WorkSpace.Tests.Base;
-using DataConfig = WorkSpace.Tests.Base.DataConfig;
+using WorkSpace.Provider.Containers;
+using WorkSpace.Provider.Settings;
 
 namespace WorkSpace.Tests.Basic.Subtraction.Simple.Optimization
 {
-    public sealed class Int1TypeTest : SampleGenerator
+    internal sealed class Int1TypeTest : SampleGenerator
     {
         public override string TestName()
         {
@@ -23,7 +23,7 @@ namespace WorkSpace.Tests.Basic.Subtraction.Simple.Optimization
         {
             return new ISampleConfig[]
             {
-                new SampleConfig(typeof(int), DataConfig.DataInt1),
+                new SampleConfig(typeof(int), TypeConfig.DataInt1),
             };
         }
 
@@ -34,9 +34,9 @@ namespace WorkSpace.Tests.Basic.Subtraction.Simple.Optimization
                 WorkerFactory<NativeArray<int>, NativeArray<int>, NativeArray<int>>
                     .Create<SimpleSubtractionOptimizationIntJob>(
                         TestName(),
-                        inputDataContainer.GetData<int>(DataConfig.DataInt1),
-                        inputDataContainer.GetData<int>(DataConfig.DataInt1),
-                        inputDataContainer.GetData<int>(DataConfig.DataInt1),
+                        inputDataContainer.GetData<int>(TypeConfig.DataInt1),
+                        inputDataContainer.GetData<int>(TypeConfig.DataInt1),
+                        inputDataContainer.GetData<int>(TypeConfig.DataInt1),
                         new WorkConfigIJob(),
                         new IDataConfig[]
                         {
@@ -48,9 +48,9 @@ namespace WorkSpace.Tests.Basic.Subtraction.Simple.Optimization
                 WorkerFactory<NativeArray<int>, NativeArray<int>, NativeArray<int>>
                     .Create<SimpleSubtractionOptimizationIntJobParallelFor>(
                         TestName(),
-                        inputDataContainer.GetData<int>(DataConfig.DataInt1),
-                        inputDataContainer.GetData<int>(DataConfig.DataInt1),
-                        inputDataContainer.GetData<int>(DataConfig.DataInt1),
+                        inputDataContainer.GetData<int>(TypeConfig.DataInt1),
+                        inputDataContainer.GetData<int>(TypeConfig.DataInt1),
+                        inputDataContainer.GetData<int>(TypeConfig.DataInt1),
                         new WorkConfigIJobParallelFor(),
                         new IDataConfig[]
                         {

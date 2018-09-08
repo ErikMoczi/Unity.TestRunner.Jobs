@@ -7,12 +7,12 @@ using TestWrapper.Facades;
 using TestWrapper.Generator;
 using TestWrapper.Generator.Interfaces;
 using Unity.Collections;
-using WorkSpace.Tests.Base;
-using DataConfig = WorkSpace.Tests.Base.DataConfig;
+using WorkSpace.Provider.Containers;
+using WorkSpace.Provider.Settings;
 
 namespace WorkSpace.Tests.Optimization
 {
-    public sealed class UnOptimizationTest : SampleGenerator
+    internal sealed class UnOptimizationTest : SampleGenerator
     {
         public override string TestName()
         {
@@ -23,7 +23,7 @@ namespace WorkSpace.Tests.Optimization
         {
             return new ISampleConfig[]
             {
-                new SampleConfig(typeof(float), DataConfig.DataFloat1),
+                new SampleConfig(typeof(float), TypeConfig.DataFloat1),
             };
         }
 
@@ -33,8 +33,8 @@ namespace WorkSpace.Tests.Optimization
             {
                 WorkerFactory<NativeArray<float>, NativeArray<float>>.Create<UnOptimizedJob>(
                     TestName(),
-                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
-                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
+                    inputDataContainer.GetData<float>(TypeConfig.DataFloat1),
+                    inputDataContainer.GetData<float>(TypeConfig.DataFloat1),
                     new WorkConfigIJob(false),
                     new IDataConfig[]
                     {
@@ -44,8 +44,8 @@ namespace WorkSpace.Tests.Optimization
                 ),
                 WorkerFactory<NativeArray<float>, NativeArray<float>>.Create<UnOptimizedJobParallelFor>(
                     TestName(),
-                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
-                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
+                    inputDataContainer.GetData<float>(TypeConfig.DataFloat1),
+                    inputDataContainer.GetData<float>(TypeConfig.DataFloat1),
                     new WorkConfigIJobParallelFor(false),
                     new IDataConfig[]
                     {
@@ -55,8 +55,8 @@ namespace WorkSpace.Tests.Optimization
                 ),
                 WorkerFactory<float[], float[]>.Create<UnOptimizedPlain>(
                     TestName(),
-                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
-                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
+                    inputDataContainer.GetData<float>(TypeConfig.DataFloat1),
+                    inputDataContainer.GetData<float>(TypeConfig.DataFloat1),
                     new WorkConfigDefault(),
                     new IDataConfig[]
                     {
@@ -66,8 +66,8 @@ namespace WorkSpace.Tests.Optimization
                 ),
                 WorkerFactory<float[], float[]>.Create<UnOptimizedSystemParallelFor>(
                     TestName(),
-                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
-                    inputDataContainer.GetData<float>(DataConfig.DataFloat1),
+                    inputDataContainer.GetData<float>(TypeConfig.DataFloat1),
+                    inputDataContainer.GetData<float>(TypeConfig.DataFloat1),
                     new WorkConfigDefault(),
                     new IDataConfig[]
                     {

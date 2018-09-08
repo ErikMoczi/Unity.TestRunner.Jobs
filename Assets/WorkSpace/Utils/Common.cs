@@ -1,6 +1,6 @@
-﻿namespace WorkSpace.Tests.Base
+﻿namespace WorkSpace.Utils
 {
-    public static class Utils
+    internal static class Common
     {
         public static string CommonPrefix(string[] data)
         {

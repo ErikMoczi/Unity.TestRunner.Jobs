@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace WorkSpace.Tests.Base
+namespace WorkSpace.Provider.Containers
 {
     public interface ISampleGeneratorData
     {

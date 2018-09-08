@@ -1,4 +1,4 @@
-using TestWrapper.Utils.Base;
+using TestWrapper.Utils.Interfaces;
 
 namespace TestWrapper.Container
 {

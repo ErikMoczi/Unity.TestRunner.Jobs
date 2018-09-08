@@ -8,12 +8,12 @@ using TestWrapper.Generator;
 using TestWrapper.Generator.Interfaces;
 using Unity.Collections;
 using Unity.Mathematics;
-using WorkSpace.Tests.Base;
-using DataConfig = WorkSpace.Tests.Base.DataConfig;
+using WorkSpace.Provider.Containers;
+using WorkSpace.Provider.Settings;
 
 namespace WorkSpace.Tests.Basic.Addition.Simd.Optimization
 {
-    public sealed class Int2TypeTest : SampleGenerator
+    internal sealed class Int2TypeTest : SampleGenerator
     {
         public override string TestName()
         {
@@ -24,7 +24,7 @@ namespace WorkSpace.Tests.Basic.Addition.Simd.Optimization
         {
             return new ISampleConfig[]
             {
-                new SampleConfig(typeof(int2), DataConfig.DataInt2),
+                new SampleConfig(typeof(int2), TypeConfig.DataInt2),
             };
         }
 
@@ -35,9 +35,9 @@ namespace WorkSpace.Tests.Basic.Addition.Simd.Optimization
                 WorkerFactory<NativeArray<int2>, NativeArray<int2>, NativeArray<int2>>
                     .Create<SimdAdditionOptimizationInt2Job>(
                         TestName(),
-                        inputDataContainer.GetData<int2>(DataConfig.DataInt2),
-                        inputDataContainer.GetData<int2>(DataConfig.DataInt2),
-                        inputDataContainer.GetData<int2>(DataConfig.DataInt2),
+                        inputDataContainer.GetData<int2>(TypeConfig.DataInt2),
+                        inputDataContainer.GetData<int2>(TypeConfig.DataInt2),
+                        inputDataContainer.GetData<int2>(TypeConfig.DataInt2),
                         new WorkConfigIJob(),
                         new IDataConfig[]
                         {
@@ -49,9 +49,9 @@ namespace WorkSpace.Tests.Basic.Addition.Simd.Optimization
                 WorkerFactory<NativeArray<int2>, NativeArray<int2>, NativeArray<int2>>
                     .Create<SimdAdditionOptimizationInt2JobParallelFor>(
                         TestName(),
-                        inputDataContainer.GetData<int2>(DataConfig.DataInt2),
-                        inputDataContainer.GetData<int2>(DataConfig.DataInt2),
-                        inputDataContainer.GetData<int2>(DataConfig.DataInt2),
+                        inputDataContainer.GetData<int2>(TypeConfig.DataInt2),
+                        inputDataContainer.GetData<int2>(TypeConfig.DataInt2),
+                        inputDataContainer.GetData<int2>(TypeConfig.DataInt2),
                         new WorkConfigIJobParallelFor(),
                         new IDataConfig[]
                         {

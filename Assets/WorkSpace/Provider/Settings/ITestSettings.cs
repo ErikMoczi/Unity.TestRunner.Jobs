@@ -1,4 +1,6 @@
-namespace WorkSpace.Tests.Base
+using WorkSpace.Provider.Containers;
+
+namespace WorkSpace.Provider.Settings
 {
     public interface ITestSettings
     {

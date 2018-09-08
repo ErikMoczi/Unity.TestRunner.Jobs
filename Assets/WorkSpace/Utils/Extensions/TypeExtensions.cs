@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
-namespace WorkSpace.Extensions
+namespace WorkSpace.Utils.Extensions
 {
-    public static class TypeExtensions
+    internal static class TypeExtensions
     {
         public static IEnumerable<Type> GetAllDerivedTypes(this Type type)
         {

@@ -1,6 +1,6 @@
-﻿namespace WorkSpace.Tests.Base
+﻿namespace WorkSpace.Provider.Settings
 {
-    public static class DataConfig
+    internal static class TypeConfig
     {
         public const string DataByte1 = "DataByte1";
         public const string DataDouble1 = "DataDouble1";

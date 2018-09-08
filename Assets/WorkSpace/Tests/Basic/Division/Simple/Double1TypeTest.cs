@@ -7,12 +7,12 @@ using TestWrapper.Facades;
 using TestWrapper.Generator;
 using TestWrapper.Generator.Interfaces;
 using Unity.Collections;
-using WorkSpace.Tests.Base;
-using DataConfig = WorkSpace.Tests.Base.DataConfig;
+using WorkSpace.Provider.Containers;
+using WorkSpace.Provider.Settings;
 
 namespace WorkSpace.Tests.Basic.Division.Simple
 {
-    public sealed class Double1TypeTest : SampleGenerator
+    internal sealed class Double1TypeTest : SampleGenerator
     {
         public override string TestName()
         {
@@ -23,7 +23,7 @@ namespace WorkSpace.Tests.Basic.Division.Simple
         {
             return new ISampleConfig[]
             {
-                new SampleConfig(typeof(double), DataConfig.DataDouble1),
+                new SampleConfig(typeof(double), TypeConfig.DataDouble1),
             };
         }
 
@@ -34,9 +34,9 @@ namespace WorkSpace.Tests.Basic.Division.Simple
                 WorkerFactory<NativeArray<double>, NativeArray<double>, NativeArray<double>>
                     .Create<SimpleDivisionDoubleJob>(
                         TestName(),
-                        inputDataContainer.GetData<double>(DataConfig.DataDouble1),
-                        inputDataContainer.GetData<double>(DataConfig.DataDouble1),
-                        inputDataContainer.GetData<double>(DataConfig.DataDouble1),
+                        inputDataContainer.GetData<double>(TypeConfig.DataDouble1),
+                        inputDataContainer.GetData<double>(TypeConfig.DataDouble1),
+                        inputDataContainer.GetData<double>(TypeConfig.DataDouble1),
                         new WorkConfigIJob(),
                         new IDataConfig[]
                         {
@@ -48,9 +48,9 @@ namespace WorkSpace.Tests.Basic.Division.Simple
                 WorkerFactory<NativeArray<double>, NativeArray<double>, NativeArray<double>>
                     .Create<SimpleDivisionDoubleJobParallelFor>(
                         TestName(),
-                        inputDataContainer.GetData<double>(DataConfig.DataDouble1),
-                        inputDataContainer.GetData<double>(DataConfig.DataDouble1),
-                        inputDataContainer.GetData<double>(DataConfig.DataDouble1),
+                        inputDataContainer.GetData<double>(TypeConfig.DataDouble1),
+                        inputDataContainer.GetData<double>(TypeConfig.DataDouble1),
+                        inputDataContainer.GetData<double>(TypeConfig.DataDouble1),
                         new WorkConfigIJobParallelFor(),
                         new IDataConfig[]
                         {
@@ -61,9 +61,9 @@ namespace WorkSpace.Tests.Basic.Division.Simple
                     ),
                 WorkerFactory<double[], double[], double[]>.Create<SimpleDivisionDoublePlain>(
                     TestName(),
-                    inputDataContainer.GetData<double>(DataConfig.DataDouble1),
-                    inputDataContainer.GetData<double>(DataConfig.DataDouble1),
-                    inputDataContainer.GetData<double>(DataConfig.DataDouble1),
+                    inputDataContainer.GetData<double>(TypeConfig.DataDouble1),
+                    inputDataContainer.GetData<double>(TypeConfig.DataDouble1),
+                    inputDataContainer.GetData<double>(TypeConfig.DataDouble1),
                     new WorkConfigDefault(),
                     new IDataConfig[]
                     {
@@ -74,9 +74,9 @@ namespace WorkSpace.Tests.Basic.Division.Simple
                 ),
                 WorkerFactory<double[], double[], double[]>.Create<SimpleDivisionDoubleSystemParallelFor>(
                     TestName(),
-                    inputDataContainer.GetData<double>(DataConfig.DataDouble1),
-                    inputDataContainer.GetData<double>(DataConfig.DataDouble1),
-                    inputDataContainer.GetData<double>(DataConfig.DataDouble1),
+                    inputDataContainer.GetData<double>(TypeConfig.DataDouble1),
+                    inputDataContainer.GetData<double>(TypeConfig.DataDouble1),
+                    inputDataContainer.GetData<double>(TypeConfig.DataDouble1),
                     new WorkConfigDefault(),
                     new IDataConfig[]
                     {
