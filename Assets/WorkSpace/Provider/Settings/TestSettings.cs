@@ -4,8 +4,14 @@ using WorkSpace.Provider.Containers;
 
 namespace WorkSpace.Provider.Settings
 {
-    [CreateAssetMenu(menuName = "TestRunner/Test Settings", fileName = "TestSettings")]
-    public sealed class TestSettings : ScriptableSingleton<TestSettings>, ITestSettings
+    [CreateAssetMenu(menuName = "TestRunner/Test Settings", fileName = nameof(TestSettings))]
+    public sealed class TestSettings :
+#if UNITY_EDITOR
+        ScriptableSingleton<TestSettings>
+#else
+        ScriptableObject
+#endif
+        , ITestSettings
     {
         [SerializeField] private int _dataSize = 1000000;
         [SerializeField] private int _totalRuns = 10;

@@ -1,3 +1,4 @@
+#if UNITY_EDITOR
 using System;
 using TestWrapper.Facades;
 using TestWrapper.Facades.Info;
@@ -15,8 +16,8 @@ namespace WorkSpace.Provider
         [Header("Delay specific frames from start")] [SerializeField] [Range(0, 10)]
         private int _delayFrames = 3;
 
-        [Header("Pause unity after finished test case")] [SerializeField] [Range(0, 10)]
-        private int _pauseAfterFinishFrames = 5;
+        [Header("Stop unity after finished test case")] [SerializeField] [Range(0, 10)]
+        private int _stopAfterFinishFrames = 5;
 
         [SerializeField] private TestSettings _testSettings;
 
@@ -46,9 +47,9 @@ namespace WorkSpace.Provider
                 _currentRun++;
             }
 
-            if (Time.frameCount > _pauseAfterFinishFrames + _delayFrames + 1 + _testSettings.TotalRuns)
+            if (Time.frameCount > _stopAfterFinishFrames + _delayFrames + 1 + _testSettings.TotalRuns)
             {
-                EditorApplication.isPaused = true;
+                EditorApplication.isPlaying = false;
             }
         }
 
@@ -72,3 +73,4 @@ namespace WorkSpace.Provider
         }
     }
 }
+#endif
