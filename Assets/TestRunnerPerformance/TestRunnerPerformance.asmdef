@@ -1,0 +1,14 @@
+{
+    "name": "TestRunnerPerformance",
+    "references": [
+        "Unity.PerformanceTesting",
+        "WorkSpace",
+        "TestWrapper"
+    ],
+    "optionalUnityReferences": [
+        "TestAssemblies"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false
+}

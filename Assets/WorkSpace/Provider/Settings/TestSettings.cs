@@ -15,6 +15,7 @@ namespace WorkSpace.Provider.Settings
     {
         [SerializeField] private int _dataSize = 1000000;
         [SerializeField] private int _totalRuns = 10;
+        [SerializeField] private int _warmUpCount = 3;
 
         [Header("Choose which test case to run")] [SerializeField]
         private TestCaseWrapper _testCaseWrapper;
@@ -22,5 +23,6 @@ namespace WorkSpace.Provider.Settings
         public TestCaseWrapper TestCaseWrapper => _testCaseWrapper;
         public int DataSize => _dataSize;
         public int TotalRuns => _totalRuns;
+        public int WarmUpCount => _warmUpCount;
     }
 }

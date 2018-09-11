@@ -7,5 +7,6 @@ namespace WorkSpace.Provider.Settings
         TestCaseWrapper TestCaseWrapper { get; }
         int DataSize { get; }
         int TotalRuns { get; }
+        int WarmUpCount { get; }
     }
 }
