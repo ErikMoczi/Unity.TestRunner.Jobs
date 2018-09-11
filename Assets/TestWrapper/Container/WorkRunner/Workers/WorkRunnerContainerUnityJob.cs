@@ -1,4 +1,5 @@
 using System;
+using System.Reflection;
 using TestWrapper.Config.Worker.Interfaces;
 using TestWrapper.Container.WorkRunner.Base;
 using TestWrapper.Workers;
@@ -11,10 +12,12 @@ namespace TestWrapper.Container.WorkRunner.Workers
         where TConfig : class, IWorkConfigUnityJob
     {
         private readonly IJobExtensionsWrapper _extensionsWrapper;
+        private readonly MethodInfo _genericMethodInfo;
 
         public WorkRunnerContainerUnityJob(TConfig config) : base(config)
         {
             _extensionsWrapper = InitJobExtensionsWrapper();
+            _genericMethodInfo = InitRunMethod();
         }
 
         private IJobExtensionsWrapper InitJobExtensionsWrapper()
@@ -29,19 +32,22 @@ namespace TestWrapper.Container.WorkRunner.Workers
 
         public sealed override void Run(ref TWorker worker)
         {
+            var result = _genericMethodInfo.Invoke(worker, GetInvokeParameters(ref worker));
+            if (GetConfig().Scheduled)
+            {
+                ((JobHandle) result).Complete();
+            }
+        }
+
+        private MethodInfo InitRunMethod()
+        {
             var methodInfo = _extensionsWrapper.ExtensionType.GetMethod(GetMethodName());
             if (methodInfo == null)
             {
                 throw new Exception($"Unity Job Api has changed - correct it!");
             }
 
-            var genericMethodInfo = methodInfo.MakeGenericMethod(typeof(TWorker));
-            var result = genericMethodInfo.Invoke(worker, GetInvokeParameters(ref worker));
-
-            if (GetConfig().Scheduled)
-            {
-                ((JobHandle) result).Complete();
-            }
+            return methodInfo.MakeGenericMethod(typeof(TWorker));
         }
 
         private string GetMethodName()
