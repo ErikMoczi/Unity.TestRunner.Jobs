@@ -1,26 +1,24 @@
-using System;
 using System.Collections.Generic;
 using TestWrapper.Config.Data.Interfaces;
 using TestWrapper.Container.Data;
 using TestWrapper.Container.Info;
 using TestWrapper.Container.Multi.Base;
+using TestWrapper.InputData;
 
 namespace TestWrapper.Container.Multi
 {
-    internal class MultiContainer<TConfig, T1, T2, T3, T4> : MultiContainer<TConfig, T1, T2, T3>,
+    internal class MultiContainer<TData, TConfig, T1, T2, T3, T4> : MultiContainer<TData, TConfig, T1, T2, T3>,
         IMultiContainer<T1, T2, T3, T4>
+        where TData : class, IInputData<T1, T2, T3, T4>
         where TConfig : class, IDataConfig
     {
         public T4 Item4 => _dataProxyContainer4.Value;
 
-        private readonly Array _itemArray4;
         private readonly IDataProxyContainer<T4> _dataProxyContainer4;
 
-        public MultiContainer(Array itemArray1, Array itemArray2, Array itemArray3, Array itemArray4,
-            params TConfig[] config) : base(itemArray1, itemArray2, itemArray3, config)
+        public MultiContainer(TData data, params TConfig[] config) : base(data, config)
         {
-            _itemArray4 = itemArray4;
-            _dataProxyContainer4 = new DataProxyContainer<T4, TConfig>(itemArray4, GetConfig(3));
+            _dataProxyContainer4 = new DataProxyContainer<T4, TConfig>(data.ItemArray4, GetCurrentConfig());
         }
 
         protected override int CurrentConfigCount()

@@ -2,10 +2,12 @@ using System;
 using System.Collections.Generic;
 using TestWrapper.Config.Data.Interfaces;
 using TestWrapper.Container.Info;
+using TestWrapper.InputData;
 
 namespace TestWrapper.Container.Multi.Base
 {
-    internal abstract class MultiContainer<TConfig> : RefreshContainer<TConfig>, IMultiContainer
+    internal abstract class MultiContainer<TData, TConfig> : RefreshContainer<TConfig>, IMultiContainer
+        where TData : class, IInputData
         where TConfig : class, IDataConfig
     {
         private int _maxDataSize;
@@ -37,8 +39,12 @@ namespace TestWrapper.Container.Multi.Base
             set => _dataSize = _maxDataSize = value;
         }
 
-        public MultiContainer(params TConfig[] config) : base(config)
+        private readonly TData _data;
+        protected TData Data => _data;
+
+        public MultiContainer(TData data, params TConfig[] config) : base(config)
         {
+            _data = data;
             CheckConfigCount();
         }
 
@@ -52,6 +58,11 @@ namespace TestWrapper.Container.Multi.Base
         }
 
         protected abstract int CurrentConfigCount();
+
+        protected TConfig GetCurrentConfig()
+        {
+            return GetConfig(CurrentConfigCount() - 1);
+        }
 
         public new IContainerInfoDataArray Info()
         {
