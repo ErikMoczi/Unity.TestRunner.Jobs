@@ -1,5 +1,4 @@
-﻿using TestWrapper.Container;
-using TestWrapper.Container.Info;
+using TestWrapper.Container;
 using TestWrapper.Container.Info.Methods;
 
 namespace TestWrapper.Workers.Wrappers

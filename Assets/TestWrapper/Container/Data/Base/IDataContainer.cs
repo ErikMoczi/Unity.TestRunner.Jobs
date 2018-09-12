@@ -1,4 +1,3 @@
-using TestWrapper.Container.Info;
 using TestWrapper.Container.Info.Methods;
 
 namespace TestWrapper.Container.Data.Base
