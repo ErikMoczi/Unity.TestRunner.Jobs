@@ -31,4 +31,45 @@ namespace TestWrapper.Container.Multi.Base
     {
         T5 Item5 { get; }
     }
+
+    internal interface IMultiContainer<T1, T2, T3, T4, T5, T6> : IMultiContainer<T1, T2, T3, T4, T5>
+    {
+        T6 Item6 { get; }
+    }
+
+    internal interface IMultiContainer<T1, T2, T3, T4, T5, T6, T7> : IMultiContainer<T1, T2, T3, T4, T5, T6>
+    {
+        T7 Item7 { get; }
+    }
+
+    internal interface IMultiContainer<T1, T2, T3, T4, T5, T6, T7, T8> : IMultiContainer<T1, T2, T3, T4, T5, T6, T7>
+    {
+        T8 Item8 { get; }
+    }
+
+    internal interface
+        IMultiContainer<T1, T2, T3, T4, T5, T6, T7, T8, T9> : IMultiContainer<T1, T2, T3, T4, T5, T6, T7, T8>
+    {
+        T9 Item9 { get; }
+    }
+
+    internal interface
+        IMultiContainer<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> : IMultiContainer<T1, T2, T3, T4, T5, T6, T7, T8, T9>
+    {
+        T10 Item10 { get; }
+    }
+
+    internal interface
+        IMultiContainer<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> : IMultiContainer<T1, T2, T3, T4, T5, T6, T7, T8,
+            T9, T10>
+    {
+        T11 Item11 { get; }
+    }
+
+    internal interface
+        IMultiContainer<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> : IMultiContainer<T1, T2, T3, T4, T5, T6, T7,
+            T8, T9, T10, T11>
+    {
+        T12 Item12 { get; }
+    }
 }

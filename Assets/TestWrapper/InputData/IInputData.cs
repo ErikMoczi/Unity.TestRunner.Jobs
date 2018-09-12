@@ -30,4 +30,24 @@ namespace TestWrapper.InputData
     {
         Array ItemArray5 { get; }
     }
+
+    internal interface IInputData<T1, T2, T3, T4, T5, T6> : IInputData<T1, T2, T3, T4, T5>
+    {
+        Array ItemArray6 { get; }
+    }
+
+    internal interface IInputData<T1, T2, T3, T4, T5, T6, T7> : IInputData<T1, T2, T3, T4, T5, T6>
+    {
+        Array ItemArray7 { get; }
+    }
+
+    internal interface IInputData<T1, T2, T3, T4, T5, T6, T7, T8> : IInputData<T1, T2, T3, T4, T5, T6, T7>
+    {
+        Array ItemArray8 { get; }
+    }
+
+    internal interface IInputData<T1, T2, T3, T4, T5, T6, T7, T8, T9> : IInputData<T1, T2, T3, T4, T5, T6, T7, T8>
+    {
+        Array ItemArray9 { get; }
+    }
 }

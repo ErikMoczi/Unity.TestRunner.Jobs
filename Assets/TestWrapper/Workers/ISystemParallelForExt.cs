@@ -25,4 +25,24 @@
         IWorker<T1, T2, T3, T4, T5>
     {
     }
+
+    public interface ISystemParallelForExt<T1, T2, T3, T4, T5, T6> : ISystemParallelForExt<T1, T2, T3, T4, T5>,
+        IWorker<T1, T2, T3, T4, T5, T6>
+    {
+    }
+
+    public interface ISystemParallelForExt<T1, T2, T3, T4, T5, T6, T7> : ISystemParallelForExt<T1, T2, T3, T4, T5, T6>,
+        IWorker<T1, T2, T3, T4, T5, T6, T7>
+    {
+    }
+
+    public interface ISystemParallelForExt<T1, T2, T3, T4, T5, T6, T7, T8> :
+        ISystemParallelForExt<T1, T2, T3, T4, T5, T6, T7>, IWorker<T1, T2, T3, T4, T5, T6, T7, T8>
+    {
+    }
+
+    public interface ISystemParallelForExt<T1, T2, T3, T4, T5, T6, T7, T8, T9> :
+        ISystemParallelForExt<T1, T2, T3, T4, T5, T6, T7, T8>, IWorker<T1, T2, T3, T4, T5, T6, T7, T8, T9>
+    {
+    }
 }
