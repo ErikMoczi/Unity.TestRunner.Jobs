@@ -33,7 +33,8 @@ namespace TestRunnerPerformance
                 #region FirstRun
 
                 workFacade.SetUp();
-                using (Measure.Scope(new SampleGroupDefinition(DefinitionName(index, FirstKeyWord))))
+                using (Measure.Scope(new SampleGroupDefinition(DefinitionName(index, FirstKeyWord),
+                    _testSettings.SampleUnit)))
                 {
                     workFacade.Run();
                 }
@@ -58,7 +59,7 @@ namespace TestRunnerPerformance
                 for (var i = 0; i < _testSettings.TotalRuns; i++)
                 {
                     workFacade.SetUp();
-                    using (Measure.Scope(new SampleGroupDefinition(DefinitionName(index))))
+                    using (Measure.Scope(new SampleGroupDefinition(DefinitionName(index), _testSettings.SampleUnit)))
                     {
                         workFacade.Run();
                     }
@@ -144,12 +145,13 @@ namespace TestRunnerPerformance
                         },
                         TestResults = new TestRunnerResult._Results
                         {
-                            First = Math.Round(firstSampleGroup.Min, 2),
-                            Min = Math.Round(sampleGroup.Min, 2),
-                            Max = Math.Round(sampleGroup.Max, 2),
-                            Median = Math.Round(sampleGroup.Median, 2),
-                            Average = Math.Round(sampleGroup.Average, 2),
-                            StandardDeviation = Math.Round(sampleGroup.StandardDeviation, 2)
+                            First = Math.Round(firstSampleGroup.Min, _testSettings.ResultsPrecision),
+                            Min = Math.Round(sampleGroup.Min, _testSettings.ResultsPrecision),
+                            Max = Math.Round(sampleGroup.Max, _testSettings.ResultsPrecision),
+                            Median = Math.Round(sampleGroup.Median, _testSettings.ResultsPrecision),
+                            Average = Math.Round(sampleGroup.Average, _testSettings.ResultsPrecision),
+                            StandardDeviation = Math.Round(sampleGroup.StandardDeviation,
+                                _testSettings.ResultsPrecision)
                         }
                     }
                 );

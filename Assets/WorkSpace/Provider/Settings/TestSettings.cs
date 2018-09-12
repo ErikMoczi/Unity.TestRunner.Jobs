@@ -1,3 +1,4 @@
+using Unity.PerformanceTesting;
 using UnityEditor;
 using UnityEngine;
 using WorkSpace.Provider.Containers;
@@ -16,6 +17,8 @@ namespace WorkSpace.Provider.Settings
         [SerializeField] private int _dataSize = 1000000;
         [SerializeField] private int _totalRuns = 10;
         [SerializeField] private int _warmUpCount = 3;
+        [SerializeField] [Range(0, 10)] private int _resultsPrecision = 4;
+        [SerializeField] private SampleUnit _sampleUnit = SampleUnit.Millisecond;
 
         [Header("Choose which test case to run")] [SerializeField]
         private TestCaseWrapper _testCaseWrapper;
@@ -24,5 +27,7 @@ namespace WorkSpace.Provider.Settings
         public int DataSize => _dataSize;
         public int TotalRuns => _totalRuns;
         public int WarmUpCount => _warmUpCount;
+        public int ResultsPrecision => _resultsPrecision;
+        public SampleUnit SampleUnit => _sampleUnit;
     }
 }

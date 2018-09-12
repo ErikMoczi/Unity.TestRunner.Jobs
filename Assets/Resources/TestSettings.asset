@@ -14,6 +14,8 @@ MonoBehaviour:
   _dataSize: 1000000
   _totalRuns: 10
   _warmUpCount: 3
+  _resultsPrecision: 4
+  _sampleUnit: 2
   _testCaseWrapper:
     Generators:
     - WorkSpace.Tests.Basic.Multiplication.Simple.Int1TypeTest

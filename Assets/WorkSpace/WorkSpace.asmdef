@@ -3,7 +3,8 @@
     "references": [
         "TestWrapper",
         "TestCase",
-        "Unity.Mathematics"
+        "Unity.Mathematics",
+        "Unity.PerformanceTesting"
     ],
     "optionalUnityReferences": [],
     "includePlatforms": [],
