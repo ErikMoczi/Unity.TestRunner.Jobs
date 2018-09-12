@@ -23,7 +23,19 @@ namespace TestWrapper.Generator
 
         public T[] GetData<T>(string key) where T : struct
         {
-            return _dataContainer[typeof(T)][key] as T[];
+            _dataContainer.TryGetValue(typeof(T), out var type);
+            if (type != null)
+            {
+                type.TryGetValue(key, out var value);
+                if (value is T[] variable)
+                {
+                    return variable;
+                }
+
+                throw new Exception($"Missing correct key {key} of data type {typeof(T)}");
+            }
+
+            throw new Exception($"Missing correct data type {typeof(T)}");
         }
 
         private void InitDataContainer()
