@@ -20,7 +20,7 @@ namespace TestWrapper.Container.Data
 
         public override void SetUp()
         {
-            ReflectionInstance = (T) Convert.ChangeType(Data.Clone(), TypeValue);
+            ReflectionInstance = (T) Data.Clone();
         }
 
         public override void CleanUp()
