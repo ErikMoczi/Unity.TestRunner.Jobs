@@ -36,5 +36,13 @@ namespace TestCase.Basic.Subtraction.Simple
                 _data3[i] = (short) (_data1[i] - _data2[i]);
             }
         }
+
+        public void CustomSetUp()
+        {
+        }
+
+        public void CustomCleanUp()
+        {
+        }
     }
 }

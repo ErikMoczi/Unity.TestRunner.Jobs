@@ -38,5 +38,13 @@ namespace TestCase.Basic.Subtraction.Simple.Optimization
                 _data3[i] = (byte) (_data1[i] - _data2[i]);
             }
         }
+
+        public void CustomSetUp()
+        {
+        }
+
+        public void CustomCleanUp()
+        {
+        }
     }
 }

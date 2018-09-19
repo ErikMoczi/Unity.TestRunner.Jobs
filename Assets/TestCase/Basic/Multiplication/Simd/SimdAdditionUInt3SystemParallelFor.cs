@@ -33,5 +33,13 @@ namespace TestCase.Basic.Multiplication.Simd
         {
             _data3[i] = _data1[i] * _data2[i];
         }
+
+        public void CustomSetUp()
+        {
+        }
+
+        public void CustomCleanUp()
+        {
+        }
     }
 }

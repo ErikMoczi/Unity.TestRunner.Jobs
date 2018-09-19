@@ -26,5 +26,13 @@ namespace TestCase.Basic
         {
             _data2[i] = _data1[i];
         }
+
+        public void CustomSetUp()
+        {
+        }
+
+        public void CustomCleanUp()
+        {
+        }
     }
 }
