@@ -1,7 +1,11 @@
-﻿namespace TestWrapper.Workers
+﻿using TestWrapper.Utils.Interfaces;
+
+namespace TestWrapper.Workers
 {
     public interface IWorker
     {
+        void CustomSetUp();
+        void CustomCleanUp();
     }
 
     public interface IWorker<T1> : IWorker

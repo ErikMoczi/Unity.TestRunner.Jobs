@@ -30,6 +30,7 @@ namespace TestWrapper.Facades
             try
             {
                 SetUpUnSafe();
+                WorkerWrapper.CustomSetUp();
             }
             catch (Exception e)
             {
@@ -66,6 +67,7 @@ namespace TestWrapper.Facades
         {
             try
             {
+                WorkerWrapper.CustomCleanUp();
                 CleanUpUnSafe();
             }
             catch (Exception e)

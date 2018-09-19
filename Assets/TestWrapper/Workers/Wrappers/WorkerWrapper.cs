@@ -42,5 +42,15 @@ namespace TestWrapper.Workers.Wrappers
         }
 
         public abstract void Run();
+
+        public void CustomSetUp()
+        {
+            Worker.CustomSetUp();
+        }
+
+        public void CustomCleanUp()
+        {
+            Worker.CustomCleanUp();
+        }
     }
 }
