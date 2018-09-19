@@ -1,11 +1,11 @@
 ﻿using TestWrapper.Container;
 using TestWrapper.Container.Info.Methods;
+using TestWrapper.Utils.Interfaces;
 
 namespace TestWrapper.Workers.Wrappers
 {
-    internal interface IWorkerWrapper : IBaseContainer, IInfoWorker
+    internal interface IWorkerWrapper : IBaseContainer, IInfoWorker, IRun, IWorker
     {
-        void Run();
     }
 
     internal interface IWorkerWrapper<T1> : IWorker<T1>, IWorkerWrapper

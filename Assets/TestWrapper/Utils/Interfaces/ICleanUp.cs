@@ -1,6 +1,6 @@
 namespace TestWrapper.Utils.Interfaces
 {
-    internal interface ICleanUp
+    public interface ICleanUp
     {
         void CleanUp();
     }

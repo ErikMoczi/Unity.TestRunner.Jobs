@@ -1,12 +1,10 @@
 ﻿using TestWrapper.Facades.Info;
+using TestWrapper.Utils.Interfaces;
 
 namespace TestWrapper.Facades
 {
-    public interface IWorkFacade
+    public interface IWorkFacade : ISetUp, ICleanUp, IRun
     {
-        void SetUp();
-        void Run();
-        void CleanUp();
         IWorkWrapperInfo Info();
     }
 }

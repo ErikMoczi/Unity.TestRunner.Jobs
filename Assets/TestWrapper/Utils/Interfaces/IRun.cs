@@ -1,7 +1,7 @@
 namespace TestWrapper.Utils.Interfaces
 {
-    public interface ISetUp
+    public interface IRun
     {
-        void SetUp();
+        void Run();
     }
 }
