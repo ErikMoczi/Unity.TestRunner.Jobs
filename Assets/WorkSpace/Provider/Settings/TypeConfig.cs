@@ -21,5 +21,8 @@
         public const string DataUInt2 = "DataUInt2";
         public const string DataUInt3 = "DataUInt3";
         public const string DataUInt4 = "DataUInt4";
+        public const string DataVector2 = "DataVector2";
+        public const string DataVector3 = "DataVector3";
+        public const string DataVector4 = "DataVector4";
     }
 }

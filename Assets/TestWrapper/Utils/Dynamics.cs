@@ -143,6 +143,26 @@ namespace TestWrapper.Utils
 
                 #endregion
 
+                #region Unity.Vector
+
+                case InputDataTypeName.Vector2:
+                {
+                    SetDataToDynamicTypeArray(RandomGenerator.GetRandomVector2(), name, index, typedData);
+                    break;
+                }
+                case InputDataTypeName.Vector3:
+                {
+                    SetDataToDynamicTypeArray(RandomGenerator.GetRandomVector3(), name, index, typedData);
+                    break;
+                }
+                case InputDataTypeName.Vector4:
+                {
+                    SetDataToDynamicTypeArray(RandomGenerator.GetRandomVector4(), name, index, typedData);
+                    break;
+                }
+
+                #endregion
+
                 default:
                 {
                     throw new Exception($"Missing implementation of {type} or not allowed type.");

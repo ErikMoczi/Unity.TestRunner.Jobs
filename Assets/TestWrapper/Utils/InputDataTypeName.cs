@@ -55,5 +55,13 @@
         public const string Float4 = "Unity.Mathematics.float4";
 
         #endregion
+
+        #region Unity.Vector
+
+        public const string Vector2 = "UnityEngine.Vector2";
+        public const string Vector3 = "UnityEngine.Vector3";
+        public const string Vector4 = "UnityEngine.Vector4";
+
+        #endregion
     }
 }

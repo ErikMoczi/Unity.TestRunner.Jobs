@@ -175,5 +175,24 @@ namespace TestWrapper.Generator
         }
 
         #endregion
+
+        #region Unity.Vector
+
+        internal static Vector2 GetRandomVector2()
+        {
+            return new Vector2(RandomRangeFloat1(), RandomRangeFloat1());
+        }
+
+        internal static Vector3 GetRandomVector3()
+        {
+            return new Vector3(RandomRangeFloat1(), RandomRangeFloat1(), RandomRangeFloat1());
+        }
+
+        internal static Vector4 GetRandomVector4()
+        {
+            return new Vector4(RandomRangeFloat1(), RandomRangeFloat1(), RandomRangeFloat1(), RandomRangeFloat1());
+        }
+
+        #endregion
     }
 }
