@@ -8,7 +8,7 @@ using WorkSpace.Provider.Settings;
 
 namespace WorkSpace.Provider
 {
-    public sealed class TestProvider
+    public sealed class TestProvider : ITestProvider
     {
         public IWorkFacade[] WorkFacades => _workFacades;
 

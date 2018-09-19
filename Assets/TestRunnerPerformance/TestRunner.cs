@@ -20,8 +20,8 @@ namespace TestRunnerPerformance
         private const string PerformanceTestPrefix = "##performancetestresult:";
         private const string TestRunnerPrefix = "##testrunnerresult:";
 
-        private TestProvider _testProvider;
-        private TestSettings _testSettings;
+        private ITestProvider _testProvider;
+        private ITestSettings _testSettings;
 
         [PerformanceTest]
         public void TestRunner_Workers()
@@ -165,7 +165,7 @@ namespace TestRunnerPerformance
             return $"{DefinitionPrefix}{index}{(!string.IsNullOrEmpty(suffix) ? suffix : "")}";
         }
 
-        private TestSettings LoadTestSettings()
+        private ITestSettings LoadTestSettings()
         {
             return Resources.Load<TestSettings>(TestSettingsAsset);
         }
