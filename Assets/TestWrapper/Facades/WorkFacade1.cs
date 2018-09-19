@@ -12,9 +12,9 @@ namespace TestWrapper.Facades
         {
         }
 
-        protected override void SetUpSafe()
+        protected override void SetUpUnSafe()
         {
-            base.SetUpSafe();
+            base.SetUpUnSafe();
             WorkerWrapper.DataSize = MultiContainer.DataSize;
             WorkerWrapper.Data1 = MultiContainer.Item1;
         }

@@ -29,7 +29,7 @@ namespace TestWrapper.Facades
         {
             try
             {
-                SetUpSafe();
+                SetUpUnSafe();
             }
             catch (Exception e)
             {
@@ -37,7 +37,7 @@ namespace TestWrapper.Facades
             }
         }
 
-        protected virtual void SetUpSafe()
+        protected virtual void SetUpUnSafe()
         {
             _multiContainer.SetUp();
         }
@@ -66,7 +66,7 @@ namespace TestWrapper.Facades
         {
             try
             {
-                CleanUpSafe();
+                CleanUpUnSafe();
             }
             catch (Exception e)
             {
@@ -74,7 +74,7 @@ namespace TestWrapper.Facades
             }
         }
 
-        protected virtual void CleanUpSafe()
+        protected virtual void CleanUpUnSafe()
         {
             _multiContainer.CleanUp();
         }

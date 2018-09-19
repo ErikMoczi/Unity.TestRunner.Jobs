@@ -13,9 +13,9 @@ namespace TestWrapper.Facades
         {
         }
 
-        protected override void SetUpSafe()
+        protected override void SetUpUnSafe()
         {
-            base.SetUpSafe();
+            base.SetUpUnSafe();
             WorkerWrapper.Data3 = MultiContainer.Item3;
         }
     }
