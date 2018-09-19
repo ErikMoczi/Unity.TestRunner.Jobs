@@ -10,33 +10,12 @@ namespace TestWrapper.Container.Multi.Base
         where TData : class, IInputData
         where TConfig : class, IDataConfig
     {
-        private int _maxDataSize;
         private int _dataSize;
 
         public int DataSize
         {
             get => _dataSize;
-            set
-            {
-                if (value > _maxDataSize)
-                {
-                    _dataSize = _maxDataSize;
-                }
-                else if (value < 0)
-                {
-                    _dataSize = 0;
-                }
-                else
-                {
-                    _dataSize = value;
-                }
-            }
-        }
-
-        protected int MaxDataSize
-        {
-            get => _maxDataSize;
-            set => _dataSize = _maxDataSize = value;
+            set => _dataSize = value < 0 ? 0 : value;
         }
 
         private readonly TData _data;

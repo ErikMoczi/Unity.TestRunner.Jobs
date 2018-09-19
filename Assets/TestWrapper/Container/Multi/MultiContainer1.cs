@@ -17,7 +17,7 @@ namespace TestWrapper.Container.Multi
 
         public MultiContainer(TData data, params TConfig[] config) : base(data, config)
         {
-            MaxDataSize = data.ItemArray1.Length;
+            DataSize = data.ItemArray1.Length;
             _dataProxyContainer1 = new DataProxyContainer<T1, TConfig>(data.ItemArray1, GetCurrentConfig());
         }
 
