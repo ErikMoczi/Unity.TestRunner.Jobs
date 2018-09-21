@@ -12,18 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1dcc2aebf088467b8f54a59b065106a3, type: 3}
   m_Name: TestSettings
   m_EditorClassIdentifier: 
-  _dataSize: 1000000
+  _dataSize: 258
   _totalRuns: 10
   _warmUpCount: 3
   _resultsPrecision: 4
   _sampleUnit: 2
   _testCaseWrapper:
     Generators:
-    - WorkSpace.Tests.Basic.Multiplication.Simple.Int1TypeTest
-    - WorkSpace.Tests.Basic.Multiplication.Simple.Optimization.Int1TypeTest
-    - WorkSpace.Tests.Basic.Division.Simple.Int1TypeTest
-    - WorkSpace.Tests.Basic.Division.Simple.Optimization.Int1TypeTest
-    - WorkSpace.Tests.Basic.Addition.Simple.Int1TypeTest
-    - WorkSpace.Tests.Basic.Addition.Simple.Optimization.Int1TypeTest
-    - WorkSpace.Tests.Basic.Subtraction.Simple.Int1TypeTest
-    - WorkSpace.Tests.Basic.Subtraction.Simple.Optimization.Int1TypeTest
+    - WorkSpace.Tests.TerrainTest
