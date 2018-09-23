@@ -3,7 +3,7 @@
 namespace TestRunnerPerformance
 {
     [Serializable]
-    public class TestRunnerResult
+    internal class TestRunnerResult
     {
         public _Base BaseSetUp;
         public _Worker Worker;

@@ -1,25 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text.RegularExpressions;
 using NUnit.Framework;
 using NUnit.Framework.Interfaces;
+using TestWrapper.Facades;
 using Unity.PerformanceTesting;
-using UnityEngine;
 using WorkSpace.Provider;
 using WorkSpace.Provider.Settings;
 
 namespace TestRunnerPerformance
 {
     [Category("Performance")]
-    public class TestRunner
+    internal class TestRunner
     {
-        private const string TestSettingsAsset = "TestSettings";
-        private const string FirstKeyWord = "_First";
-        private const string DefinitionPrefix = "#";
-        private const string PerformanceTestPrefix = "##performancetestresult:";
-        private const string TestRunnerPrefix = "##testrunnerresult:";
-
         private ITestProvider _testProvider;
         private ITestSettings _testSettings;
 
@@ -32,14 +25,7 @@ namespace TestRunnerPerformance
 
                 #region FirstRun
 
-                workFacade.SetUp();
-                using (Measure.Scope(new SampleGroupDefinition(DefinitionName(index, FirstKeyWord),
-                    _testSettings.SampleUnit)))
-                {
-                    workFacade.Run();
-                }
-
-                workFacade.CleanUp();
+                MainWork(workFacade, index.ToString(), true);
 
                 #endregion
 
@@ -47,9 +33,7 @@ namespace TestRunnerPerformance
 
                 for (var i = 0; i < _testSettings.WarmUpCount; i++)
                 {
-                    workFacade.SetUp();
-                    workFacade.Run();
-                    workFacade.CleanUp();
+                    MainWork(workFacade, index.ToString(), measure: false);
                 }
 
                 #endregion
@@ -58,13 +42,7 @@ namespace TestRunnerPerformance
 
                 for (var i = 0; i < _testSettings.TotalRuns; i++)
                 {
-                    workFacade.SetUp();
-                    using (Measure.Scope(new SampleGroupDefinition(DefinitionName(index), _testSettings.SampleUnit)))
-                    {
-                        workFacade.Run();
-                    }
-
-                    workFacade.CleanUp();
+                    MainWork(workFacade, index.ToString());
                 }
 
                 #endregion
@@ -72,9 +50,9 @@ namespace TestRunnerPerformance
         }
 
         [SetUp]
-        public void Setup()
+        public void SetUp()
         {
-            _testSettings = LoadTestSettings();
+            _testSettings = Utils.LoadTestSettings();
             _testProvider = new TestProvider(_testSettings);
         }
 
@@ -84,36 +62,32 @@ namespace TestRunnerPerformance
             var context = TestContext.CurrentTestExecutionContext;
             if (Equals(context.CurrentResult.ResultState, ResultState.Success))
             {
-                var data = ParseTestData(context.CurrentResult.Output);
-                var performanceTest = GetPerformanceTest(data);
+                var data = Utils.ParsePerformanceTestData(context.CurrentResult.Output);
+                var performanceTest = Utils.GetPerformanceTest(data);
                 var testRunnerResults = ParsePerformanceTest(performanceTest);
-                var json = CreateTestRunnerResultJson(testRunnerResults);
-                TestContext.WriteLine(TestRunnerPrefix + json);
+                var json = Utils.CreateTestRunnerResultJson(testRunnerResults);
+                TestContext.WriteLine(Utils.TestRunnerPrefix + json);
             }
         }
 
-        private string ParseTestData(string data)
+        private void MainWork(IWorkFacade workFacade, string name, bool firstRun = false, bool measure = true)
         {
-            var performanceData = Regex.Match(data, $@"{PerformanceTestPrefix}[^\n]+$");
-            if (performanceData.Success & performanceData.Groups.Count == 1)
+            workFacade.SetUp();
+            if (measure)
             {
-                return performanceData.Groups[0].Value.Trim().Replace(PerformanceTestPrefix, string.Empty);
+                using (Measure.Scope(new SampleGroupDefinition(
+                    Utils.DefinitionName(name, firstRun ? Utils.FirstKeyWord : string.Empty),
+                    _testSettings.SampleUnit)))
+                {
+                    workFacade.Run();
+                }
+            }
+            else
+            {
+                workFacade.Run();
             }
 
-            throw new Exception(
-                $"Problem with parsing performance test data, check Unity API {typeof(PerformanceTest)}"
-            );
-        }
-
-        private PerformanceTest GetPerformanceTest(string jsonData)
-        {
-            return JsonUtility.FromJson<PerformanceTest>(jsonData);
-        }
-
-        private string CreateTestRunnerResultJson(TestRunnerResult[] testRunnerResults)
-        {
-            var data = new Wrapper<TestRunnerResult> {data = testRunnerResults};
-            return JsonUtility.ToJson(data);
+            workFacade.CleanUp();
         }
 
         private TestRunnerResult[] ParsePerformanceTest(PerformanceTest performanceTest)
@@ -122,10 +96,10 @@ namespace TestRunnerPerformance
             for (var i = 0; i < _testProvider.WorkFacades.Length; i++)
             {
                 var workFacade = _testProvider.WorkFacades[i];
-                var sampleGroup =
-                    performanceTest.SampleGroups.First(group => group.Definition.Name.Equals(DefinitionName(i)));
+                var sampleGroup = performanceTest.SampleGroups.First(group =>
+                    group.Definition.Name.Equals(Utils.DefinitionName(i.ToString())));
                 var firstSampleGroup = performanceTest.SampleGroups.First(group =>
-                    group.Definition.Name.Equals(DefinitionName(i, FirstKeyWord)));
+                    group.Definition.Name.Equals(Utils.DefinitionName(i.ToString(), Utils.FirstKeyWord)));
                 results.Add(
                     new TestRunnerResult
                     {
@@ -158,16 +132,6 @@ namespace TestRunnerPerformance
             }
 
             return results.ToArray();
-        }
-
-        private string DefinitionName(int index, string suffix = "")
-        {
-            return $"{DefinitionPrefix}{index}{(!string.IsNullOrEmpty(suffix) ? suffix : "")}";
-        }
-
-        private ITestSettings LoadTestSettings()
-        {
-            return Resources.Load<TestSettings>(TestSettingsAsset);
         }
     }
 }

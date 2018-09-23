@@ -3,7 +3,7 @@
 namespace TestRunnerPerformance
 {
     [Serializable]
-    public class Wrapper<T>
+    internal class Wrapper<T>
     {
         public T[] data;
     }

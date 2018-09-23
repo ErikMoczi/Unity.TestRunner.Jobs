@@ -15,9 +15,9 @@ namespace WorkSpace.Provider.Settings
         , ITestSettings
     {
         [SerializeField] private int _dataSize = 1000000;
-        [SerializeField] private int _totalRuns = 10;
-        [SerializeField] private int _warmUpCount = 3;
-        [SerializeField] [Range(0, 10)] private int _resultsPrecision = 4;
+        [SerializeField, Range(0, 1000)] private int _totalRuns = 10;
+        [SerializeField, Range(0, 10)] private int _warmUpCount = 3;
+        [SerializeField, Range(0, 10)] private int _resultsPrecision = 4;
         [SerializeField] private SampleUnit _sampleUnit = SampleUnit.Millisecond;
 
         [Header("Choose which test case to run")] [SerializeField]
