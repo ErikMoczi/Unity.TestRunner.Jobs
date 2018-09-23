@@ -14,7 +14,7 @@ using UnityEngine;
 using WorkSpace.Provider.Containers;
 using WorkSpace.Provider.Settings;
 
-namespace WorkSpace.Tests
+namespace WorkSpace.Tests.MeshTest
 {
     internal sealed class TerrainTest : SampleGenerator
     {
