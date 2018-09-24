@@ -2,6 +2,7 @@
 using TestWrapper.Config.Data.Interfaces;
 using TestWrapper.Container.Data.Base;
 using TestWrapper.Container.Info;
+using TestWrapper.DataType;
 using Unity.Collections.LowLevel.Unsafe;
 using UnityEngine;
 
@@ -40,6 +41,12 @@ namespace TestWrapper.Container.Data
                 }
 
                 throw new Exception($"Missing implementation of {type} Unity collection");
+            }
+
+            if (type.IsValueType & type.DeclaringType?.Name == nameof(NativeConcurrentIntArray))
+            {
+                return new DataContainerNativeConcurrentIntArray<T, IDataConfigUnityCollection>(_data,
+                    GetConfig() as IDataConfigUnityCollection);
             }
 
             if (type.IsValueType | type.IsClass)
