@@ -13,13 +13,15 @@ namespace WorkSpace.Provider
     {
         private const string TestNamePrefix = "TestRunner";
 
-        [Header("Delay specific frames from start")] [SerializeField] [Range(0, 10)]
-        private int _delayFrames = 3;
+#pragma warning disable 649
+        [Header("Delay specific frames from start"), SerializeField, Range(0, 10)]
+        private int delayFrames = 3;
 
-        [Header("Stop unity after finished test case")] [SerializeField] [Range(0, 10)]
-        private int _stopAfterFinishFrames = 5;
+        [Header("Stop unity after finished test case"), SerializeField, Range(0, 10)]
+        private int stopAfterFinishFrames = 5;
 
-        [SerializeField] private TestSettings _testSettings;
+        [SerializeField] private TestSettings testSettings;
+#pragma warning restore 649
 
         [NonSerialized] private TestProvider _testProvider;
 
@@ -27,17 +29,17 @@ namespace WorkSpace.Provider
 
         private void Awake()
         {
-            _testProvider = new TestProvider(_testSettings);
+            _testProvider = new TestProvider(testSettings);
         }
 
         private void Update()
         {
-            if (_delayFrames + 1 > Time.frameCount)
+            if (delayFrames + 1 > Time.frameCount)
             {
                 return;
             }
 
-            if (_testSettings.TotalRuns > _currentRun)
+            if (testSettings.TotalRuns > _currentRun)
             {
                 foreach (var workFacade in _testProvider.WorkFacades)
                 {
@@ -47,7 +49,7 @@ namespace WorkSpace.Provider
                 _currentRun++;
             }
 
-            if (Time.frameCount > _stopAfterFinishFrames + _delayFrames + 1 + _testSettings.TotalRuns)
+            if (Time.frameCount > stopAfterFinishFrames + delayFrames + 1 + testSettings.TotalRuns)
             {
                 EditorApplication.isPlaying = false;
             }

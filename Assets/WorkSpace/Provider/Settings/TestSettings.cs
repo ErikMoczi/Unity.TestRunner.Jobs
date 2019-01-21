@@ -14,20 +14,21 @@ namespace WorkSpace.Provider.Settings
 #endif
         , ITestSettings
     {
-        [SerializeField] private int _dataSize = 1000000;
-        [SerializeField, Range(0, 1000)] private int _totalRuns = 10;
-        [SerializeField, Range(0, 10)] private int _warmUpCount = 3;
-        [SerializeField, Range(0, 10)] private int _resultsPrecision = 4;
-        [SerializeField] private SampleUnit _sampleUnit = SampleUnit.Millisecond;
+#pragma warning disable 649
+        [SerializeField] private int dataSize = 1000000;
+        [SerializeField, Range(0, 1000)] private int totalRuns = 10;
+        [SerializeField, Range(0, 10)] private int warmUpCount = 3;
+        [SerializeField, Range(0, 10)] private int resultsPrecision = 4;
+        [SerializeField] private SampleUnit sampleUnit = SampleUnit.Millisecond;
+        [Header("Choose which test case to run"), SerializeField]
+        private TestCaseWrapper testCaseWrapper;
+#pragma warning restore 649
 
-        [Header("Choose which test case to run")] [SerializeField]
-        private TestCaseWrapper _testCaseWrapper;
-
-        public TestCaseWrapper TestCaseWrapper => _testCaseWrapper;
-        public int DataSize => _dataSize;
-        public int TotalRuns => _totalRuns;
-        public int WarmUpCount => _warmUpCount;
-        public int ResultsPrecision => _resultsPrecision;
-        public SampleUnit SampleUnit => _sampleUnit;
+        public TestCaseWrapper TestCaseWrapper => testCaseWrapper;
+        public int DataSize => dataSize;
+        public int TotalRuns => totalRuns;
+        public int WarmUpCount => warmUpCount;
+        public int ResultsPrecision => resultsPrecision;
+        public SampleUnit SampleUnit => sampleUnit;
     }
 }
