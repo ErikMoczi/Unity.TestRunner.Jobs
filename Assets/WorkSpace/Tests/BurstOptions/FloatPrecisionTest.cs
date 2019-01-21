@@ -12,11 +12,11 @@ using WorkSpace.Provider.Settings;
 
 namespace WorkSpace.Tests.BurstOptions
 {
-    internal sealed class AccuracyTest : SampleGenerator
+    internal sealed class FloatPrecisionTest : SampleGenerator
     {
         public override string TestName()
         {
-            return nameof(AccuracyTest);
+            return nameof(FloatPrecisionTest);
         }
 
         public override ISampleConfig[] InitSampleConfigs()
@@ -33,7 +33,7 @@ namespace WorkSpace.Tests.BurstOptions
             {
                 #region IJob
 
-                WorkerFactory<NativeArray<float>, NativeArray<float>>.Create<BurstAccuracyStdJob>(
+                WorkerFactory<NativeArray<float>, NativeArray<float>>.Create<BurstFloatPrecisionStdJob>(
                     TestName(),
                     inputDataContainer.GetData<float>(TypeConfig.DataFloat1),
                     inputDataContainer.GetData<float>(TypeConfig.DataFloat1),
@@ -44,7 +44,7 @@ namespace WorkSpace.Tests.BurstOptions
                         new DataConfigUnityCollection(Allocator.Persistent),
                     }
                 ),
-                WorkerFactory<NativeArray<float>, NativeArray<float>>.Create<BurstAccuracyLowJob>(
+                WorkerFactory<NativeArray<float>, NativeArray<float>>.Create<BurstFloatPrecisionLowJob>(
                     TestName(),
                     inputDataContainer.GetData<float>(TypeConfig.DataFloat1),
                     inputDataContainer.GetData<float>(TypeConfig.DataFloat1),
@@ -55,7 +55,7 @@ namespace WorkSpace.Tests.BurstOptions
                         new DataConfigUnityCollection(Allocator.Persistent),
                     }
                 ),
-                WorkerFactory<NativeArray<float>, NativeArray<float>>.Create<BurstAccuracyMedJob>(
+                WorkerFactory<NativeArray<float>, NativeArray<float>>.Create<BurstFloatPrecisionMedJob>(
                     TestName(),
                     inputDataContainer.GetData<float>(TypeConfig.DataFloat1),
                     inputDataContainer.GetData<float>(TypeConfig.DataFloat1),
@@ -66,7 +66,7 @@ namespace WorkSpace.Tests.BurstOptions
                         new DataConfigUnityCollection(Allocator.Persistent),
                     }
                 ),
-                WorkerFactory<NativeArray<float>, NativeArray<float>>.Create<BurstAccuracyHighJob>(
+                WorkerFactory<NativeArray<float>, NativeArray<float>>.Create<BurstFloatPrecisionHighJob>(
                     TestName(),
                     inputDataContainer.GetData<float>(TypeConfig.DataFloat1),
                     inputDataContainer.GetData<float>(TypeConfig.DataFloat1),
@@ -82,7 +82,7 @@ namespace WorkSpace.Tests.BurstOptions
 
                 #region IJobParallelFor
 
-                WorkerFactory<NativeArray<float>, NativeArray<float>>.Create<BurstAccuracyStdJobParallelFor>(
+                WorkerFactory<NativeArray<float>, NativeArray<float>>.Create<BurstFloatPrecisionStdJobParallelFor>(
                     TestName(),
                     inputDataContainer.GetData<float>(TypeConfig.DataFloat1),
                     inputDataContainer.GetData<float>(TypeConfig.DataFloat1),
@@ -93,7 +93,7 @@ namespace WorkSpace.Tests.BurstOptions
                         new DataConfigUnityCollection(Allocator.Persistent),
                     }
                 ),
-                WorkerFactory<NativeArray<float>, NativeArray<float>>.Create<BurstAccuracyLowJobParallelFor>(
+                WorkerFactory<NativeArray<float>, NativeArray<float>>.Create<BurstFloatPrecisionLowJobParallelFor>(
                     TestName(),
                     inputDataContainer.GetData<float>(TypeConfig.DataFloat1),
                     inputDataContainer.GetData<float>(TypeConfig.DataFloat1),
@@ -104,7 +104,7 @@ namespace WorkSpace.Tests.BurstOptions
                         new DataConfigUnityCollection(Allocator.Persistent),
                     }
                 ),
-                WorkerFactory<NativeArray<float>, NativeArray<float>>.Create<BurstAccuracyMedJobParallelFor>(
+                WorkerFactory<NativeArray<float>, NativeArray<float>>.Create<BurstFloatPrecisionMedJobParallelFor>(
                     TestName(),
                     inputDataContainer.GetData<float>(TypeConfig.DataFloat1),
                     inputDataContainer.GetData<float>(TypeConfig.DataFloat1),
@@ -115,7 +115,7 @@ namespace WorkSpace.Tests.BurstOptions
                         new DataConfigUnityCollection(Allocator.Persistent),
                     }
                 ),
-                WorkerFactory<NativeArray<float>, NativeArray<float>>.Create<BurstAccuracyHighJobParallelFor>(
+                WorkerFactory<NativeArray<float>, NativeArray<float>>.Create<BurstFloatPrecisionHighJobParallelFor>(
                     TestName(),
                     inputDataContainer.GetData<float>(TypeConfig.DataFloat1),
                     inputDataContainer.GetData<float>(TypeConfig.DataFloat1),

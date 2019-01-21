@@ -1,11 +1,11 @@
-﻿using TestWrapper.Workers;
+using TestWrapper.Workers;
 using Unity.Burst;
 using Unity.Collections;
 
 namespace TestCase.BurstOptions
 {
-    [BurstCompile(FloatPrecision = FloatPrecision.High)]
-    public struct BurstFloatPrecisionHighJobParallelFor : IJobParallelForExt<NativeArray<float>, NativeArray<float>>
+    [BurstCompile(FloatMode = FloatMode.Deterministic)]
+    public struct BurstFloatModeDeterministicJobParallelFor : IJobParallelForExt<NativeArray<float>, NativeArray<float>>
     {
         private NativeArray<float> _data1;
         private NativeArray<float> _data2;

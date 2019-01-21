@@ -4,8 +4,8 @@ using Unity.Collections;
 
 namespace TestCase.BurstOptions
 {
-    [BurstCompile(Accuracy = Accuracy.Low)]
-    public struct BurstAccuracyLowJobParallelFor : IJobParallelForExt<NativeArray<float>, NativeArray<float>>
+    [BurstCompile(FloatPrecision = FloatPrecision.Low)]
+    public struct BurstFloatPrecisionLowJobParallelFor : IJobParallelForExt<NativeArray<float>, NativeArray<float>>
     {
         private NativeArray<float> _data1;
         private NativeArray<float> _data2;

@@ -4,8 +4,8 @@ using Unity.Collections;
 
 namespace TestCase.BurstOptions
 {
-    [BurstCompile(Support = Support.Relaxed)]
-    public struct BurstSupportRelaxedJob : IJobExt<NativeArray<float>, NativeArray<float>>
+    [BurstCompile(FloatMode = FloatMode.Strict)]
+    public struct BurstFloatModeStrictJob : IJobExt<NativeArray<float>, NativeArray<float>>
     {
         private NativeArray<float> _data1;
         private NativeArray<float> _data2;

@@ -1,11 +1,11 @@
-﻿using TestWrapper.Workers;
+using TestWrapper.Workers;
 using Unity.Burst;
 using Unity.Collections;
 
 namespace TestCase.BurstOptions
 {
-    [BurstCompile(Support = Support.Strict)]
-    public struct BurstSupportStrictJobParallelFor : IJobParallelForExt<NativeArray<float>, NativeArray<float>>
+    [BurstCompile(FloatMode = FloatMode.Deterministic)]
+    public struct BurstFloatModeDeterministicJob : IJobExt<NativeArray<float>, NativeArray<float>>
     {
         private NativeArray<float> _data1;
         private NativeArray<float> _data2;
@@ -24,9 +24,12 @@ namespace TestCase.BurstOptions
             set => _data2 = value;
         }
 
-        public void Execute(int i)
+        public void Execute()
         {
-            _data2[i] = _data1[i];
+            for (int i = 0; i < DataSize; i++)
+            {
+                _data2[i] = _data1[i];
+            }
         }
 
         public void CustomSetUp()
