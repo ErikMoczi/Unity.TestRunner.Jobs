@@ -1,8 +1,8 @@
 {
   "dependencies": {
-    "com.unity.burst": "0.2.4-preview.41",
-    "com.unity.mathematics": "0.0.12-preview.19",
-    "com.unity.package-manager-ui": "2.1.0-preview.1",
+    "com.unity.burst": "0.2.4-preview.45",
+    "com.unity.mathematics": "0.0.12-preview.20",
+    "com.unity.package-manager-ui": "2.1.1",
     "com.unity.test-framework.performance": "0.1.50-preview",
     "com.unity.modules.jsonserialize": "1.0.0",
     "com.unity.modules.physics": "1.0.0",
