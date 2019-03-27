@@ -10,15 +10,16 @@ namespace TestWrapper.Facades
         where TWorkerWrapper : class, IWorkerWrapper
         where TMultiContainer : class, IMultiContainer
     {
-        protected TWorkerWrapper WorkerWrapper;
         protected TMultiContainer MultiContainer => _multiContainer;
+        protected TWorkerWrapper WorkerWrapper => _workerWrapper;
 
         private readonly TMultiContainer _multiContainer;
-        private IWorkWrapperInfo _info;
+        private readonly TWorkerWrapper _workerWrapper;
+        private readonly IWorkWrapperInfo _info;
 
         public WorkFacade(string testName, TWorkerWrapper workerWrapper, TMultiContainer multiContainer)
         {
-            WorkerWrapper = workerWrapper;
+            _workerWrapper = workerWrapper;
             _multiContainer = multiContainer;
             _info = new WorkWrapperInfo(testName, WorkerWrapper.Info(), _multiContainer.Info());
         }
@@ -30,7 +31,7 @@ namespace TestWrapper.Facades
             try
             {
                 SetUpUnSafe();
-                WorkerWrapper.CustomSetUp();
+                _workerWrapper.CustomSetUp();
             }
             catch (Exception e)
             {
@@ -51,7 +52,7 @@ namespace TestWrapper.Facades
         {
             try
             {
-                WorkerWrapper.Run();
+                _workerWrapper.Run();
             }
             catch (Exception e)
             {
@@ -67,7 +68,7 @@ namespace TestWrapper.Facades
         {
             try
             {
-                WorkerWrapper.CustomCleanUp();
+                _workerWrapper.CustomCleanUp();
                 CleanUpUnSafe();
             }
             catch (Exception e)

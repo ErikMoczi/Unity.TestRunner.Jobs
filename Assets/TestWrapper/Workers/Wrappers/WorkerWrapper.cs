@@ -10,10 +10,11 @@ namespace TestWrapper.Workers.Wrappers
         where TWorker : struct, IWorker
         where TConfig : class, IWorkConfig
     {
-        protected TWorker Worker;
         protected IWorkRunnerContainer<TWorker> Runner => _runner;
+        protected ref TWorker Worker => ref _worker;
 
         private readonly IWorkRunnerContainer<TWorker> _runner;
+        private TWorker _worker;
 
         public WorkerWrapper(TConfig config) : base(config)
         {
@@ -24,7 +25,7 @@ namespace TestWrapper.Workers.Wrappers
                 );
             }
 
-            Worker = new TWorker();
+            _worker = new TWorker();
             _runner = InitRunner();
         }
 
@@ -45,12 +46,12 @@ namespace TestWrapper.Workers.Wrappers
 
         public void CustomSetUp()
         {
-            Worker.CustomSetUp();
+            _worker.CustomSetUp();
         }
 
         public void CustomCleanUp()
         {
-            Worker.CustomCleanUp();
+            _worker.CustomCleanUp();
         }
     }
 }

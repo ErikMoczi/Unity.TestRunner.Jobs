@@ -4,7 +4,7 @@ namespace TestWrapper.Container.Multi.Base
 {
     internal interface IMultiContainer : IRefreshContainer, IInfoDataArray
     {
-        int DataSize { get; }
+        int DataSize { get; set; }
     }
 
     internal interface IMultiContainer<T1> : IMultiContainer
